@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0721 3번</title>
+    <style>
+        .container {
+            display: block;
+            text-align: center;
+            width: 500px;
+            margin: 30 auto;
+        }
+        table {
+            width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th,
+        td {
+            text-align: center;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        thead {
+            background: linear-gradient(blueviolet, white, blueviolet);
+        }
+        td {
+            height: 35px;
+        }
+        img {
+            display: block;
+            margin: 15px auto;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!--
+        1. 자신이 태어난 월을 입력받아 월의 탄생석과 상징을 보여주는 프로그램
+        입력 : 당신의 태어난 월을 입력하시오.(1-12)
+        출력 : 입력한 월에 따라 탄생석 이미지를 보여주고, 탄생월, 탄생석, 상징 메세지를 출력
+        2. switch~case문으로 작성
+        3. 결과 화면 외에 월별 탄생석과 상징 정보를 표로 브라우저에 먼저 출력해 놓고, 입력 받도록 작성
+    -->
+
+    <div class="container">
+        <table>
+            <div class="table">
+                <caption>월별 탄생석 프로그램</caption>
+                <thead>
+                    <tr>
+                        <th>월</th>
+                        <th>탄생석</th>
+                        <th>상징</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <th>1월</th>
+                    <td>가넷</td>
+                    <td>사랑, 진실</td>
+                </tr>
+                <tr>
+                    <th>2월</th>
+                    <td>자수정</td>
+                    <td>평화, 성실</td>
+                </tr>
+                <tr>
+                    <th>3월</th>
+                    <td>아쿠아마린</td>
+                    <td>총명, 용감</td>
+                </tr>
+                <tr>
+                    <th>4월</th>
+                    <td>다이아몬드</td>
+                    <td>영원한 사랑</td>
+                </tr>
+                <tr>
+                    <th>5월</th>
+                    <td>에메랄드</td>
+                    <td>행복, 행운</td>
+                </tr>
+                <tr>
+                    <th>6월</th>
+                    <td>진주</td>
+                    <td>건강, 부귀</td>
+                </tr>
+                <tr>
+                    <th>7월</th>
+                    <td>루비</td>
+                    <td>영원한 생명, 열정, 용기</td>
+                </tr>
+                <tr>
+                    <th>8월</th>
+                    <td>감람석</td>
+                    <td>지혜, 부부의 행복</td>
+                </tr>
+                <tr>
+                    <th>9월</th>
+                    <td>사파이어</td>
+                    <td>지혜, 불변</td>
+                </tr>
+                <tr>
+                    <th>10월</th>
+                    <td>오팔</td>
+                    <td>희망, 순결</td>
+                </tr>
+                <tr>
+                    <th>11월</th>
+                    <td>토파즈</td>
+                    <td>우정, 인내</td>
+                </tr>
+                <tr>
+                    <th>12월</th>
+                    <td>터키석</td>
+                    <td>성공, 승리</td>
+                </tr>
+            </div>
+        </table>
+    </div>
+    <script>
+        var month = Number(prompt("당신의 태어난 월을 입력하시오.(1~12)"));
+
+        switch (month) {
+
+            case 1:
+                document.write('<img src="../test/images/images_month_stone/stone01.png" alt="">')
+                document.write('<div class="text">1월 탄생석은 가넷이고 상징은 사랑, 진실입니다</div>');
+                break;
+            case 2:
+                document.write('<img src="../test/images/images_month_stone/stone02.png" alt="">')
+                document.write('<div class="text">2월 탄생석은 자수정이고 상징은 평화, 성실입니다</div>');
+                break;
+            case 3:
+                document.write('<img src="../test/images/images_month_stone/stone03.png" alt="">')
+                document.write('<div class="text">3월 탄생석은 아쿠아마린이고 상징은 총명, 용감입니다</div>');
+                break;
+            case 4:
+                document.write('<img src="../test/images/images_month_stone/stone04.png" alt="">')
+                document.write('<div class="text">4월 탄생석은 다이아몬드이고 상징은 영원한 사랑입니다</div>');
+                break;
+            case 5:
+                document.write('<img src="../test/images/images_month_stone/stone05.png" alt="">')
+                document.write('<div class="text">5월 탄생석은 에메랄드이고 상징은 행복, 행운입니다</div>');
+                break;
+            case 6:
+                document.write('<img src="../test/images/images_month_stone/stone06.png" alt="">')
+                document.write('<div class="text">6월 탄생석은 진주이고 상징은 건강, 부귀입니다</div>');
+                break;
+            case 7:
+                document.write('<img src="../test/images/images_month_stone/stone07.png" alt="">')
+                document.write('<div class="text">7월 탄생석은 루비이고 상징은 영원한생명, 열정, 용기입니다</div>');
+                break;
+            case 8:
+                document.write('<img src="../test/images/images_month_stone/stone08.png" alt="">')
+                document.write('<div class="text">8월 탄생석은 감람석이고 상징은 지혜, 부부의 행복입니다</div>');
+                break;
+            case 9:
+                document.write('<img src="../test/images/images_month_stone/stone09.png" alt="">')
+                document.write('<div class="text">>9월 탄생석은 사파이어이고 상징은 지혜, 불변입니다</div>');
+                break;
+            case 10:
+                document.write('<img src="../test/images/images_month_stone/stone10.png" alt="">')
+                document.write('<div class="text">10월 탄생석은 오팔이고 상징은 희망, 순결입니다</div>');
+                break;
+            case 11:
+                document.write('<img src="../test/images/images_month_stone/stone11.png" alt="">');
+                document.write('<div class="text">11월 탄생석은 토파즈이고 상징은 우정, 인내입니다</div>');
+                break;
+            case 12:
+                document.write('<img src="../test/images/images_month_stone/stone12.png" alt="">')
+                document.write('<div class="text">12월 탄생석은 터키석이고 상징은 성공, 승리입니다</div>');
+                break;
+            default:
+                document.write("잘못 입력하셨습니다.");
+                break;
+        }
+    </script>
+</body>
+
+</html>

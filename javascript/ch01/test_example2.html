@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1점 맛보기</title>
+    <style>
+        #container {
+            width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+    </script>
+
+</head>
+
+<body>
+    <div id="container">
+        <h1 id="heading">자바스크립트</h1>
+        <p id="text">위 텍스트를 클릭해보세요.</p>
+    </div>
+    <script>
+        var heading = document.querySelector('#heading');
+        heading.onclick = function() {
+            heading.style.color = "red";
+        }
+    </script>
+</body>
+
+</html>

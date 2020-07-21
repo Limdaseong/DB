@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        1. 입력창을 통해서 이름(name), 키(height), 몸무게(weight) 3개의 값을 입력받아 변수에 저장
+        2. 표준 몸무게 계산법 : (키 - 100) * 0.9을 변수에 저장
+        3. 
+        나의 몸무게가 표준 몸무게의 +5 또는 -5의 사이에 있다면 '적정 체중입니다.'라는 메세지를
+        나의 몸무게가 표준 몸무게보다 많거나 적다면 '적정 몸무게가 아닙니다.'라는 메세지를 브라우저로 출력
+        4. 삼항 연산자를 사용하여 출력 (추가 : if문 사용)
+    -->
+
+    <script>
+        var name = prompt("이름을 입력하세요", "");
+        var height = prompt("키를 입력하세요", "");
+        var weight = prompt("몸무게를 입력하세요", "");
+        var calc = (height - 100) * 0.9;
+        
+        (5 >= (weight - calc) && (weight - calc) >= -5 ? document.write(name + "님은 적정 체중입니다") :  document.write(name + "님은 적정 몸무게가 아닙니다"));
+    </script>
+</body>
+</html>

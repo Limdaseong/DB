@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2장 연습문제 1번</title>
+</head>
+<body>
+    <!--
+        1. 입력창을 통해 교통비, 식비, 음료비를 입력 받아서 변수에 저장, price1, price2, price3
+        2. 이 3가지 비용의 합이 하루 적정 지출 비용인 10000을 넘었을 때 얼마를 초과했는 지 출력하고,
+        하루 적정 지출 비율보다 적으면 '돈 관리를 잘했어요!'라고 출력
+        ex) 3가지 비용의 합이 15000이라면 '5000원 초과했어요.'
+        3. 조건선택 연산자를 활용 (추가 : if문 활용)
+    -->
+
+    <script>
+        var priceFee = prompt("교통비를 입력하세요", "");
+        var priceCost = prompt("식비를 입력하세요", "");
+        var priceDrink = prompt("음료비를 입력하세요", "");
+        var sum = parseInt(priceDrink) + parseInt(priceCost) + parseInt(priceFee);
+        sum > 10000 ? document.write(sum-10000 + "원 초과했습니다.") : document.write("돈 관리를 잘했어요!");
+    </script>
+</body>
+</html>

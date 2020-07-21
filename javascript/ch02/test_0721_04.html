@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0721 4qjs</title>
+    <style>
+        #even {
+            color: blue;
+        }
+        #odd {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        1. 입력창으로 부터 정수를 입력받아서 출력하는 프로그램
+        입력 : 정수 입력 : 10
+        출력 : 1에서 부터 입력 받아 정수까지 출력, 홀수일때는 글자색을 빨강색으로, 짝수일대는 글자색을 파랑색
+    -->
+
+    <script>
+        var nm = Number(prompt("정수 입력 : "));
+
+        for(var i = 1; i<=nm; i++) {
+            if(i %2 == 0){
+                document.write('<span id="even">'+i+'</span> ');
+            } else if (i % 2 == 1) {
+                document.write('<span id="odd">'+i+'</span> ');
+            } else {
+                document.write("잘못 입력하였습니다.");
+            }
+        }
+    </script>
+</body>
+</html>

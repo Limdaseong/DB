@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0721 2번</title>
+</head>
+<body>
+    <!--
+        1. 국어, 영어, 수학 점수를 입력 받아 평균과 학점을 구하는 프로그램
+        입력 : 국어점수 입력, 영어점수 입력, 수학점수 입력
+        출력 : 평균, 학점은 평균에 따라 A: 100~90, B: 89~80, C: 79~70, D:69~60, E: 60미만
+    -->
+
+    <script>
+        var kor = Number(prompt("국어점수 입력"));
+        var eng = Number(prompt("영어점수 입력"));
+        var mth = Number(prompt("수학점수 입력"));
+        var avr = Number((kor + eng + mth) / 3);
+        var score = avr / 10;
+        switch(parseInt(score)) {
+            case 10: case 9: 
+                document.write("평균은 "+ avr +"이고 학점은 A입니다"); break;
+            case 8:
+                document.write("평균은 "+ avr +"이고 학점은 B입니다"); break;
+            case 7:
+                document.write("평균은 "+ avr +"이고 학점은 C입니다"); break;
+            case 6:
+                document.write("평균은 "+ avr +"이고 학점은 D입니다"); break;
+            case 5: case 4: case 3: case 2: case 1: 
+                document.write("평균은 "+ avr +"이고 학점은 E입니다"); break;
+            default :
+                document.write("잘못 입력했습니다"); break;
+        }
+    </script>
+</body>
+</html>
