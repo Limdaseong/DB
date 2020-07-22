@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <!--
         1. 입력창으로부터 정수를 입력받아 정수의 약수를 출력하고, 약수의 갯수, 약수의 합
@@ -17,8 +19,21 @@
 
     <script>
         var num = Number(prompt("정수 입력 : "));
-        
-        while()
+        var yak = 0;
+        var sum = 0;
+
+        document.write("약수 : ")
+        for (var i = 1; i <= num; i++) {
+            if (num % i == 0) {
+                document.write(i + " ");
+                yak++;
+                sum += i;
+            }
+
+        }
+        document.write("<br>약수의 갯수 " + yak + "개<br>");
+        document.write("약수의 합 : " + sum);
     </script>
 </body>
+
 </html>

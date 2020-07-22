@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100px;
+            line-height: 30px;
+            border: 1px solid black;
+            display: inline-block;
+            padding: 20px;
+            margin: 15px;
+            text-indent: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        1. 입력창으로부터 단을 입력 받아서 해당하는 단에 구구단을 출력하는 프로그램
+        입력 : 구구단의 단 입력 : 5
+        출력 : 5단에 해당하는 구구단을 출력
+
+        2. 단 전체는 div 구성
+        - 단 제목은 h3
+        - display는  inline-block
+        - padding 20px
+        - margin : 15px
+        - 줄간격 - 30px
+    -->
+
+    <script>
+        var num = Number(prompt("구구단의 단 입력 : "));
+        document.write('<div class="container"><h3>'+num+'단</h3><br>');
+        for(var i=1; i<=9;i++) {
+            document.write(num +" * "+i + " = "+num*i+"<br>");
+        }
+        document.write("</div>");
+    </script>
+</body>
+</html>

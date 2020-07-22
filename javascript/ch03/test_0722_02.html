@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 35px auto;
+        }
+        td,th {
+            border: 1px solid black;
+            border-collapse: collapse;
+            height: 35px;
+            width: 50px;
+            text-align: center;
+        }
+        th {
+            background: linear-gradient(purple, white, purple);
+        }
+    </style>
+</head>
+
+
+<body>
+    <!--
+        1. table을 활용하여 1~10까지의 제곱, 세제곱, 네제곱을 출력하는 프로그램
+    -->
+
+    <script>
+        
+        document.write("<table>");
+        document.write("<caption>제곱수</caption><tr><th>n</th><th>n<sup>2</sup></th><th>n<sup>3</sup></th><th>n<sup>4</sup></th>")
+        for (var z = 1; z <= 10; z++) {
+            var sum =1;
+            document.write("<tr>");
+            for (var i = 1; i <= 4; i++) {
+                sum*=z
+                document.write("<td>"+sum+"</td>");
+            }
+            document.write("</tr>");
+        }
+        document.write("</table>");
+    </script>
+</body>
+
+</html>
