@@ -12,14 +12,23 @@
         margin: 30px auto;
         text-align: center;
     }
-    table {
-        border: 1px solid black;
-        border-collapse: collapse;
+    h2 {
+        text-align: center;
+        margin-bottom: 50px;
     }
-    td {
-        width: 3000px;
+    p {
+        font-size: 0.8em;
+    }
+    .stone {
         border: 1px solid black;
-        border-collapse: collapse;
+        width: 150px;
+        height: 200px;
+        padding: 10px;
+        margin: 10px;
+        float: left;
+    }
+    .content {
+        width: 100%;
     }
 </style>
 
@@ -30,6 +39,7 @@
 
         2. table을 사용하지 않고, div로 묶어 출력하시오.
     -->
+    
 
     <div class="container">
         <h2>월별 탄생석과 상징</h2>
@@ -48,18 +58,18 @@
                 "11월 / 토파즈 / 우정,인내",
                 "12월 / 터키석 / 성공,승리"
             ]
+            document.write("<div class='content'>");
             var cnt = 0;
-            document.write("<table>");
+
             for (var i = 0; i < 3; i++) {
-                document.write("<tr>");
                 for (var z = 1; z <= 4; z++) {
                     cnt++;
-                    document.write("<td><img src='../images/images_month_stone/stone" + cnt + ".png' width ='150px'><br>");
-                    document.write(stones[cnt-1]+"</td>");
+                    document.write('<div class="stone">');
+                    document.write('<img src="../test/images/images_month_stone/stone' + cnt + '.png" ><br>');
+                    document.write("<p>"+stones[cnt-1]+"</p></div>");
                 }
-                document.write("</tr>");
             }
-            document.write("</table>");
+            document.write("</div>");
 
         </script>
     </div>

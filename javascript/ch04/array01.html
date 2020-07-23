@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1차원 배열</title>
+</head>
+<!--
+    1. score 배열의 총점과 평균을 계산하시오.
+    총점 : tot, 평균 : avr
+-->
+<body>
+    <script>
+        // 1. 배열 생성 1번
+        var score = [85, 94, 77, 68, 52, 72, 44, 38, 98, 82];
+
+        // 배열의 데이터를 확인(확인만 가능, 추가, 삭제, 변경 등은 불가능)
+        document.write(score + "<br>");
+        document.write("score의 갯수 : "+ score.length+"개<br>");
+
+        //1. 배열의 값을 출력하는 방법 1 - 기본 for문
+        // 기본 for문 : 배열의 인덱스를 통해서 부분적으로 접근 가능
+        var tot = 0;
+        for(var i = 0; i<score.length;i++) {
+            documen.write(score[i]+ " ");
+            tot +=score[i];
+        }
+        var avr = tot / score.length;
+        document.write("<br>총점: " + tot);
+        document.write("<br>평균: " + avr.toFixed(4));
+
+        // 2. 배열의 값을 출력하는 방법 2 - 확장 for문
+        // for-in문 : 무조건 처음부터 끝까지 접근해서 사용
+        tot = 0;
+        avr = 0;
+        
+        for(var i in score) {
+            document.write(score[i]+ " ");
+            tot += score[i];
+        }
+
+        var avr = tot / score.length;
+        document.write("<br>총점: " + tot);
+        document.write("<br>평균: "+ avr.toFixed(2));
+        document.write("<br>------------<br>");
+    </script>
+</body>
+</html>

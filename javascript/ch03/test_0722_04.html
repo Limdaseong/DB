@@ -13,6 +13,19 @@
             text-align: center;
             margin-bottom: 30px;
         }
+        .gugudan {
+            border: 1px solid black;
+            width: 8%;
+            padding: 10px;
+            padding-left: 20px;
+            margin: 10px;
+            text-align: center;
+            display: inline-block;
+            line-height: 2em;
+        }
+        .gugudan h3 {
+            text-align: center;
+        }
 
     </style>
 </head>
@@ -26,9 +39,9 @@
         <script>
             for(var i=2;i<=9;i++) {
                 document.write('<div class="gugudan">');
-                document.write("<h3>"+i+"단</h3><br>");
+                document.write("<h3>"+i+"단</h3>");
                 for(var z=1;z<=9;z++) {
-                    document.write("<p>"+i+" * "+ z+" = "+i*z+"<br>");
+                    document.write("<p>"+i+" x "+ z+" = "+i*z+"</p>");
                 }
                 document.write("</div>");
             }

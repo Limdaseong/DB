@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2차원 배열</title>
+</head>
+<!--
+    1. 각 행별로(반별로) 총점과 평균을 구하여 출력하시오
+-->
+
+<body>
+    <script>
+        // 1. 2차원 배열을 만드는 1번 방법 
+        // var score = [
+        //     [95, 88, 76, 64, 73],
+        //     [78, 63, 57, 92],
+        //     [77, 82, 67, 63, 81, 92]
+        // ];
+
+        // 2. 2차원 배열을 만드는 2번 방법 - Array 객체
+        var score = new Array(
+            new Array(95, 88, 76, 64, 73),
+            new Array(78, 63, 57, 92),
+            new Array(77, 82, 67, 63, 81, 92)
+        )
+
+
+        //확인
+        document.write(score + "<br>");
+        document.write("score의 갯수 : " + score.length + "<br>");
+        document.write("0번 행 열의 갯수 : " + score[0].length + "<br>");
+        document.write("1번 행 열의 갯수 : " + score[1].length + "<br>");
+        document.write("2번 행 열의 갯수 : " + score[2].length + "<br><br>");
+        for (var i = 0; i < score.length; i++) {
+            var sum = 0;
+            var avg;
+            for (var z = 0; z < score[i].length; z++) {
+                sum += score[i][z];
+            }
+            avg = sum / score[i].length;
+            document.write((i + 1) + "반의 총점은 " + sum + "이고 평균은 " + avg.toFixed(2) + "이다.<br>")
+        }
+
+        document.write("------------------------------<br>");
+        // 2. for-in문 
+        for(var i in score) {
+            sum = 0; avg = 0;
+            for(var j in score[i]) {
+                sum += score[i][j];
+            }
+            avg = sum/score[i].length;
+            document.write(Number(i+1) + "반("+score[Number(i)].length+ "명) 총점 : "+ sum);
+            document.write(", 평균 : "+ avg.toFixed(2));
+            document.write("<br>");
+        }
+    </script>
+</body>
+
+</html>
