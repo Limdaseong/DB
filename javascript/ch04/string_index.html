@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열 인덱스 활용</title>
+    <style>
+        .container {
+            width: 500px;
+            margin: 30px auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            width: 100px;
+            display: inline-block;
+            margin-left: 100px;
+        }
+        label, input {
+            text-align: center;
+        }
+        .btn {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <fieldset>
+            <h2>2020년 1학기 성적 결과</h2>
+            <form method="POST" name="form1">
+                <label for="name">이름</label>
+                <input type="text" name="name" id="name"><br>
+                <label for="kor">국어 점수</label>
+                <input type="text" name="kor" id="kor"><br>
+                <label for="mat">수학 점수</label>
+                <input type="text" name="mat" id="mat"><br>
+                <label for="eng">영어 점수</label>
+                <input type="text" name="eng" id="eng"><br>
+                <div class="btn">
+                <button onclick="calc();">성적 처리 결과</button>
+            </div>
+            </form>
+        </fieldset>
+        <script>
+            function calc() {
+                var tot = 0;
+                tot = parseInt(form1['kor'].value) + parseInt(form1['mat'].value) + parseInt(form1['eng'].value);
+                ave = tot / 3;
+                alert(form1['name'].value + "학생의 총점은 " + tot + "이고, 평균은 "+ ave.toFixed(2) +"입니다.");
+            }
+        </script>
+    </div>
+</body>
+
+</html>

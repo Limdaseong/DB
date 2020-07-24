@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2차원 배열의 활용</title>
+    <title>문제 4번</title>
     <style>
         table {
             border: 1px solid black;
@@ -20,61 +20,58 @@
         }
     </style>
 </head>
-<!--
-    1. 학생 2차원 배열의 정보를 출력하시오.
-    2. 각 학생별 총점, 평균(소수점2째자리)을 기말고사 뒤에 출력하시오.
-    3. table로 출력
--->
 <body>
     <script>
         var student = new Array(
+            Array("이름", "전공", "중간", "기말","총점", "평균"),
             Array("이익준", "컴공", 88, 76), // 이름, 전공, 중간, 기말
             Array("양석형", "수학", 70, 83),
             Array("채송화", "물리", 92, 95),
             Array("안정원", "전자", 85, 92),
-            Array("김준원", "기계", 97, 88),
-            Array("이름", "전공", "중간", "기말","총점", "평균")
+            Array("김준원", "기계", 97, 88)
         );
+
+        var totSum = 0; var totAvg = 0;
 
         document.write('<div class="container">');
         document.write("<table>");
-
         document.write("<tr>");
-        for(var i= 0;i<student[5].length;i++){
-            document.write("<th>"+student[5][i]+"</th>");
+        for(var i = 0;i<student[0].length;i++) {
+            document.write("<th>"+student[0][i]+"</th>");
         }
         document.write("</tr>");
 
-        for(var i= 0 ;i<student.length;i++) {
+        for(var i = 1; i<student.length;i++) {
             var sum = 0; var avg = 0; var cnt = 0;
-            document.write("<tr>");
-
-            if(i == 5) {
-                break;
-            }
-
+            document.write("<tr>")
             for(var z = 0;z<student[i].length;z++) {
-
-                if(isNaN(student[i][z]) == false) {
+                if( isNaN(student[i][z]) == false ){
                     sum += student[i][z];
                     cnt++;
                 }
-                document.write("<td>"+student[i][z]+"</td> ");
+                document.write("<td>"+student[i][z]+"</td>");
             }
-
             avg = sum / cnt;
-            document.write("<td>"+sum + "<td>"+ avg.toFixed(2) +"</td>");
+            totSum += sum;
+            totAvg += avg;
+            document.write("<td>"+sum + "<td>"+ avg.toFixed(2) +"</td></tr>");
+        }
 
-            document.write("</tr>");
+        document.write("<tr><td colspan='2'>통계</td>");
+        for(var i=2;i<student.length-2;i++) {
+            var sum = 0; var avg = 0; var cnt = 0;
+           for(var z = 1;z<student.length;z++) {
+               sum += student[z][i];
+               cnt++;
+           }
+           avg = sum / cnt;
+           document.write("<td>" + avg + "</td>");
         }
-        document.write("<tr><th></th>");
-        for(var i = 0;i<5;i++){
-            document
-        }
+        document.write("<td>"+ totSum/5 + "</td>");
+        document.write("<td>"+ totAvg/5 + "</td>");
+
+        document.write("</tr>");
         document.write("</table>");
-        document.write("</div>");
-
-
     </script>
 </body>
 </html>
