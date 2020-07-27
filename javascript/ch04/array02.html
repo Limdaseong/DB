@@ -16,7 +16,7 @@
         var b1 = new Array(10, 20, 30, 40, 50); //크기가 5인 배열
         var b2 = new Array(); // 크기가 0인 배열
         var b3 = new Array('JAVA', 84, "웹프로그래밍", 92, "Oracle", 84.5);
-        var b4 = new Array(5);
+        var b4 = new Array(5); //생성자에 값을 하나만 적었을 때 데이터가 아니라 크기로 취급
 
         //확인 
         document.write("a1 : "+ a1 + "<br>");
@@ -26,6 +26,10 @@
         document.write("a3 : "+ a3 + "<br>");
         document.write("b3 : "+ b3 + "<br>");
         document.write("b4 : "+ b4 + "<br>");
+        document.write("b1의 크기"+ b1.length + "<br>");
+        document.write("b2의 크기"+ b2.length + "<br>");
+        document.write("b3의 크기"+ b3.length + "<br>");
+        document.write("b4의 크기"+ b4.length + "<br>");
     </script>
 </body>
 </html>
