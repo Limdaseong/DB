@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수 활용 2</title>
+    <!-- 
+        1.변수 종료 - 범위를 기준
+        (1)전역 변수(global variable) : 함수 밖에서 선언되어 사용하는 변수
+        - 웹브라우저에서 해당 웹페이즈를 사요하는 동안 계속 유지되고,
+        모든 자바스크립트에서 참조할 수 있음.
+        (2) 지역 변수(loacal variable) : 함수 안에서 선언되어 사용하는 변수
+        - 해당 함수가 실행되는 동안만 유지되고, 해당 함수 안의 코드들에서만 참조할 수 있음.
+        2. 미리 정의하지 않고 특성 함수 내에서 변수를 사용하게 되면, 자바스크립트에서는
+        이 변수를 지역변수로 취급하고, 만약 함수 내에서 전역변수로 사용하려면,
+        반드시 함수 밖에서 전역변수로 선언하고 사용해야함.
+     -->
+</head>
+<body>
+    <script>
+        var a = 'global_A'; //전역변수
+        var b = 'global_B';
+        var c = 'global_C';
+        function f1(){
+            var b = 'local_B'; //지역변수
+            var d = 'local_D';
+            document.write("--- 함수 안에서 사용 ---<br>");
+            document.write("a = " + a + "<br>");
+            document.write("b = " + b + "<br>"); //함수 안에서는 지역변수가 전역변수보다 우선
+            document.write("c = " + c + "<br>");
+            document.write("d = " + d + "<br>");
+            //같은 이름의 전역변수와 지역변수가 있을때
+            // 우선적으로 지역변수를 사용
+            // 같은 이름의 전역변수를 사용하는 방법
+            document.write("b = " + this.b + "<br>");
+        }
+        f1();
+        document.write("--- 함수 밖에서 사용 ---<br>");
+        document.write("a = " + a + "<br>");
+        document.write("b = " + b + "<br>");
+        document.write("c = " + c + "<br>");
+        // document.write("d = " + d + "<br>"); //함수 밖에서는 지역변수에 접근할수 없다
+    </script>
+    
+</body>
+</html>

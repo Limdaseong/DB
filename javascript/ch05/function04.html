@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수 활용4</title>
+    <!-- 
+        1. 자바스크립트의 특성 : 함수와 변수는 먼저 사용하고, 뒤에 정의하는 것이 가능하다
+        2.hoist : 끌어 당긴다
+        호이스팅(hoisting) : 모든 전역변수와 함수의 정의 부분을 
+        HTML문서의 앞부분으로 끌어당겨 이동시킨 후에 실행하는 자바스크립트의 특성.
+
+        - 일반적으로 전역변수와 함수는 가독성을 위해서 선언하고 사용하는것을 권장.
+     -->
+</head>
+<body>
+    <script>
+        // 함수 호출 1
+        f1(10, 20, 30);
+
+        // 함수 호출 2
+        a=35;
+        f1(a, b);
+
+        //함수 호출 3
+        x = 40; y=50; z= 60;
+        f1(x,y,z);
+
+        // 함수 정의
+        function f1(x, y, z){
+            document.write("x = " + x + "<br>");
+            document.write("y = " + y + "<br>");
+            document.write("z = " + z + "<br><hr>");
+        }
+        var a;
+        var b = 45; // 초기화
+
+        var x, y, z;
+    </script>
+    
+</body>
+</html>
