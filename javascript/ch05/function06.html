@@ -4,49 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>함수 활용 6</title>
+    <!-- 
+        함수의 종류
+        1. 기본 함수
+     -->
 </head>
 <body>
-    <!--
-        1. 변수 선언할 때 var라는 키워드 사용
-        변수의 중복 선언 - 똑같은 이름으로 변수를 여러 개 선언함으로써
-        여러 개발자에 의해서 협업을 할 때 심각한 문제를 야기함.
-        - A개발자의 maxScore은 90점이었지만, B개발자가 maxScore를 120점으로 바꿔서
-        개발에 큰 혼선을 가져오게 함.
-        2. 이러한 문제점을 개선하기 위해서 ES6버전부터 let, const로 구분해서 사용하기로
-        3. 현재 시점까지는 ES5버전을 많이 사용하고 있으면,
-        javascript를 활용한 프레임워크에서는 ES6버전을 사용하고 있음.
-    -->
-
     <script>
-        // 1. var을 사용하여 변수 선언
-        // - 중복선언, 중복할당 모두 가능 -> 문제점이 되기도 함.
+        // 1. 기본 함수
+        //함수 생성(정의)
+        function add(a, b){
+            // var result = a + b;
+            // return result;
+            return a + b;
+        }
+        //함수 호출(사용)
+        // var result = add(10, 20);
+        document.write("합계 : " + add(10,20) + "<br>");
 
-        // A 개발자
-        var maxScore = 90; // 전역변수, 최고점수는 90점
-        document.write("최고점수 : " + maxScore + "<br>");
 
-        // B 개발자
-        var maxScore = 120;
-        document.write("최고점수 : " + maxScore + "<br>");
+        // 2. 익명 함수 (anonymous function)
+        //익명 함수를 만드는 목적 : 함수를 담아 호출시에 전달하고자 함. (보통 매개변수(콜백함수)로 사용됨)
+        //익명 함수 생성(정의) - 이름을 적지않고 함수 자체를 변수에 담는다
+        var add2 = function(a, b){
+            return a + b;
+        }
+        //익명 함수 사용
+        // var result = add2(30,40);
+        document.write("합계 : " + add2(30,40) + "<br>");
 
-        // 2. let을 사용
-        // A 개발자
-        let minScore = 50;
-        document.write("최저점수 : " + minScore + "<br>");
-        
-        // B 개발자
-        let minScore = 60;
-        document.write("최저점수 : " + minScore + "<br>");
 
-        // 3. const 사용 - 중복선언 불가, 값을 재할당하는 것도 불가
-        // 상수(constant) 선언 - 한번 선언하고, 값을 할당하면 바꿀 수 없음
-        // A 개발자
-        const basicScore = 80;
-        document.write("기준점수 : " + basicScore + "<br>");
+        // 3. 즉시 실행 함수
+        // 함수 생성과 동시에 실행 
+        //함수전체를 괄호로 감싼후 다시 ()해서 매개변수값을 적어준다 EX : (함수)(a,b);
+        var result = (function(a,b){
+            return a + b;
+        })(50,60);
+        document.write("합계 : " + result + "<br>");
 
-        // B 개발자
-        const basicScore = 90; // 값을 변경
-        document.write("기준점수 : " + basicScore + "<br>");
-    </script>
+
+        // 4. 콜백 함수
+        // 어떤 함수의 매개변수로만 사용되는 함수
+        function f1(f, n){ //매개변수 : (함수(콜백함수),정수)  n번만큼 f자리에 들어간 함수를 반복함
+                            //매개변수로 들어간 f가 콜백함수
+            document.write("콜백함수를 " + n + "번 호출함.<br>");
+            for(var i=0; i<n; i++){
+                f(); //콜백함수 호출
+            }
+        }
+
+        // 익명 함수 생성
+        var f3 = function(){
+            document.write("바보 <br>");
+        }
+        // 함수 호출
+        f1(f3,5);
+
+    </script>    
 </body>
 </html>
