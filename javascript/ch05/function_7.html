@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>재귀함수 사용</title>
+    <!-- 
+    재귀함수(reculsive function) 호출 - 함수 안에서 자신의 함수를 호출하는 것
+     -->
 </head>
-    <!--
-        재귀함수(reculsive function) 호출 - 함수 안에서 자신의 함수를 호출하는 함수        
-    -->
 <body>
     <script>
         var num = 0;
+        // 함수 정의
         function testFnc() {
             num++;
             document.write(num + "<br>");
 
-            if(num == 10) return; // num이 10일 때 중지.
+            if(num == 10) return; // num이 10일때 중지.
 
             testFnc(); // 재귀함수 호출
         }
+
+        // 함수 호출
+        testFnc();
     </script>
 </body>
 </html>

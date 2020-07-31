@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>밀리의 서재 또는 윌라</title>
+    <style>
+        .container { width: 500px; margin: 30px auto;}
+    </style>
+</head>
+<body>
+    <!--오만과 편견 확인 삭제
+    레미제라블
+노인과 바다 전쟁과 평화
+확인-->
+    <div class="container">
+        <table>
+            <tr>
+                <td>
+                    오만과 편견
+                    <button onclick="Book()">확인</button>
+                    <button onclick="delete()">삭제</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    레미제라블
+                    <button onclick="Book()">확인</button>
+                    <button onclick="delete()">삭제</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    노인과 바다
+                    <button onclick="Book()">확인</button>
+                    <button onclick="delete()">삭제</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    전쟁과 평화
+                    <button onclick="Book()">확인</button>
+                    <button onclick="delete()">삭제</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        // 객체 생성자 함수
+        // Book - 제목, 저자, 페이지, 가격
+        function Book(tilte, author, volume, price) {
+            this.title = title;
+            this.author = author;
+            this.volume = volume;
+            this.price = price;
+        }
+
+        //
+    </script>
+</body>
+</html>

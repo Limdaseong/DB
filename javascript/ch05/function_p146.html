@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>몰라</title>
+    <title>전역함수와 지역함수</title>
 </head>
 <body>
-        
+    <script>
+        // 전역함수
+        function myFnc() {
+            alert("전역함수");
+        }
+
+        // 전역함수
+        function outerFnc() {
+            // 지역함수
+            function myFnc() {
+                alert("지역함수");
+            }
+
+            // 지역함수 호출
+            myFnc();
+        }
+
+        // 전역함수 호출
+        outerFnc();
+        myFnc();
+    </script>
 </body>
 </html>

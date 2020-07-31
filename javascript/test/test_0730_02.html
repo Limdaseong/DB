@@ -6,9 +6,21 @@
     <title>잭팟 게임</title>
 </head>
 <style>
-    .container {
-        width: 650px; margin: 30px auto;
-    }
+    .container { width: 650px; margin: 30px auto; }
+    .container h1 { text-align: left; margin-left: 200px; padding-left: 80px;
+    background:url('../test/images/dice_info.png'); background-repeat: no-repeat; background-size: 40px;}
+    .info { border: 1px solid black; padding: 10px; margin-bottom: 10px;}
+    .info p { background: url('../test/images/dice_info.png'); background-repeat: no-repeat;
+    background-size: 20px; padding-left: 30px;}
+    .info .accent { color: red; font-weight: bold;}
+    .betting_menu { text-align: center; border: 1px solid black; margin-bottom: 10px;}
+    .betting_menu ul { list-style: none; padding: 10px;}
+    .betting_menu label { width: 80px; text-align: right;}
+    .betting_menu input { height: 30px;}
+    .betting_menu button { background-color: black; color: white; border: none; 
+    height: 30px; width: 80px;}
+    .dice_img { text-align: center; margin-bottom: 20px;}
+    .result { text-align: center;}
 </style>
 <!--
     1. 베팅금액을 입력하지 않으면, 경고를 알려준다. 베팅금액을 입력해야만 게임이 시작된다.
@@ -23,16 +35,73 @@
         <h1>잭팟 게임</h1>
         <div class="info">
             <p>주사위를 던져주세요</p>
-            <p>같은 숫자 3개가 일치하면 베팅 금액의 10배, 숫자 2개가 일치하면 베팅금액의 2배를 드립니다.</p>
+            <p>같은 숫자 3개가 일치하면 베팅 금액의 <span class="accent">10배</span>, 숫자 2개가 일치하면 베팅금액의 <span class="accent">2배</span>를 드립니다.</p>
             <p>베팅금액을 입력하고, 플레이 버튼을 누르면 게임을 시작합니다.</p>
-            <script>
-                //순서 : 베팅 금액 입력 - 게임 시작 - 주사위 던짐 - 숫자를 예측 - 같은 숫자가 2개라면 베팅금액 2배, 같은 숫자 3개라면 베팅금액 10배
-
-                var betM = Number(prompt("베팅 금액을 입력하시오.")); // 베팅 금액 입력
-
-                var arr =var dice = Number(Math.random()*6+1);
-            </script>
+        </div>
+        <div class="betting_menu">
+            <ul>
+                <li>
+                    <label for="betting_price">베팅 금액</label>&nbsp;&nbsp;&nbsp;
+                    <input type="text" id="betting_price" autofocus>&nbsp;&nbsp;&nbsp;
+                    <button onclick="play()">PLAY</button>
+                </li>
+            </ul>
+        </div>
+        <div class="dice_img">
+            <img src="" id="img1" width="200" alt="">&nbsp;&nbsp;
+            <img src="" id="img2" width="200" alt="">&nbsp;&nbsp;
+            <img src="" id="img3" width="200" alt="">
+        </div>
+        <div class="result">
+            <h3>게임 결과</h3>
+            <p id="msg"></p>
+            <p id="winning_price"></p>
         </div>
     </div>
+
+    <script>
+        function play() {
+            var betting_price = document.querySelector('#betting_price').value;
+
+            var rn1 = parseInt(Math.random()*6+1); // 1~6까지의 난수
+            var rn2 = parseInt(Math.random()*6+1);
+            var rn3 = parseInt(Math.random()*6+1);
+
+            // 난수를 통해 주사위 이미지를 적용
+            document.querySelector('#img1').setAttribute('src', '../test/images/dice_'+ rn1 +'.png');
+            document.querySelector('#img2').setAttribute('src', '../test/images/dice_'+ rn2 +'.png');
+            document.querySelector('#img3').setAttribute('src', '../test/images/dice_'+ rn3 +'.png');
+
+            // 게임 결과 계산
+            var m;
+            if(rn1 == rn2 && rn2 == rn3) { // 3개의 주사위가 같다면
+                m = 10;
+            } else if(rn1 == rn2 || rn1 == rn3 || rn2 == rn3) { // 2개의 주사위가 같다면
+                m = 2;
+            } else {
+                m = 0;
+            }
+
+            // 게임 결과
+            var winning_price = betting_price * m;
+            switch(m) {
+                case 10:
+                    document.querySelector('#msg').innerHTML = '축하합니다. 10배의 우승상금을 받게 되셨습니다.';
+                    document.querySelector('#winning_price').innerHTML = '우승 금액 : ' + winning_price + '원';
+                    break;
+                case 2:
+                    document.querySelector('#msg').innerHTML = '축하합니다. 2배의 우승상금을 받게 되셨습니다.';
+                    document.querySelector('#winning_price').innerHTML = '우승 금액 : ' + winning_price + '원';
+                    break;
+                case 0:
+                    document.querySelector('#msg').innerHTML = '아쉽습니다. 다시 한번 도전해 주세요.';
+                    document.querySelector('#winning_price').innerHTML = '현재 금액 : ' + winning_price + '원';
+                    break;
+            }
+
+            document.querySelector('#betting_price').value = '';
+            document.querySelector('#betting_price').focus();
+        }
+    </script>
 </body>
 </html>

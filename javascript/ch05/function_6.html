@@ -7,22 +7,22 @@
 </head>
 <body>
     <div id="grlleryZone">
-        <p><img src="images/pic_1.jpg" id="photo" width="200" alt=""></p>
+        <p><img src="../image/ch05/pic_1.jpg" alt="" width="200" id="photo"></p>
         <p>
             <button onclick="gallery(0)">이전</button>&nbsp;&nbsp;&nbsp;
-            <button onclick="gallery(1)">다음</button>
+            <button onclick="gallery(1)">다음</button>&nbsp;
         </p>
     </div>
     <script>
         var num = 1;
         function gallery(direct) {
             if(direct == 1) {
-                //if(num == 9) return; // num이 9일때 마지막 이미지이므로 더 증가하지 않도록 하기 위함.
-                if(num == 9) num = 0; // 9번 일때 0으로 설정, 회전하도록 설정.
+                //if(num == 9) return; // num이 9일 때 마지막 이미지이므로 더 증가하지 않도록 하기 위함
+                if(num == 9) num = 0; //9번 일때 0으로 설정, 회전하도록 설정.
                 num++;
-            } else if(direct == 0) {
-                //if(num == 1) return; // num이 1일때 처음 이미지이므로 더 감소하지 않도록 하기 위함.
-                if(num == 1) num = 10; // 1번 일때 10으로 설정, 회전하도록 설정.
+            } else if (direct == 0) {
+                //if(num == 1) return; //num이 1일대 처음 이미지이므로 더 감소하지 않도록 하기 위함
+                if(num == 1) return; // 1번 일때 10으로 설정, 회전하도록 설정.
                 num--;
             }
             var imgTag = document.getElementById('photo');
