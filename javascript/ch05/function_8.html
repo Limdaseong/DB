@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전역함수의 문제점</title>
+    <title>Document</title>
 </head>
 <body>
     <script>
         var num = 100;
-
         function menu() {
             num += 100;
             alert(num);
@@ -16,7 +15,7 @@
 
         menu(); // 아래쪽의 재정의 된 함수를 호출
 
-        // 같은 함수 이름으로 재정의된것으로 판정.
+        // 같은 함수 이름으로 재정의된 것으로 판정.
         function menu() {
             alert(num);
         }

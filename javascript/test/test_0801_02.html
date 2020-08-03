@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서 목록 관리 프로그램</title>
+    <style>
+        * { box-sizing: border-box;}
+    .container { width: 600px; margin: 30px auto;}
+    .container h2 { text-align: center;}
+    .container form { background-color: yellowgreen; padding: 30px 40px;
+    color: white; text-align: center;}
+    form input { border: none; width: 255px; padding: 10px; font-size: 1.2em;
+    margin-bottom: 5px;}
+    form .addBtn { border: none; background-color: white; color: #555; width: 60px;
+    padding: 11px; font-size: 1em; box-shadow: 2px 2px 4px black; margin-left: 10px;
+    cursor: pointer;}
+    .m1 { text-align: left;}
+    .m2 { text-align: right; float: right;}
+    ul { list-style: none; margin: 0; padding: 0;}
+    ul li { background-color: #eee; font-size: 1.1em; transition: 0.2s;
+    padding: 10px 10px 10px 40px; position: relative;}
+    ul li:nth-child(odd) { background-color: #ddd;}
+    ul li:hover { background-color: lemonchiffon; font-weight: bold; color: brown;}
+    .close { background-color:pink; opacity: 0.7; padding: 2px 12px 6px 12px;
+    font-size: 1.5em; color: red; position: absolute; right: 0; top: 0; cursor: pointer;}
+    .bookInfo { background-color:orange; opacity: 0.7; padding: 12px 12px 12px 12px;
+    font-size: 0.8em; color: gray; position: absolute; right: 37px; top: 0; cursor: pointer;}
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>도서 목록 관리 프로그램</h2>
+        <form action="">
+            <div>
+                <input type="text" id="title" autofocus placeholder="제목">
+                <input type="text" id="author" placeholder="저자">
+                <input type="text" id="volume" placeholder="페이지 수">
+                <input type="text" id="price" placeholder="가격">
+                <button id="add" class="addBtn" onclick="showList()">추가</button>
+            </div>
+            <div>
+
+            </div>
+            
+        </form>
+        <div id="itemList"></div>
+    </div>
+    <script>
+        // 객체 생성자 함수
+        function Book(title, author, volume, price) {
+            this.title = title;
+            this.author = author;
+            this.volume = volume;
+            this.price = price;
+        }
+        Book.prototype.showInfo = function() {
+            return "제목: " + this.title+ "\n저자: " + this.author + "\n페이지 수: "
+             + this.volume + "\n가격: " + this.price;
+        }
+
+        // var itemList = [
+        //     new Book('레미제라블', '빅토르 위고', 950, 23000),
+        //     new Book('죄와 벌', '토스토예프스키', 1025, 21000),
+        //     new Book('전쟁과 평화', '톰스토이', 875, 18500),
+        //     new Book('오만과 편견', '제인 오스턴', 770, 15000),
+        //     new Book('폭풍의 언덕', '에밀리 브론테', 820, 15500),
+        // ]
+
+        // 책정보를 담기 위한 빈 배열
+        var itemList = []; 
+
+        var addBtn = document.querySelector("#add");
+        addBtn.addEventListener("click", addList); // 이벤트리스너
+
+        // 이벤트 함수
+        function addList() {
+            var title = document.querySelector("#title").value;
+            var author = document.querySelector("#author").value;
+            var volume = document.querySelector("#volume").value;
+            var price = document.querySelector("#price").value;
+
+            // 준비물을 입력했을 때
+            itemList.push(new Book(title, author, volume, price));
+            document.querySelector('#title').value = "";
+            document.querySelector('#author').value = "";
+            document.querySelector('#volume').value = "";
+            document.querySelector('#price').value = "";
+            event.preventDefault();
+            showList();
+        }
+
+
+        function showList() {
+            event.preventDefault();
+            // itemList 배열의 내용을 li로 나열함.
+            var list = "<ul>";
+            for(var i=0; i<itemList.length; i++) {
+                list += "<li>"+ itemList[i].title +"<span class='bookInfo' id="+ i +">책 정보</span>"+"<span class='close' id="+ i +">x</span></li>";
+            }
+            list += "</ul>";
+
+            document.querySelector("#itemList").innerHTML = list;
+
+            // item에 대한 배열
+            var bookList = document.querySelectorAll(".bookInfo");
+
+            for(var i=0; i<bookList.length; i++) {
+                bookList[i].addEventListener("click", showBookInfo); // 이벤트이름, 이벤트함수
+            }
+
+            var removeList = document.querySelectorAll(".close");
+
+            for(var i=0; i<removeList.length; i++) {
+                removeList[i].addEventListener("click", removeItem); // 이벤트이름, 이벤트함수
+            }
+        }
+
+
+        function removeItem() {
+            var id = this.getAttribute("id"); // id 속성을 저장
+            itemList.splice(id, 1); // 선택된 id 1개를 삭제
+            showList();
+        }
+
+        function showBookInfo() {
+            var id = this.getAttribute("id");
+            alert(itemList[id].showInfo());
+        }
+    </script>
+</body>
+</html>
