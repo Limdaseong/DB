@@ -43,7 +43,7 @@
 	//null로 선언하는 이유 : try에서도 쓰고 싶고 finally에서도 쓰고 싶어서
 	
 	
-	String sql = " SELECT i_board, title FROM t_board "; // 컬럼명은 소문자로 명령어는 대문자로 보기 편하게 쓰기
+	String sql = " SELECT i_board, title FROM t_board ORDER BY i_board ASC "; // 컬럼명은 소문자로 명령어는 대문자로 보기 편하게 쓰기
 
 	try {
 		con = getCon();
@@ -87,7 +87,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>게시판 리스트</div>
+	<div>
+	게시판 리스트
+	<a href="/jsp/board_Write.jsp"><button>글쓰기</button></a> <!-- 화면 띄우는 용도(post방식으로?) -->
+	</div>
 	<table>
 		<tr>
 			<th>NO</th>
@@ -97,8 +100,10 @@
 		<tr>
 			<td><%=vo.getI_board() %></td>
 			<td>
-				<a href="/jsp/boardDetail.jsp?i_board=<%=vo.getI_board() %>"> <!-- ?(키값)=(value값) / &는 키값과 value값을 더 보내고 싶을 때 쓴다 (연결자) -->
+				<a href="/jsp/board_Detail.jsp?i_board=<%= vo.getI_board()%>"> 
+				<!-- ?(키값)=(value값) / &는 키값과 value값을 더 보내고 싶을 때 쓴다 (연결자) -->
 					<%=vo.getTitle() %> <!-- 포스트 방식(보안면에서 좋다), 겟 방식(캐싱때문에 빠르다) -->
+				</a>
 			</td>
 		</tr>
 		<% } %> <!-- for문은 리스트가 있는 만큼 찍어낼 것이다 -->
