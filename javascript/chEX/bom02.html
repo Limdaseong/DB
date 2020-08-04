@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타이머 메소드</title>
+    <style>
+        .container { width: 500px; margin: 0 auto;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>타이머 메소드</h1>
+        현재시간 : <span id="nowClock"></span><br>
+        <button onclick="clearInterval(t1)">Time Stop</button>
+    </div>
+
+    <script>
+        var t1 = setInterval(myClock, 1000); // 1초마다 myClock 호출
+
+        function myClock() {
+            var currentTime = new Date();
+            document.getElementById("nowClock").innerHTML = currentTime.toLocaleTimeString();
+        }
+    </script>
+</body>
+</html>
