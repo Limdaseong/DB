@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 효과</title>
+</head>
+<style>
+    .container { width: 600px; margin: 0 auto}
+</style>
+<!--
+    DOM 객체의 연결 메소드
+    1. getElementId() - 저장된 id 속성값을 가진 요소의 첫번째 요소객체를 반환
+    2. getElementsByName() - 저장된 name 속성값을 가진 요소객체들을 반환
+    3. getElementsByClassName() - 저장된 class 속성값을 가진 요소객체들을 반환
+    4. getElementsByTagName() - 지정된 tag명을 가진 요소객체를 반환.
+
+    5. querySelector() - 지정된 css 선택자를 만족하는 첫번째 요소객체를 반환
+    6. querySelectorAll() - 지정된 css 선택자를 만족하는 모든 요소객체들을 변환
+
+    // 1개 - getElementId(), querySelector()
+    // 여러 개 - 반복문과 함께 사용
+    getElementsByName(), getElementsByClassName(),
+-->
+<!--
+    개선점 누를수록 빨라짐
+-->
+
+<body>
+    <div class="container">
+        <h3>이미지 이동하는 애니메이션 효과</h3>
+        <div id="images">
+            <img src="Image/f1.png" alt="" height="100">
+            <img src="Image/f2.png" alt="" height="100">
+            <img src="Image/f3.png" alt="" height="100">
+            <img src="Image/f4.png" alt="" height="100">
+            <img src="Image/f5.png" alt="" height="100">
+            <img src="Image/f6.png" alt="" height="100">
+            <img src="Image/f7.png" alt="" height="100">
+        </div>
+        <hr>
+        <button onclick="setInterval(moveImages, 500)">애니메이션 적용</button>
+        <button onclick="clearInterval(moveImages)"></button>
+    </div>
+<script>
+    var images = document.querySelector("#images")
+    //var btn1 = document.querySelector("#btn1");
+    //var imgTags = document.querySelectorAll("img"); // 이미지의 배열
+
+    //var btn1 = document.querySelector("#btn1");
+    //btn1.addEventListener("click", moveImages);
+
+    function moveImages() {
+        var imgTags = document.querySelectorAll("img")
+        var movingImg = imgTags[0];
+
+        images.removeChild(movingImg);s
+        images.appendChild(movingImg);
+    }
+</script>    
+</body>
+</html>
