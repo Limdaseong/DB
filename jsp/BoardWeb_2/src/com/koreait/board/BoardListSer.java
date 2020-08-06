@@ -27,7 +27,7 @@ public class BoardListSer extends HttpServlet { // http는 요청하고 응답�
     }
 
     // 생성자는 이름명으로 적고 메소드는 리턴 타입을 안받는다 super는 내 바로 위에 부모를 받는다 this는 나 자신, super는 부모 (메소드아님)
-    // object -> http -> survlet  / 호출할 때는 반대로 맨 밑부터
+    // object -> http -> servlet  / 호출할 때는 반대로 맨 밑부터
     
     //오버라이딩할 때 생략보다는 적어주는게 제일 좋음 클래스명이나 바꿨을 때 오류가 나기 때문에
     @Override               //get방식은 화면 띄우려고 쓰는 것임
@@ -38,17 +38,7 @@ public class BoardListSer extends HttpServlet { // http는 요청하고 응답�
     
     	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardList.jsp");
     	rd.forward(request, response);
-    	// sendredirect : 	1.
-    	//					2. 주소값 변환
-    	//					3. 무조건 get방식으로 날라감
-    	//
-    	// requestdispatcher : 3. doGet으로 보내면 get방식이 되고, doPost로 보내면 post방식이 된다
-    	//jsp파일을 연다
-    	//주소값 변환 x 
-    	// sendredirect : 1.
-    	//				  2.
-    	//				  3.
-    	// requestDispatcher
+    	
     	
     	try {
     		Connection con = DbCon.getCon();

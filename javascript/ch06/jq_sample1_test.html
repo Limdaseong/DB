@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery 사용법</title>
+    <!-- <script src="js/jquery-3.5.1.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <script>
+        // 1. 잘못된 방법 - 태그문서 jquery보다 위에 있을 때만 실행 가능
+        //$("#title").css("color", "red");
+
+        // 2. 권장하는 방법 - jquery의 위치에 상관없이 실행됨.
+        // $(document).ready(function() {
+        //     $("#title").css("color", "red");
+        // });
+
+        // 3. 권장하는 방법 - jquery의 위치에 상관없이 실행됨.
+        $(function(){
+            $("#title").css("color", "red");
+        })
+    </script>
+
+    <h1 id="title">제목</h1>
+</body>
+</html>

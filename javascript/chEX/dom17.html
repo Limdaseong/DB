@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>라디오버튼 체크박스의 DOM 객체</title>
+    <style>
+        .container { width: 700px; margin: 0 auto;}
+        h2 { text-align: center;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>코리아 대학교 설문조사</h2>
+        <h3>Q1. 학생의 학년을 선택해 주세요.</h3>
+        <input type="radio" name="year" value="1">1학년&nbsp;&nbsp;
+        <input type="radio" name="year" value="2">2학년&nbsp;&nbsp;
+        <input type="radio" name="year" value="3">3학년&nbsp;&nbsp;
+        <input type="radio" name="year" value="4">4학년
+        <h3>Q2. 학생이 좋아하는 과목은 선택해 주세요.</h3>
+        <input type="checkbox" name="subject" value="알고리즘">알고리즘&nbsp;&nbsp;
+        <input type="checkbox" name="subject" value="자료구조">자료구조&nbsp;&nbsp;
+        <input type="checkbox" name="subject" value="운영체제">운영체제&nbsp;&nbsp;
+        <input type="checkbox" name="subject" value="네트워크">네트워크&nbsp;&nbsp;
+        <input type="checkbox" name="subject" value="프로그래밍">프로그래밍&nbsp;&nbsp;
+        <input type="checkbox" name="subject" value="데이터베이스">데이터베이스
+        <hr>
+        <button onclick="inputComplete()">입력 완료</button>
+        <hr>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        var years = document.getElementsByName("year"); // 배열
+        var subjects = document.getElementsByName("subject"); // 배열
+        var result = document.getElementById("result");
+        var output1 = "", output2 = "";
+
+        function inputComplete() {
+            // name이 동일한 radio 버튼에서 선택한 값을 얻는 방법
+            for(var i=0; i<years.length; i++) {
+                if(years[i].checked == true) { // 체크되어 있는가를 확인
+                    output1 = years[i].value;
+                }
+            }
+            //console.log("학년: "+ output1);
+
+            for(var i=0; i<subjects.length; i++) {
+                if(subjects[i].checked == true) { // 체크되어 있는가를 확인
+                    output2 += subjects[i].value + " ";
+                }
+            }
+            //console.log("좋아하는 과목: " + output2)
+            result.innerHTML = "학년: " + output1 + "<br>좋아하는 과목: " + output2 + "<br>"; 
+        }
+    </script>
+</body>
+</html>
