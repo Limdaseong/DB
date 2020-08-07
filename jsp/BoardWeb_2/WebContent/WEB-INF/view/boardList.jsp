@@ -22,7 +22,7 @@
 <body>
 	<div>
 	게시판 리스트
-	<a href="/board_Write"><button>글쓰기</button></a>
+	<a href="/boardWrite"><button>글쓰기</button></a>
 	</div>
 	<table>
 		<tr>
