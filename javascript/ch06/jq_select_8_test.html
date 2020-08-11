@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하위 요소 선택자</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <h1>인접 관계 연산자</h1>
+        <p>내용1</p>
+        <section>
+            <h1>하위 요소 선택자</h1>
+            <p>내용2</p>
+        </section>
+        <section>
+            <h1>하위 요소 선택자</h1>
+            <p>내용3</p>
+        </section>
+    </div>
+    <script>
+        $(function() {
+            // 1. 하위 요소 선택자
+            // $("#wrap h1").css({
+            //     backgroundColor:"yellow", border:"2px dashed red",
+            // });
+
+            // 2. 자식 요소 선택자
+            $("#wrap > h1").css({
+                backgroundColor:"yellow", border:"2px dashed red",
+            });
+
+            $("#wrap > section").children().css({
+                backgroundColor:"yellow", border:"2px dotted blue",
+            })
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>형변환 함수</title>
+</head>
+<body>
+    <h3>형변환 함수</h3>
+    <p>데이터타입(자료형)을 변환하는 함수</p>
+    <p>
+    1. String() : 숫자를 문자로 변환하는 함수<br>
+    2. Number() : 문자를 숫자로 변환하는 함수<br>
+    3. Boolean() : 비논리형을 논리형으로 변환하는 함수<br>
+    - 논리형 : true, false 둘 중의 하나<br>
+    - true : 문자열, 0을 제외한 모든 숫자(정수,실수 포함)<br>
+    - false : 숫자 0, null, undefined<br>
+    4. toString() : 숫자를 문자로 변환하는 함수<br>
+    5. parseInt() : 문자를 정수로 변환하는 함수<br>
+    6. parseFloat() : 문자를 실수로 변환하는 함수<br>
+    </p>
+
+    <script>
+         var a = "10", b = 20, c;
+         c = a + b; // 문자 + 숫자 -> 문자열로 처리 
+         console.log("결과 : " + c);
+         console.log("데이터 타입 : " + typeof c); // string
+
+         c = Number(a) + b; // a의 값을 숫자로 바꿔서 더함. 그렇다고 a의 타입이 변경된 것은 아님.
+         console.log("결과 : " + c);
+         console.log("데이터 타입 : " + typeof c); // number
+
+         console.log("결과 : " + a);
+         console.log("데이터 타입 : " + typeof a); // string
+
+         a = Number(a);
+         console.log("결과 : " + a);
+         console.log("데이터 타입 : " + typeof a);
+
+         var x = "ten";
+         x = Number(x);
+         console.log("결과 : " + x); // NaN : not a number(숫자가 아님)
+         console.log("데이터 타입 : " + typeof x);
+
+         var y = 100;
+         var z = String(y);
+         console.log("결과 : " + z);
+         console.log("데이터 타입 : " + typeof z);
+
+         // 논리형 : true, false 둘 중의 하나
+         // true : 문자열, 0을 제외한 모든 숫자(정수,실수 포함)
+         // false : 숫자 0, null, undefined
+
+         // 문자
+         var h = Boolean("자바스크립트");
+         console.log("결과 : " + h);
+         console.log("데이터 타입 : " + typeof h);
+
+         // 0
+         h = Boolean(0);
+         console.log("결과 : " + h);
+         console.log("데이터 타입 : " + typeof h);
+
+         // 0을 제외한 숫자
+         h = Boolean(3.5);
+         console.log("결과 : " + h);
+         console.log("데이터 타입 : " + typeof h);
+
+         // null
+         h = Boolean(null);
+         console.log("결과 : " + h);
+         console.log("데이터 타입 : " + typeof h);
+
+         // undefined
+         var g;
+         console.log("결과 : " + Boolean(g));
+         console.log("데이터 타입 : " + typeof g);
+
+         // 빈문자
+         var i = "";
+         console.log("결과 : " + Boolean(i));
+         console.log("데이터 타입 : " + typeof i);
+
+         //////////
+         // toString() : 숫자를 문자로 변경
+         var aa = 10;
+         aa = aa.toString();
+         console.log("결과 : " + aa);
+         console.log("데이터 타입 : " + typeof aa);
+
+         // parseInt() : 문자를 정수로 변경
+         var bb = "30";
+         bb = parseInt(bb);
+         console.log("결과 : " + bb);
+         console.log("데이터 타입 : " + typeof bb);
+
+         // parseFloat() : 문자를 실수로 변경
+         var cc = "3.14";
+         cc = parseFloat(cc);
+         console.log("결과 : " + cc);
+         console.log("데이터 타입 : " + typeof cc);
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날짜 객체</title>
+</head>
+<body>
+    <script>
+        // 시스템으로부터 현재 날짜, 시간 정보를 얻어서 활용하는 방법
+        var date1 = new Date();
+        
+        var year = date1.getFullYear(); 
+        var month = date1.getMonth(); // 월(0~11), 7월: 6, +1해서 보정해서 월을 사용
+        var day = date1.getDate();
+
+        var hour = date1.getHours(); // 24시간 기준
+        var minute = date1.getMinutes();
+        var second = date1.getSeconds();
+        var milliSecond = date1.getMilliseconds(); // 1000분의 1초
+
+        var week = date1.getDay(); // 요일 정보, 0~6, 0:일, 1:월, 2:화, 3:수, 4:목, 5:금, 6:토
+
+        document.write(date1 + "<br>"); // 현재 시스템의 날짜 정보 확인, 외국 날짜 형식
+        document.write(year + "년 " + (month+1) + "월 " + day + "일<br>");
+        document.write(hour + "시 " + minute + "분 " + second + "초 (" + milliSecond + ")<br>");
+    
+        // 1. 요일을 확인하는 방법 1 - 배열을 활용하는 경우
+        var weekDay = ['일', '월', '화', '수', '목', '금', '토'];
+        document.write(year + "년 " + (month+1) + "월 " + day + "일 (" + weekDay[week] + "요일)<br>");
+
+        // 2. 요일을 확인하는 방법 2 - 배열없이 switch~case문 활용하는 경우
+        var weekStr;
+        switch(week) {
+        case 0: weekStr = "일"; break;
+        case 1: weekStr = "월"; break;
+        case 2: weekStr = "화"; break;
+        case 3: weekStr = "수"; break;
+        case 4: weekStr = "목"; break;
+        case 5: weekStr = "금"; break;
+        case 6: weekStr = "토"; break;
+        }
+        document.write(year + "년 " + (month+1) + "월 " + day + "일 (" + weekStr + "요일)<br>");
+    </script>
+</body>
+</html>

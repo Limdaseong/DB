@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인접 요소 선택자</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        * { margin: 10px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">타이틀/로그</div>
+        <div class="util">회원가입</div>
+        <nav id="gnb">
+            <ul>
+                <li>메뉴1
+                    <ul>
+                        <li>서브메뉴1</li>
+                        <li>서브메뉴2</li>
+                        <li>서브메뉴3</li>
+                    </ul>
+                </li>
+                <li>메뉴2
+                    <ul>
+                        <li>서브메뉴4</li>
+                        <li>서브메뉴5</li>
+                        <li>서브메뉴6</li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="visual">
+            <p>비주얼</p>
+        </div>
+        <div id="content">
+            <div class="left">왼쪽</div>
+            <div class="right">
+                <div class="util">오른쪽</div>
+                <footer id="footer">푸터</footer>
+            </div>
+        </div>
+        <div id="banner">배너</div>
+        <footer id="footer">푸터</footer>
+    </div>
+    <script>
+        $(function() {
+            $("p").css("border", "4px solid red"); // 태그(요소)
+            $("#gnb").css("border", "4px solid orange"); // 아이디
+            $(".logo").css("border", "4px solid yellow"); // 클래스
+            //$("#gnb ul li").css("border", "4px solid green"); // 모든 자식 li
+            $("#gnb > ul > li").css("border", "4px solid green"); // ul의 바로 밑의 자식 li
+            $("#gnb ul").css("border", "4px solid blue"); // #gnb 안의 모든 ul
+            //$("#gnb > ul").css("border", "4px solid blue"); // #gnb 의 첫번째 자식 ul
+            $("#visual + #content").css("border", "4px solid navy"); // #visual 바로 인접 형제인 #content
+            $("#visual ~ #footer").css("border", "4px solid purple"); // #visual의 다음 형제인 #footer
+            $("div.util").css("border", "4px solid pink") // div 안의 .util
+            $(".left, .right, #banner").css("border", "4px solid gray") // 개별 요소
+
+            //$("#visual ~ #footer").css("border", "4px solid gold");
+        });
+    </script>
+</body>
+</html>

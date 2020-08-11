@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 객체 4</title>
+    <style>
+        .container { width: 500px; margin: 0 auto;}
+        #light { width: 30%;}
+    </style>
+    <!-- 
+    1. 버튼 하나로 점등과 소등을 하도록 하는 프로그램
+     -->
+</head>
+<body>
+    <div class="container">
+        <h3>전구 점등/소등</h3>
+        <hr>
+        <button id="btnLight">점등</button>
+        <hr>
+        <img src="images/lightoff.png" alt="" id="light">
+    </div>
+    <script>
+        var btnLight = document.querySelector("#btnLight");
+        var imgLight = document.querySelector("#light");
+
+        btnLight.addEventListener("click", changeLight);
+
+        // 토글 버튼(Toggle Button)
+        function changeLight() {
+            if(btnLight.innerHTML == "점등") { // 점등일 때
+                //imgLight.src = "images/lighton.png"; // 속성
+                imgLight.setAttribute("src", "images/lighton.png"); // 메소드
+                btnLight.innerHTML = "소등";
+                //btnLight.style.background = "lightgray";
+                //btnLight.setAttribute("style","background:lightgray");
+                btnLight.setAttribute("style","background-color:lightgray");
+            } else { // 소등일 때
+                //imgLight.src = "images/lightoff.png";
+                imgLight.setAttribute("src", "images/lightoff.png");
+                btnLight.innerHTML = "점등";
+                //btnLight.style.background = "lightyellow";
+                //btnLight.setAttribute("style", "background:lightyellow");
+                btnLight.setAttribute("style", "background-color:lightyellow");
+            }
+        }
+    </script>
+</body>
+</html>

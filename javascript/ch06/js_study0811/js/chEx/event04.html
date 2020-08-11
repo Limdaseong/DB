@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>event 속성</title>
+    <style>
+        .container { width: 500px; margin: 0 auto;}
+    </style>
+    <!-- 
+    1. focus, blur 이벤트
+    - focus : 입력상자에서 포커스를 가질 때 발생하는 이벤트
+    - blur : 입력상자의 포커스를 잃을 때 발생하는 이벤트
+     -->
+</head>
+<body>
+    <div class="container">
+        <h3>회원 가입</h3>
+        영문명 : <input type="text" id="name" onfocus="f()" onblur="b()"><br>
+        연락처 : <input type="text">
+    </div>
+
+    <script>
+        function f() {
+            var name = document.getElementById("name");
+            name.style.backgroundColor = "gray";
+        }
+
+        function b() {
+            var name = document.getElementById("name");
+            name.style.backgroundColor = "red";
+            name.value = name.value.toUpperCase();
+        }
+    </script>
+</body>
+</html>

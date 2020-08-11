@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 객체 5</title>
+    <style>
+        .container { width: 500px; margin: 0 auto;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>자바스크립트 DOM 객체</h3>
+        <div class="box1">자바스크립트 요소의 동적인 스타일 변경</div>
+        <button class="btn1">스타일 변경</button>
+    </div>
+
+    <script>
+        var box1 = document.querySelector(".box1");
+        var btn1 = document.querySelector(".btn1");
+
+        btn1.addEventListener("click", changeStyle);
+
+        function changeStyle() {
+            // 속성 사용 - 되도록 메소드보다는 속성을 사용하기를 권장
+            // 속성을 이용했을 때는 속성이 하나씩 다 누적하여 적용되고, 
+            // 메소드를 사용하면 최종적으로 선택된 메소드 하나만 적용됨. 
+
+            // box1.style.border = "1px solid black";
+            // box1.style.padding = "10px";
+            // box1.style.margin = "10px 0";
+            // box1.style.backgroundColor = "yellow";
+            // box1.style.width = "400px";
+            // box1.style.height = "100px";
+            // box1.style.textAlign = "center";
+            // box1.style.lineHeight = "100px";
+            // box1.style.fontSize = "1.2em";
+            // box1.style.color = "blue";
+            // box1.style.fontWeight = "bold";
+            // box1.style.borderRadius = "50%";
+            // box1.style.boxShadow = "5px 5px 5px darkgray";
+
+            // 메소드 사용
+            box1.setAttribute("style", "border:1px solid black;");
+            box1.setAttribute("style", "padding:10px;");
+            box1.setAttribute("style", "margin:10px 0;");
+            box1.setAttribute("style", "background:yellow;");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 트리 구조 확인</title>
+    <style>
+        .container { width: 500px; margin: 0 auto;}
+    </style>
+    <!-- 
+    --- DOM 트리의 요소 선택 속성 정리 ---
+    previousSibling : 노드 객체의 직전 형제 노드 선택
+    nextSibling : 노드 객체의 직후 형제 노드 선택
+    firstChild : 노드 객체의 첫번째 자식 노드 선택
+    lastChild : 노드 객체의 마지막 자식 노드 선택
+    childNodes[] : 노드 객체의 자식 노드들을 순차적으로 선택, 배열
+    parentNode[] : 노드 객체의 부모 노드 선택
+     -->
+</head>
+<body>
+    <div class="container">
+        <h3>DOM 트리 구조 확인</h3>
+        <hr>
+        <ul><li>웹프로그래밍</li><ol id="now"><li>HTML5</li><li>CSS3</li><li>Javascript</li><li>JQuery</li></ol><li>JAVA</li><li>Oracle</li></ul>
+        <hr>
+        <button onclick="f1()">현재 노드</button> <span id="s1"></span><br>
+        <button onclick="f2()">직전 형제 노드</button> <span id="s2"></span><br>
+        <button onclick="f3()">직후 형제 노드</button> <span id="s3"></span><br>
+        <button onclick="f4()">첫번째 자식 노드</button> <span id="s4"></span><br>
+        <button onclick="f5()">두번째 자식 노드</button> <span id="s5"></span><br>
+        <button onclick="f6()">마지막 자식 노드</button> <span id="s6"></span><br>
+        <button onclick="f7()">부모 노드</button> <span id="s7"></span><br>
+    </div>
+    <script>
+        var now = document.getElementById("now");
+        var s1 = document.getElementById("s1");
+        var s2 = document.getElementById("s2");
+        var s3 = document.getElementById("s3");
+        var s4 = document.getElementById("s4");
+        var s5 = document.getElementById("s5");
+        var s6 = document.getElementById("s6");
+        var s7 = document.getElementById("s7");
+
+        function f1() {
+            now.style.border = "1px solid red";
+            s1.innerText = "빨간색 박스";
+        }
+        
+        function f2() {
+            now.previousSibling.style.color = "red";
+            s2.innerText = now.previousSibling.innerText;
+        }
+
+        function f3() {
+            now.nextSibling.style.color = "blue";
+            s3.innerText = now.nextSibling.innerText;
+        }
+
+        function f4() {
+            now.firstChild.style.backgroundColor = "yellow";
+            s4.innerText = now.firstChild.innerText;
+        }
+
+        function f5() {
+            now.childNodes[1].style.backgroundColor = "pink";
+            s5.innerText = now.childNodes[1].innerText;
+        }
+
+        function f6() {
+            now.lastChild.style.backgroundColor = "cyan";
+            s6.innerText = now.lastChild.innerText;
+        }
+
+        function f7() {
+            now.parentNode.style.border = "1px solid blue";
+            s7.innerText = now.parentNode.innerText;
+        }
+    </script>
+</body>
+</html>

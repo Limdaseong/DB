@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자료형(Data Type)</title>
+</head>
+<body>
+    <h3>자바스크립트의 자료형(Data Type)</h3>
+    <p>
+    1. 기본형<br>
+    (1) 숫자형(number) : 따옴표 없이 표기한 숫자<br>
+    - 정수와 실수라고 구분하지는 않는다.(정수, 실수)<br>
+    (2) 문자형(string) : 값을 따옴표로 싸서 표기한 문자<br>
+    (3) 논리형 : 값을 true(참), false(거짓)로 표기하는 자료형<br>
+    (4) undefined형 : 선언하고, 초기화되지 않은 자료형<br>
+
+    2. 복합형
+    (1) array형(배열) : 하나의 변수에 여러 개의 값을 저장하는 자료형<br>
+    (2) object형(객체) : 함수와 속성이 포함된 자료형<br>
+    </p>
+
+    <script>
+        // 1. 자바스크립트에서 변수를 선언하면 undefinded가 되고, 
+        // 데이터를 삽입하면 데이터타입이 결정된다.
+        // 2. undefined : 변수가 처음에 값을 할당하지 않은 상태.
+        // 3. null : 기존에 있는 값이 더이상 유효하지 않음을 의미.
+        // - 주로 초기화하는 용도로 사용
+        // 4. typeof 연산자 : 변수의 타입을 확인할 때 사용.
+        var a = 10, b = 20, c, d;
+        c = a + b;
+        console.log("결과 : " + c);
+        console.log("데이터 타입 : " + typeof c);
+
+        console.log("결과 : " + d);                // undefined
+        console.log("데이터 타입 : " + typeof d);  // undefined
+
+        d = null;
+        console.log("결과 : " + d);                // null
+        console.log("데이터 타입 : " + typeof d);   // object (객체)
+
+        var s = "자바스크립트";
+        console.log("결과 : " + s);
+        console.log("데이터 타입 : " + typeof s);  // string(문자형)
+
+        var x = 20, y = 10;
+        console.log(x > y);
+        console.log(x < y);
+    </script>
+</body>
+</html>

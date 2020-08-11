@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>제이쿼리</h1>
+    <h2 id="tit1">선택자1번</h2>
+    <h2 id="tit2">선택자2번</h2>
+    <h3 class="tit1">직접 선택자1번</h3>
+    <h3 class="tit2">직접 선택자2번</h3>
+
+    <script>
+        $(function() {
+            // 1. 전체 선택자
+            //$("*").css("border", "1px solid blue");
+            $("*").css({border:"1px solid blue"});
+
+            // 2. 아이디 선택자
+            //$("#tit").css("background", "#ff0");
+            //$("#tit").css("background-color", "#ff0");
+            //$("#tit").css("backgroundColor", "#ff0").css("border", "2px solid #f00";
+            // $("#tit").css({
+            //     backgroundColor:"#ff0",
+            //     border:"2px solid #f00"
+            // });
+
+            // 3. 클래스 선택자
+            //$(".tit").css("backgroundColor", "pink").css("border", "2px dashed #f00");
+            // $(".tit").css({
+            //     backgroundColor:"pink",
+            //     border:"2px dashed red",
+            // })
+
+            // 4. 요소명(태그명) 선택자
+            //$("h1").css("color", "blue").css("backgroundColor", "lightgray");
+            // $("h1").css({
+            //     color:"blue", backgroundColor:"lightgray",
+            // });
+
+            // 5. 종속 선택자
+            $("h2#tit2").css("color", "red");
+            $("h3.tit2").css("color", "green");
+
+            
+        });
+    </script>
+</body>
+</html>

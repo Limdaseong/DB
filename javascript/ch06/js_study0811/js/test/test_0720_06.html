@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0720 6번</title>
+    <!-- 
+    1. 월(month)을 입력받아서, 계절을 판별하는 프로그램
+    입력 : 좋아하는 달을 입력하세요.
+    출력 : 3월은 봄입니다.
+    3, 4, 5 -> 봄, month>=3 && month<=5
+    6, 7, 8 -> 여름
+    9, 10, 11 -> 가을
+    12, 1, 2 -> 겨울
+    그 나머지 -> 잘못 입력하였습니다.
+    메세지 밑에 계절에 해당하는 이미지를 출력
+-->
+</head>
+<body>
+    <script>
+        var month = prompt("좋아하는 달을 입력하세요.");
+
+        // if(month==3 || month==4 || month==5)
+        if(month>=3 && month<=5) {
+            document.write(month + "는 봄입니다.<br><img src='images/spring.png'>");
+        } else if(month>=6 && month<=8) {
+            document.write(month + "는 여름입니다.<br><img src='images/summer.png'>");
+        } else if(month>=9 && month<=11) {
+            document.write(month + "는 가을입니다.<br><img src='images/fall.png'>");
+        } else if(month==12 || month==1 || month==2) {
+            document.write(month + "는 겨울입니다.<br><img src='images/winter.png'>");
+        } else {
+            document.write("잘못 입력하셨습니다.<br>다시 시작해주세요.");
+        }
+    </script>
+</body>
+</html>

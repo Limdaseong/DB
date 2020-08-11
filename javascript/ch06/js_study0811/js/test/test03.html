@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3번</title>
+    <!-- 
+        1. 확인창으로부터 메세지를 전달받아 전등의 점등/소등을 여부를 변수에 저장.
+        - 메세지 : '전등을 점등하겠습니까?'
+        2. 그 값으로부터 전등의 점등/소등 여부를 브라우저 화면에 메세지와 함께 이미지를 출력.
+        3. if문 필요
+     -->
+</head>
+<body>
+    <script>
+        var check = confirm("전등을 점등하겠습니까?"); // check : 논리형(boolean형) - true, false
+        if(check) { // if(check) {    // true
+            document.write("<h3>전등을 점등하였습니다.</h3>");
+            document.write("<img src='images/lighton.png' width='33%'>");
+        } else { //} else if(check == false) { // false
+            document.write("<h3>전등을 소등하였습니다.</h3>");
+            document.write("<img src='images/lightoff.png' width='33%'>");
+        }
+    </script>
+</body>
+</html>

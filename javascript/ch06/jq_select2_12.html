@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .container { width: 600px; margin: 0 auto;}
+        .accent { display: none;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="wrap">
+            <p>내용1</p>
+            <p class="accent">내용2</p>
+            <p>내용3</p>
+        </div>
+        <form action="#">
+            <p id="zone1">
+                <select name="course" id="course">
+                    <option value="opt1">옵션1</option>
+                    <option value="opt2" selected>옵션2</option>
+                    <option value="opt3">옵션3</option>
+                </select>
+            </p>
+            <p id="result1"></p>
+            <p id="zone2">
+                <input type="checkbox" name="hobby1" value="독서">독서&nbsp;&nbsp;
+                <input type="checkbox" name="hobby2" value="자전거">자전거&nbsp;&nbsp;
+                <input type="checkbox" name="hobby3" value="등산" checked>등산
+                <input type="checkbox" name="hobby4" value="영화">영화
+                <input type="checkbox" name="hobby5" value="바이크">바이크
+            </p>
+            <p id="result2"></p>
+            <p id="zone3">
+                <input type="radio" name="gender" value="male" checked>남성&nbsp;&nbsp;
+                <input type="radio" name="gender" value="female">여성
+            </p>
+            <p id="result3"></p>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            //$("#wrap p:hidden").css("display","block").css("backgroundColor", "#ff0");
+            $("#wrap p:hidden").css({
+                "display":"block", "background":"#ff0",
+            });
+
+            var z1 = $("#zone1 :selected").val();
+            $("#result1").text("옵션은 " + z1 + "을 선택하였습니다.");
+
+            var z2 = $("#zone2 :checked").val();
+            $("#result2").text("취미는 " + z2 + "를 선택하였습니다.");
+
+            var z3 = $("#zone3 :checked").val();
+            $("#result3").text("성별은 " + z3 + "입니다.");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기념일 계산 프로그램</title>
+    <!-- css, javascript를 파일로 따로 분리함. -->
+    <link rel="stylesheet" href="css/0729.css">
+    <!-- 
+    1. 기념일(결혼, 회사입사일, 데이트 ...)로 부터 몇 일이 지났는지를 계산하는 프로그램
+
+    // 개선 사항
+    1. 현재 프로그램은 코드에 날짜를 적어놓고 사용하므로,
+    이것을 브라우저로부터 날짜를 입력하여 계산한다면 좀더 대화형으로 작업할 수 있는 프로그램이 됨.
+    2. 추가할 내용
+    기념일 입력(label) , 실제 날짜(input), 날짜 계산(button)
+    3. 위치
+    기념일 계산 p태그 밑에 생성
+     -->
+</head>
+<body>
+    <div class="container">
+        <div class="day1">
+            <h3>기념일 계산 프로그램</h3>
+            <p>기념일로부터 오늘까지 <span class="accent" id="passDay"></span> 일 지났습니다.</p>
+        </div>
+        <div class="bar">
+            <p>기념일 계산</p>
+        </div>
+        <div class="day2">
+            <ul>
+                <li class="item_title">100일</li>
+                <li class="item_date" id="date100"></li>
+            </ul>
+            <ul>
+                <li class="item_title">200일</li>
+                <li class="item_date" id="date200"></li>
+            </ul>
+            <ul>
+                <li class="item_title">1년</li>
+                <li class="item_date" id="date365"></li>
+            </ul>
+            <ul>
+                <li class="item_title">500일</li>
+                <li class="item_date" id="date500"></li>
+            </ul>
+            <ul>
+                <li class="item_title">2년</li>
+                <li class="item_date" id="date730"></li>
+            </ul>
+            <ul>
+                <li class="item_title">1000일</li>
+                <li class="item_date" id="date1000"></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="js/0729.js"></script>
+</body>
+</html>

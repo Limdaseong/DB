@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <ul>
+        <li>내용1</li>
+        <li>내용2</li>
+        <li id="list3">내용3</li>
+        <li>내용4</li>
+    </ul>
+    <script>
+        $(document).ready(function() {
+            var arr1 = ['서울', '대전', '부산', '전주']; // 배열
+            var arr2 = ['한국', '미국', '일본', '중국']; // 배열
+            var obj = {"name":"정부장", "area":"서울"};  // 객체
+
+            // 1. inArray() - 데이터와 일치하는 인덱스를 반환
+            var idxNum = $.inArray("부산", arr1);
+            console.log(idxNum);
+
+            // 2. isArray() - 데이터가 배열이면 true, 그렇지 않으면 false
+            var okArray1 = $.isArray(arr1);
+            var okArray2 = $.isArray(obj);
+
+            console.log(okArray1);
+            console.log(okArray2);
+
+            // 3. merge() - 왼쪽 배열에 오른쪽 배열을 합쳐서 새로운 배열을 생성
+            $.merge(arr2, arr1); // arr2와 arr1을 합쳐서 arr2에 저장
+            console.log(arr2);
+
+            // 4. index() - 지정 요소를 찾아 인덱스를 반환3
+            var idxNum2 = $("li").index($("#list3"))
+            console.log(idxNum2)
+
+        });
+    </script>
+</body>
+</html>

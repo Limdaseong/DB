@@ -13,21 +13,4 @@ public class Utils {
 			return defNo;
 		} 
 	}
-	
-	public static int swErr(int err) {
-		switch(result) {
-		case 1:
-			response.sendRedirect("/jsp/board_List.jsp");
-			return;
-			
-		case 0:
-			err = 10;
-			break;
-			 
-		case -1:
-			err = 20;
-			break;
-		}
-		response.sendRedirect("/jsp/boardWrite.jsp?err="+err);
-	}
 }

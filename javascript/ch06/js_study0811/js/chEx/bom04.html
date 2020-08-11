@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>window 객체</title>
+    <style>
+        .container { width: 500px; margin: 0 auto;}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>윈도우 창 열기/닫기(크기, 위치 조절)</h3>
+        <button id="openBtn">창 열기</button>
+        <button>창 닫기</button>
+    </div>
+
+    <script>
+        var openBtn = document.querySelector("#openBtn");
+        openBtn.addEventListener("click", openWindow);
+
+        var sw = screen.width/2; // 모니터의 너비의 절반
+        var sh = screen.height/2; // 모니터의 높이의 절반
+
+        var hl = screen.width/2 - sw/2; // 모니터의 가로 중간
+        var vl = screen.height/2 - sh/1.5; // 모니터의 세로 중산
+
+        var ss = 'width='+sw+",height="+sh+",left="+hl+",top="+vl;
+
+        function openWindow() {
+            window.open('http://www.naver.com','',ss);
+        }
+    </script>
+</body>
+</html>

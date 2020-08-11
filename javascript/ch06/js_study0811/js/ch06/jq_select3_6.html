@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        * { padding: 0;}
+        p { width: 100px; height: 50px; padding: 20px;
+        border: 5px solid #000; background-color: #ff0;}
+    </style>
+</head>
+<body>
+    <h1>수치 조작 메소드</h1>
+    <p id="p1">내용1</p>
+    <p id="p2">내용2</p>
+    <script>
+        $(document).ready(function() {
+            // 1. 읽기
+            // width() : 내용의 너비
+            var w1 = $("#p1").width();
+            console.log("p1의 width: " + w1);
+
+            // innerWidth() : 내용+패딩의 너비
+            var w2 = $("#p1").innerWidth();
+            console.log("p1의 innerWidth: " + w2);
+
+            // outerWidth() : 내용+패딩+테두리의 너비
+            var w3 = $("#p1").outerWidth();
+            console.log("p1의 outerWidth: " + w3);
+
+            // 2. 설정(변경)
+            $("#p2").width(200).height(25);
+        });
+    </script>
+</body>
+</html>

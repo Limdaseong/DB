@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 객체의 컬렉션 객체</title>
+    <style>
+
+    </style>
+    <!-- 
+    DOM 객체의 컬렉션 객체
+    - HTML에서 많이 사용되는 태그 요소들에 대해서 모든 요소들을 순차적으로 접근할 수 있도록
+    컬렉션 객체로 만들어 놓은 것, 배열
+    - a 태그 : anchors[]
+    - img 태그 : images[]
+    - form 태그 : forms[]
+    - form 태그의 자식요소 : elements[]  
+
+     -->
+</head>
+<body>
+    <div class="container">
+        <!-- forms[0] -->
+        <form name="stuInfo">
+            학과: <input type="text" name="major">&nbsp;&nbsp;&nbsp;
+            이름: <input type="text" name="sname">
+        </form>
+        <!-- forms[1] -->
+        <form name="q1">
+            <p>Q1. 웹개발에서 다르는 언어가 아닌것은?</p>
+            <input type="radio" name="p1" value="1">HTML
+            <input type="radio" name="p1" value="2">CSS
+            <input type="radio" name="p1" value="3">Javascript
+            <input type="radio" name="p1" value="4">JSP
+            <input type="radio" name="p1" value="5">HWP
+        </form>
+        <!-- forms[2] -->
+        <form name="q2">
+            <p>Q2. 다음 중 특성이 다른 태그는?</p>
+            <input type="radio" name="p2" value="1">div
+            <input type="radio" name="p2" value="2">h3
+            <input type="radio" name="p2" value="3">p
+            <input type="radio" name="p2" value="4">img
+            <input type="radio" name="p2" value="5">hr
+        </form>
+        <!-- forms[3] -->
+        <form name="q3">
+            <p>Q3. 다음 중 css 선택자 중에서 첫번째 요소 하나를 선택하여 반환하는 메소드는?</p>
+            <input type="radio" name="p3" value="1">getElementById
+            <input type="radio" name="p3" value="2">getElementsClassName
+            <input type="radio" name="p3" value="3">querySelector
+            <input type="radio" name="p3" value="4">querySelectorAll
+            <input type="radio" name="p3" value="5">getElementsTagName
+        </form>
+        <hr>
+        <button id="btn1">채점(각10점)</button>
+        <span id="result"></span>
+    </div>
+    <script>
+        var result = document.querySelector("#result");
+        var btn1 = document.querySelector("#btn1");
+
+        btn1.addEventListener("click", calcScore);
+        function calcScore() {
+            var sname = document.stuInfo.sname.value; // form 안의 name을 저장
+            var answer = [5, 4, 3]; // 각 문제의 정답
+            //var choice = []; // 학생의 응답, 빈 배열
+            var choice = new Array(); // 학생의 응답, 빈 배열
+            var score = 0; // 누적 점수
+
+            // 학생의 응답을 배열에 저장 -> 반복문을 통해 처리하도록 개선
+            choice[0] = document.forms[1].p1.value; // 1번 문제
+            choice[1] = document.forms[2].p2.value; // 2번 문제
+            choice[2] = document.forms[3].p3.value; // 3번 문제
+
+            // 학생의 응답을 정답과 비교
+            for(var i=0; i<document.forms.length-1; i++) {
+                if(choice[i] == answer[i]) {
+                    score += 10;
+                }
+            }
+
+            result.innerHTML = sname + " : " + score + "점";
+        }
+    </script>
+</body>
+</html>

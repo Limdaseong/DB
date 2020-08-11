@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 6</title>
+    <style>
+        .container { width: 500px; margin: 0 auto;}
+    </style>
+    <!-- 
+    1. 
+    document.createElement() - DOM tree 추가할 요소 노드를 생성.
+    document.createTextNode() - 요소 노드의 텍스틀 생성.
+    appendChild() - 생성한 노드를 자식 노드로 연결함.
+     -->
+</head>
+<body>
+    <div class="container">
+        여행하고 싶은 지역: <input type="text" id="tripInput">
+        <button id="btnAdd">추가</button>
+        <ul id="tripList"></ul>
+    </div>
+    <script>
+        var tripInput = document.getElementById("tripInput");
+        var btnAdd = document.getElementById("btnAdd");
+        var tripList = document.getElementById("tripList");
+
+        btnAdd.addEventListener("click", addTripList);
+
+        function addTripList() {
+            var newTrip = document.createElement("li");
+            var tripNode = document.createTextNode(tripInput.value);
+
+            newTrip.appendChild(tripNode); // 태그의 자식으로 텍스트를 연결
+            tripList.appendChild(newTrip); // ul 태그의 자식으로 생성한 태그를 연결
+            
+            tripInput.value = "";
+            tripInput.focus();
+        }
+
+    </script>
+</body>
+</html>

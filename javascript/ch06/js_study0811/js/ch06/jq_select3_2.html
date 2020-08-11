@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .container { width: 600px; margin: 0 auto;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><strong>객체 조작 및 생성</strong></h1>
+        <section id="sec_1">
+            <h2>이미지 속성</h2>
+            <p><img src="images/math_img_1.jpg" alt="가위" border="2"></p>
+        </section>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var srcVal = $("#sec_1 img").attr("src"); // 값을 읽어올때
+            console.log(srcVal);
+
+            //$("#sec_1 img").attr("width","200").attr("src","images/math_img_2.jpg").attr("alt","바위");
+            $("#sec_1 img").attr({
+                "width":"200",
+                //"src":srcVal.replace("math_img_1.jpg","math_img_2.jpg"),
+                "src":"images/math_img_2.jpg",
+                "alt":"바위"
+            }).removeAttr("border");
+
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .container { width: 500px; margin: 30px auto;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>객체 조작 및 생성</h1>
+        <form action="#" id="form_1">
+            <p>
+                <label for="user_name">이름</label>
+                <input type="text" name="user_name" id="user_name" value="CoolGuy">
+            </p>
+            <p>
+                <label for="user_id">아이디</label>
+                <input type="text" name="user_id" id="user_id" value="Hello">
+            </p>
+        </form>
+        <hr>
+        <button id="b1">확인</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        // user_name : defaultValue값이 CoolGuy로 설정
+        // user_id : defaultValue값이 Hello로 설정
+        $(document).ready(function() {
+            $("#user_id").val("jquery");
+            $("#b1").click(function() {
+                var result_1 = $("#user_name").val(); // 값을 읽어오기
+                var result_2 = $("#user_id").val();
+
+                // 입력값을 무시하고 defaultValue 값을 사용하고자 할때
+                //result_1 = $("#user_name").prop("defaultValue");
+                //result_2 = $("#user_id").prop("defaultValue");
+
+                $("#result").html(result_2 + "(" + result_1 + ")님이 접속하였습니다.");
+            });
+        });
+    </script>
+</body>
+</html>

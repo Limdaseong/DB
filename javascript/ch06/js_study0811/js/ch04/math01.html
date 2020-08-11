@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수학 객체</title>
+</head>
+<body>
+    <script>
+        // Math 객체 사용 방법
+        // 1. abs() : 절대값(양수)
+        document.write(Math.abs(-10) + "<br>");
+        document.write(Math.abs(10) + "<br>");
+
+        // 2. max() : 나열된 값 중에서 최댓값을 구함.
+        // 문자열을 비교 불가(NaN), 숫자 문자열은 가능.
+        document.write(Math.max(21, 35, 42.37, 55, 68, 77, "135") + "<br>");
+
+        // 3. min() : 나열된 값 중에서 최솟값을 구함.
+        // 문자열은 비교 불가(NaN), 숫자 문자열은 가능.
+        document.write(Math.min(35, 55, 30.77, 29, 28, "27.7", "thirty") +"<br>");
+
+        // 4. pow() : a의 b승을 구함. 
+        // a, b 모두 정수, 실수 가능
+        document.write(Math.pow(2, 3) + "<br>");
+        document.write(Math.pow(3.3, 5) + "<br>");
+        document.write(Math.pow(3.3, 5.5) + "<br>");
+
+        // 5. random() : 0 ~ 1 미만의 난수를 출력
+        document.write(Math.random() + "<br>");
+
+        // 0 ~ 10 사이의 난수
+        document.write(parseInt(Math.random()*11) + "<br>");
+        //document.write(Math.floor(Math.random()*11) + "<br>");
+
+        // 1 ~ 10 사이의 난수
+        document.write(parseInt(Math.random()*10)+1 + "<br>");
+        //document.write(Math.floor(Math.random()*10)+1 + "<br>");
+
+        // 범위 사이의 난수 : -20 ~ 20 사이의 난수 (최댓값: 20, 최솟값: -20)
+        var rn1 = parseInt(Math.random()*(20-(-20)+1)) + (-20);
+        document.write(rn1 + "<br>");
+
+        // 6. round() : 반올림
+        // 소숫점 첫번째 자리에서 반올림하여 정수로 표현
+        document.write(Math.round(337.257788) + "<br>");
+        document.write(Math.round(337.557788) + "<br>");
+
+        // 7. ceil() : 소숫점 첫번째 자리에서 무조건 올림하여 정수로 표현.
+        // ceil : 천장
+        document.write(Math.ceil(337.257788) + "<br>");
+
+        // 8. floor() : 소숫점 첫번째 자리에서 무조건 버림하여 정수로 표현.
+        // floor : 바닥
+        document.write(Math.floor(337.957788) + "<br>");
+
+        // 9. sqrt() : 루트값을 구해주는 함수
+        document.write(Math.sqrt(9) + "<br>");
+        document.write(Math.sqrt(25) + "<br>");
+
+        // 10. PI 상수 : 원주율을 구함.
+        // 소숫점 이하 15자리까지 표현
+        document.write(Math.PI + "<br>");
+
+        // 기타 등등
+        // 메소드 : sin, cos, tan, log, exp ...
+        // 상수 : E, LN2, LN10 ...
+    </script>
+</body>
+</html>

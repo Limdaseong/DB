@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1번 - 나이 계산 프로그램</title>
+    <!-- 
+        입력창 : prompt() - 값을 입력받는 함수
+        경고창, 알림창 : alert() - 경고, 알림, 결과를 보여주는 함수
+        확인창 : confirm() - 확인 버튼, 취소 버튼을 클릭하는 함수, 
+        - 확인을 누르면 true가 입력되고, 취소를 누르면 false가 입력되는 함수
+        document.write() - 브라우저 화면으로 결과를 출력, 다양한 형식의 태그, 클래스, 아이디, 속성을 모두 사용
+
+    -->
+    <!-- 
+        1. 입력창으로 부터 태어난 년도를 입력받아 그 값을 변수에 저장.
+        - 메세지 : '당신의 출생년도를 입력하시오.'
+        2. 출생년도로부터 자신의 나이를 구하여 브라우저 화면에 출력.
+     -->
+</head>
+<body>
+    <script>
+        var birth = prompt("당신의 출생년도를 입력하시오.");
+        var age = 2020 - birth + 1;
+        document.write("당신의 나이는 " + age + "살입니다.")
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0720 5번</title>
+    <!-- 
+    1. 입력창으로부터 3과목의 점수를 입력받아서 결과를 출력하는 프로그램
+    입력 : 국어점수 입력, 영어점수 입력, 수학점수 입력
+    출력 : 평균점수, 
+    학점을 출력(A: 90점 이상, B: 80 ~ 89, C: 70 ~ 79, D: 60 ~ 69, F: 60점 미만)
+
+     -->
+</head>
+<body>
+    <script>
+        var kor = Number(prompt("국어점수 입력 : "));
+        var eng = Number(prompt("영어점수 입력 : "));
+        var mat = Number(prompt("수학점수 입력 : "));
+
+        var ave = (kor + eng + mat) / 3;
+        document.write("평균 : " + ave + "<br>");
+        document.write("학점 : ");
+
+        if(ave >= 90) {
+            document.write("A");
+        } else if(ave >= 80) {
+            document.write("B");
+        } else if(ave >= 70) {
+            document.write("C");
+        } else if(ave >= 60) {
+            document.write("D");
+        } else {
+            document.write("F");
+        }
+    </script>
+</body>
+</html>

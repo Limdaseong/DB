@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQUERY</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .container { width: 500px; margin: 0 auto;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>전구 스위치 점등/소등</h3>
+        <img src="images/lightoff.png" width="30%" id="lightImg" alt=""><br>
+        <button id="btn">점등</button>
+    </div>00.
+    <script>
+        $(function() {
+            $("#btn").click(function() {
+                if($("#btn").html() == "점등") { // 점등일 때
+                    $("#lightImg").attr("src", "images/lighton.png");
+                    $("#btn").css("background", "pink");
+                    $("#btn").html("소등");
+                } else { // 소등일 때
+                    $("#lightImg").attr("src", "images/lightoff.png");
+                    $("#btn").css("background", "cyan");
+                    $("#btn").html("점등");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

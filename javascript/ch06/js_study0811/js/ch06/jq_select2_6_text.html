@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탐색 선택자</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        * { margin: 10px;}
+    </style>
+</head>
+<body>
+    <h1>탐색 선택자</h1>
+    <ul>
+        <li>내용1-1</li>
+        <li>내용1-2</li>
+        <li>내용1-3</li>
+        <li>내용1-4</li>
+        <li>내용1-5</li>
+        <li>내용1-6</li>
+    </ul>
+    <ul>
+        <li>내용2-1</li>
+        <li>내용2-2</li>
+    </ul>
+    <ul>
+        <li>내용3-1</li>
+    </ul>
+    <script>
+        $(function() {
+            // 1. only-child : 부모 요소에게 자식 요소가 하나뿐인 것을 선택
+            $("li:only-child").css("border", "4px solid red");
+
+            // 2. slice(a, b) : 함수로만 사용
+            // 0번부터 시작, 3번부터 5번 앞까지 선택 (5번은 선택 안됨)
+            $("li").slice(3,5).css("background", "pink");
+        });
+    </script>
+</body>
+</html>

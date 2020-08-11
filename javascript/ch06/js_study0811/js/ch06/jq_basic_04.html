@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .container { width: 600px; margin: 0 auto;}
+        p { background-color: gray; width: 150px; height: 30px;}
+        .current { background-color: pink;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>JQuery Programming!</h3>
+        <p id="p1">HTML5/CSS3</p>
+        <p id="p2">Javascript</p>
+        <p id="p3">JQuery</p>
+    </div>
+    <script>
+        $(document).ready(function() {
+            /*
+            $("p").mouseenter(function(){
+                $(this).addClass("current");
+            });
+
+            $("p").mouseleave(function() {
+                $(this).removeClass("current");
+            });
+            */
+
+            $("p").on("mouseenter", function() {
+                $(this).addClass("current");
+            });
+
+            $("p").on("mouseleave", function() {
+                $(this).removeClass("current");
+            });
+            
+        });
+    </script>
+</body>
+</html>

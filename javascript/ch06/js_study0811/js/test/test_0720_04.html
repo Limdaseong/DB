@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0720 4번</title>
+    <!-- 
+    1. 입력창으로부터 정수를 입력받아서, 
+    그 수가 3의 배수이면서, 4의 배수인지를 확인하는 프로그램
+
+    입력 : 정수를 입력하세요.
+    출력 : 
+    11은 (3의 배수이면서 4의 배수가 아닙니다.)
+    12는 (3의 배수이면서 4의 배수입니다.)
+     -->
+</head>
+<body>
+    <script>
+        var n = prompt("정수를 입력하세요.");
+
+        if(n%3==0 && n%4==0) { // 3의 배수이면서 4의 배수일 때
+            document.write(n + "은 3의 배수이면서 4의 배수입니다.");
+        } else { // 3의 배수이면서 4의 배수가 아닐 때
+            document.write(n + "은 3의 배수이면서 4의 배수가 아닙니다.");
+        }
+    </script>
+</body>
+</html>

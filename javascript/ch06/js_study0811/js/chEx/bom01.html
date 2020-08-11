@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타이머 메소드</title>
+    <style>
+        .container { width: 500px; margin: 0 auto;}
+        img { visibility: hidden;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>타이머 메소드</h3>
+        <hr>
+        <p>생각하는 시간을 10초 주겠습니다.</p>
+        <button onclick="thinkingStart()">Start</button>
+        <hr>
+        <img src="images/thinking.PNG" width="200" height="250" alt="">
+        <p id="msg"></p>
+    </div>
+    <script>
+        function thinkingStart() {
+            document.images[0].style.visibility = "visible";
+            setTimeout(myTimer, 10000);
+        }
+
+        function myTimer() {
+            document.images[0].style.visibility = "hidden";
+            document.getElementById("msg").innerHTML = "생각하는 시간 10초가 경과하였습니다."
+        }
+    </script>
+</body>
+</html>

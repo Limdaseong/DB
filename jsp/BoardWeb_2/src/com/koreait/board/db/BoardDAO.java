@@ -9,6 +9,60 @@ import java.util.List;
 import com.koreait.board.vo.BoardVO;
 
 public class BoardDAO {
+	
+	public static int delBoard(int i_board) { // pk값을 삭제할거니까 하나의 값을 삽입
+		
+		int result = 0; // 경우의 수는 2개 ( 0, 1)
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = " DELETE FROM t_board where i_board = ? ";
+		
+		try {
+			con = DbCon.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, i_board);
+			
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbCon.close(con, ps);
+		}
+		
+		return result;
+	}
+	
+	public static int insBoard(BoardVO param) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//시퀀스는 오라클에만 있다
+		String sql = " INSERT INTO t_board"
+				+ " (i_board, title, ctnt, i_student)"
+				+ " VALUES"
+				+ " (seq_board.nextval, ?, ?, ?) ";
+		
+		try {
+			con = DbCon.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setNString(1, param.getTitle());
+			ps.setNString(2, param.getCtnt());
+			ps.setInt(3,  param.getI_student());
+			
+			result = ps.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbCon.close(con, ps);
+		}
+		return result;
+	}
+	
+	//리스트
 	public static List<BoardVO> selBoardList() {
 		List<BoardVO> list = new ArrayList();
 		
@@ -16,7 +70,7 @@ public class BoardDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = " SELECT i_board, title, ctnt, i_student FROM t_board ";
+		String sql = " SELECT i_board, title, ctnt, i_student FROM t_board ORDER BY i_board asc ";
 		
 		try {
 			con = DbCon.getCon();
@@ -46,6 +100,7 @@ public class BoardDAO {
 		return list;
 	}
 	
+	//디테일
 	public static BoardVO selBoard(BoardVO param) {
 		BoardVO vo = null;
 		Connection con = null;
@@ -82,7 +137,6 @@ public class BoardDAO {
 		return vo;
 	}
 	
-	public static BoardVO istBoard(Board)
 }
 
 

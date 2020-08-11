@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        * { margin: 10px;}
+        .container { width: 600px; margin: 0 auto;}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="outer_wrap">
+            <h1>콘텐츠 탐색 선택자</h1>
+            <section id="inner_1">
+                <h1>contains(), contents(), has()</h1>
+                <p><span>내용1</span></p>
+                <p><strong>내용2</strong></p>
+                <p><span>내용3</span></p>
+            </section>
+            <section id="inner_2">
+                <h1>not(), end()</h1>
+                <p>내용4</p>
+                <p>내용5</p>
+                <p>내용6</p>
+            </section>
+            <section id="inner_3">
+                <h1>find(), filter()</h1>
+                <p class="txt1">내용1</p>
+                <p class="txt2">내용2</p>
+            </section>
+            <section id="inner_4">
+                <h2>filter(function)</h2>
+                <p>index0</p>
+                <p>index1</p>
+                <p>index2</p>
+                <p>index3</p>
+            </section>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            // 1. 내용을 포함하는 요소 선택
+            $("#inner_1 p:contains(내용1)").css("background", "#ff0");
+
+            // 2. 해당요소를 포함하는 요소 선택
+            $("#inner_1 p:has(strong)").css("background", "#0ff");
+
+            // 3. 선택요소의 하위요소를 선택
+            $("#outer_wrap").contents().css("border", "1px dashed #00f");
+
+            // 4. 선택요소의에서 첫번째가 아닌것을 선택
+            $("#inner_2 p").not(":first").css("background", "#0f0");
+
+            // 5. end() - 선택되기 이전의 선택자로 적용이 됨.
+            $("#inner_2 p").eq(2).css("background", "#f00"); // 2번 인덱스
+            $("#inner_2 p").eq(2).end().css("background", "#f00"); 
+
+            //
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 활용 6</title>
+</head>
+<body>
+    <script>
+        // 객체 생성자 함수
+        function Student(name, kor, eng, mat) {
+            // 프로퍼티(property)
+            this.name = name;
+            this.kor = kor;
+            this.eng = eng;
+            this.mat = mat;
+        }
+
+        // 메소드를 프로토타입으로 생성
+        Student.prototype.sum = function() {
+            return (this.kor + this.eng + this.mat);
+        }
+
+        Student.prototype.ave = function() {
+            return this.sum() / 3;
+        }
+
+        Student.prototype.showInfo = function() {
+            return this.name + ", 총점: " + this.sum() + ", 평균: " + this.ave().toFixed(2) + "<br>";
+        }
+
+        // 객체 생성
+        // var s1 = new Student('이익준', 92, 93, 93);
+        // document.write("이름: " + s1.name + ", 총점: " + s1.sum() + ", 평균: " + s1.ave() + "<br>");
+
+        // 객체 배열 생성
+        var students = [
+            new Student('이익준', 92, 93, 93),
+            new Student('김준완', 88, 87, 82),
+            new Student('양석형', 73, 79, 85),
+            new Student('채송화', 68, 62, 77),
+            new Student('안정원', 78, 88, 98),
+        ];
+
+        for(var i=0; i<students.length; i++) {
+            //document.write(students[i].name + ", 총점: " + students[i].sum() + ", 평균: " + students[i].ave().toFixed(2) + "<br>");
+            document.write(students[i].showInfo());
+        }
+    </script>
+</body>
+</html>

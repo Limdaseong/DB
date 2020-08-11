@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event 객체</title>
+    <style>
+        .container { width: 600px; margin: 0 auto;}
+    </style>
+    <!-- 
+    1. contextmenu 이벤트 : 웹브라우저 화면에서 특정 HTML 요소 위에서 
+    오른쪽 마우스 버튼을 누르면 발생하는 이벤트
+    2. 소스보기, 이미지 다운로드 등의 메뉴를 제공하는 컨텍스트 메뉴를 디폴트로 제공함.
+    3. oncontextmenu 속성으로 컨텍스트 메뉴를 사용할 수 없도록 할 때 주로 사용.
+     -->
+</head>
+<body>
+    <div class="container">
+        <h3>contenxtmenu 이벤트 속성</h3>
+        <img src="images/image1.JPG" width="500" oncontextmenu="return false;" alt="">
+    </div>
+</body>
+</html>

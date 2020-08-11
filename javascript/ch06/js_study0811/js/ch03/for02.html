@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단 - for문 활용</title>
+    <style>
+        .dan { width: 100px; padding: 20px; margin: 15px; 
+        line-height: 30px; border: 1px solid black; font-size: 1.1em;}
+        .dan h3 { text-align: center;}
+    </style>
+    <!-- 
+    1. 입력창으로부터 단을 입력 받아서 해당하는 단에 구구단을 출력하는 프로그램
+    입력 : 구구단의 단 입력 : 5
+    출력 : 5단에 해당하는 구구단을 출력
+
+    2. 단 전체는 div로 구성 
+    - 단 제목은 h3
+    - display는 inline-block
+    - padding : 20px
+    - margin : 15px
+    - 줄간격 : 30px
+     -->
+</head>
+<body>
+    <script>
+        var dan = prompt("구구단의 단 입력 : ");
+
+        document.write("<div class='dan'><h3>" + dan + "단</h3>");
+        for(var i=1; i<=9; i++) {
+            document.write(dan + " * " + i + " = " + (dan*i) + "<br>");
+        }
+        document.write("</div>");
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연산자</title>
+</head>
+<body>
+    <h3>연산자(operator)</h3>
+    <p>
+    typeof : 변수의 데이터타입을 확인하는 연산자<br>
+
+    3. 비교연산자 : >, >=, <, <=, ==(equal), !=(not equal), ===, !== <br>
+    - ==, != : 값만 비교해서 true 또는 false를 출력<br>
+    - ===, !== : 값과 데이터타입을 모두 비교해서 true 또는 false를 출력<br>
+    - 우선순위 : (>, >=, <, <=) 연산자가 (==, !=)보다 우선임.<br>
+    - 운선순위 : (==, !=) 연산자가 (===, !==)보다 우선임.<br>
+    - 우선순위 : (>, >=, <, <=) > (==, ~=) > (===, !==)<br>
+
+    4. 논리연산자 : &&(논리 AND, 논리곱), ||(논리 OR, 논리합), !(논리 NOT, 논리 부정)<br>
+    - 논리연산자의 결과는 논리값(true, false 둘 중의 하나)<br>
+    - 비교연산자가 논리연산자보다 우선임. 비교 > 논리<br>
+    - 우선순위 : 논리AND가 논리OR보다 우선임.<br>
+    - 우선순위 : ! > && > ||<br>
+
+    5. 대입연산자 : = 
+    복합대입연산자(할당연산자, assignment) : +=, -=, *=, /=, %=
+    </p>
+    <script>
+        var a = "10", b = 10;
+
+        console.log("변수 a 값 : " + a);
+        console.log("변수 a 타입 : " + typeof a);
+        console.log("변수 b 값 : " + b);
+        console.log("변수 b 타입 : " + typeof b);
+
+        // == 로 비교 : 값만 비교, 문자열의 값을 꺼내서 비교
+        console.log("a == b : " + (a == b)); // true
+
+        // === 로 비교 : 값과 타입을 모두 비교하므로, 둘 중 하나라도 다르면 false, 모두 같을 때 true
+        console.log("a === b : " + (a === b)); // false
+
+        // != 로 비교 : 값만 비교, 문자열의 값을 꺼내서 비교
+        console.log("a != b : " + (a != b)); // false
+
+        // !== 로 비교 : 값과 타입을 모두 비교
+        console.log("a !== b : " + (a !== b)); // true, 값은 같지만 타입은 다르기 때문에 다름.
+
+        //////////
+        // 논리연산자 : &&, ||, !
+        var x = 30, y = 10;
+
+        // && : 모두가 true일 때, 전체 결과가 true가 됨.
+        // 이고, 모두다
+        console.log(x>20 && y<20); // true
+        console.log(x>20 && y>20); // false
+        console.log(x<20 && y>20); // false
+
+        // || : 둘 중의 하나라도 true가 있다면, 전체 결과는 true가 됨.
+        // 또는, 하나라도
+        console.log(x>20 || y<20); // true
+        console.log(x>20 || y>20); // true
+        console.log(x<20 || y>20); // false
+
+        // ! : true를 false, false를 true로 변경함.
+        var z = true; // 논리형(boolean형)
+        console.log(z); // true
+        console.log(!z); // false
+        console.log(!30); // false, 0을 제외한 모든 숫자는 true, 이것의 부정이므로 false
+        console.log(!"javascript"); // false, 모든 문자열은 true, 이것의 부정이므로 false
+
+        // 대입, 복합대입연산자 : =, +-, -=, *=, /=, %=
+        a = 10;
+        //a = a + 5;
+        a += 5; // a변수에 5를 더해서 a에 대입하라.
+        console.log(a); // 15
+
+        //a = a * 2;
+        a *= 2; // a변수에 2를 곱해서 a에 대입하라.
+        console.log(a); // 30
+
+        ++a; console.log(a); // 31
+        a++; console.log(a); // 32
+        a = a + 1; console.log(a); // 33
+        a += 1; console.log(a); // 34
+    </script>
+</body>
+</html>

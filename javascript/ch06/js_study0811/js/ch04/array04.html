@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2차원 배열의 활용</title>
+    <!-- 
+    1. 학생 2차원 배열의 정보를 출력하시오.
+    2. 각 학생별 총점, 평균(소숫점2째자리)를 기말고사 뒤에 출력하시오.
+    3. table로 출력하시오.
+     -->
+</head>
+<body>
+    <script>
+        var student = new Array(
+            Array("이익준", "컴공", 88, 76, 0, 0), // 이름,전공,중간,기말,총점,평균
+            Array("양석형", "수학", 70, 83, 0, 0),
+            Array("채송화", "물리", 92, 95, 0, 0),
+            Array("안정원", "전자", 85, 92, 0, 0),
+            Array("김준완", "기계", 97, 88, 0, 0),
+        );
+        // 통계를 저장할 1차원 배열 : 중간의 합계, 기말의 합계, 총점의 합계, 평균의 합계
+        var result = new Array(0, 0, 0, 0); 
+        var title = ['이름', '전공', '중간', '기말', '총점', '평균'];
+
+        document.write("<table border=1>");
+        document.write("<tr>");
+        for(var i=0; i<title.length; i++) {
+            document.write("<td>" + title[i] + "</td>");
+        }
+        document.write("</tr>");
+        for(var i=0; i<student.length; i++) {
+            document.write("<tr>");
+            for(var j=0; j<student[i].length-2; j++) {
+                document.write("<td>" + student[i][j] + "</td>");
+                student[i][4] = student[i][2] + student[i][3];
+            }
+            student[i][5] = student[i][4] / 2;
+            document.write("<td>" + student[i][4] + "</td>");
+            document.write("<td>" + student[i][5].toFixed(2) + "</td>");
+            document.write("</tr>");
+            result[0] += student[i][2]; // 중간의 합계
+            result[1] += student[i][3]; // 기말의 합계
+            result[2] += student[i][4]; // 총점의 합계
+            result[3] += student[i][5]; // 평균의 합계
+        }
+        document.write("<tr><td colspan='2'>통계</td>");
+        for(var i=0; i<result.length; i++) {
+            document.write("<td>"+(result[i]/student.length).toFixed(2)+"</td>");
+        }
+        document.write("</tr></table>");
+    </script>
+</body>
+</html>

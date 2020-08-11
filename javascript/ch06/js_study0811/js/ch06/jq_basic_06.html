@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .container { width: 500px; margin: 30px auto;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3><img src="images/w3.PNG" id="logo" width="70" alt="">JQuery Programming!</h3>
+    </div>
+    <script>
+        $(document).ready(function() {
+            // 1번 방법 - 익명함수 활용
+            /*
+            $("#logo").mouseover(function() {
+                $("#logo").attr("src", "images/icon1.png");
+            });
+            $("#logo").mouseout(function() {
+                $("#logo").attr("src", "images/w3.png");
+            });
+            */
+
+            // 2번 방법 - 함수 생성후에 활용
+            $("#logo").mouseover(f1);
+            $("#logo").mouseout(f2);
+
+            function f1() {
+                $("#logo").attr("src", "images/icon1.png");
+            }
+
+            function f2() {
+                $("#logo").attr("src", "images/w3.png");
+            }
+        });
+    </script>
+</body>
+</html>

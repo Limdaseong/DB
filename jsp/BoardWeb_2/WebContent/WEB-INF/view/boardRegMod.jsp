@@ -5,14 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>글쓰기</title>
+<style>
+	.err {
+		color: #e74c3c;
+	}
+</style>
 </head>
 <body>
 	<div>
-	<a href="/boardWrite"><button>글쓰기</button></a><!-- 제목 글쓰기 / a태그로 날라가면  get방식  -->
+	글쓰기<!-- 제목 글쓰기 / a태그로 날라가면  get방식  -->
 	</div>
+	<div class="err">${msg }</div>
 	<form action="/boardWrite" method="post" onsubmit="return chk()">
 		<div><label>제목: <input type="text" name="title"></label></div>
-		<div><label>내용: <textarea name="ctnt"></textarea>></label></div>
+		<div><label>내용: <textarea name="ctnt"></textarea></label></div>
 		<div><label>작성자: <input type="text" name="i_student"></label></div>
 		<div><input type="submit" value="글등록"></div>
 	</form>

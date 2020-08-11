@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if문 연습</title>
+</head>
+<body>
+    <script>
+        // DB에 저장된 아이디와 패스워드라고 가정
+        var id = "easy1004";
+        var pw = "112233";
+
+        var user_id = prompt("아이디는?", "");   // 빈문자열: false
+        var user_pw = prompt("비밀번호는?", "");
+
+        // 중첩 if문을 사용하는 좋은 예제
+        if(user_id == id) { // 아이디가 일치할 때.
+            if(user_pw == pw) { // 패스워드가 일치할 때
+                document.write(user_id + "님, 반갑습니다.");
+            } else { // 패스워드가 일치하지 않을 때
+                alert("비밀번호가 일치하지 않습니다.");
+                location.reload(); // 새로고침(F5)
+            }
+        } else { // 아이디가 일치하지 않을 때.
+            alert("아이디가 일치하지 않습니다.");
+            location.reload();
+        }
+    </script>
+</body>
+</html>

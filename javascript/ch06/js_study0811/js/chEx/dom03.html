@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 객체 3</title>
+    <style>
+        .container { width: 500px; margin: 0 auto;}
+        #light { width: 30%;}
+    </style>
+    <!-- 
+    1. 버튼 2개로 점등과 소등을 하도록 만든 프로그램
+    점등을 눌렀을 때 불이 켜진 이미지로 변경
+    소등을 눌렸을 때 불이 꺼진 이미지로 변경
+     -->
+</head>
+<body>
+    <div class="container">
+        <h3>전구 점등/소등</h3>
+        <hr>
+        <button id="btnOn">점등</button>&nbsp;&nbsp;&nbsp;
+        <button id="btnOff">소등</button>
+        <hr>
+        <img src="images/lightoff.png" alt="" id="light">
+    </div>
+    <script>
+        var btnOn = document.getElementById("btnOn");
+        btnOn.addEventListener("click", changeOn);
+
+        var btnOff = document.getElementById("btnOff");
+        btnOff.addEventListener("click", changeOff);
+
+        var img = document.getElementById("light");
+        function changeOn() {
+            img.src = "images/lighton.png";
+        }
+
+        function changeOff() {
+            img.src = "images/lightoff.png";
+        }
+
+    </script>
+</body>
+</html>

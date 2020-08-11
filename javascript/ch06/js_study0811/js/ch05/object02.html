@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 활용 2</title>
+    <!-- 
+    (2) 객체
+    - 객체 생성자 함수를 사용하여 객체를 생성.
+    - this : 현재 코드를 실행하는 객체를 나타내는 키워드, this는 생성되는 객체 자신.
+    - 객체 생성자 함수를 통해서 객체를 만들때 반드시 new 키워드를 사용하여 생성해야함.
+-->
+</head>
+<body>
+    <script>
+        // 객체 생성자 함수
+        function Student(name, major, age) {
+            // 프로퍼티(property)
+            this.name = name;
+            this.major = major;
+            this.age = age;
+        }
+
+        // 객체 생성
+        var s1 = new Student('이익준', '외과', 42);
+        var s2 = new Student('김준완', '흉부외과', 41);
+        var s3 = new Student('양석형', '산부인과', 43);
+        var s4 = new Student('채송화', '신경외과', 39);
+        var s5 = new Student('안정원', '소아외과', 45);
+
+        document.write("이름: " + s1.name + "<br>");
+        document.write("전공: " + s1.major + "<br>");
+        document.write("나이: " + s1.age + "<br>");
+    </script>
+</body>
+</html>

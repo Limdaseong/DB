@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날짜 객체</title>
+</head>
+<body>
+    <script>
+        // 날짜를 직접 설정하는 방법
+        // 2020년 5월 31일로 날짜를 설정
+
+        // 1. 년, 월, 일을 설정해서 사용
+        // 월: 0~11, 4로 적으면 5월
+        var date1 = new Date(2002, 4, 31); // 2002년 5월 31일
+        var year = date1.getFullYear();
+        var month = date1.getMonth();
+        var day = date1.getDate();
+
+        var hour = date1.getHours();
+        var minute = date1.getMinutes();
+        var second = date1.getSeconds();
+
+        document.write(date1 + "<br>");
+        // 월을 사용할 때 +1로 보정해서 사용
+        document.write(year + "년 " + (month+1) + "월 " + day + "일<br>");
+        document.write(hour + "시 " + minute + "분 " + second + "초<br>");
+        document.write("<hr>")
+
+        // 2. 년월일, 시분초를 설정해서 사용
+        var date2 = new Date(2020, 11, 31, 18, 32, 44); // 2020년 12월 31일
+        var year2 = date2.getFullYear();
+        var month2 = date2.getMonth();
+        var day2 = date2.getDate();
+
+        var hour2 = date2.getHours();
+        var minute2 = date2.getMinutes();
+        var second2 = date2.getSeconds();
+
+        document.write(date2 + "<br>");
+        // 월을 사용할 때 +1로 보정해서 사용
+        document.write(year2 + "년 " + (month2+1) + "월 " + day2 + "일<br>");
+        document.write(hour2 + "시 " + minute2 + "분 " + second2 + "초<br>");
+        document.write("<hr>");
+
+        // 3. 날짜 객체를 생성하고, 후에 년월일, 시분초를 삽입하여 사용하는 방법
+        var date3 = new Date();
+
+        date3.setFullYear(2020);
+        date3.setMonth(6); // 6으로 적으면 7월로 인식
+        date3.setDate(27);
+
+        date3.setHours(14);
+        date3.setMinutes(49);
+        date3.setSeconds(45);
+
+        var year3 = date3.getFullYear();
+        var month3 = date3.getMonth();
+        var day3 = date3.getDate();
+
+        var hour3 = date3.getHours();
+        var minute3 = date3.getMinutes();
+        var second3 = date3.getSeconds();
+
+        document.write(year3 + "년 " + (month3+1) + "월 " + day3 + "일<br>");
+        document.write(hour3 + "시 " + minute3 + "분 " + second3 + "초<br>");
+        document.write("<hr>");
+
+    </script>
+</body>
+</html>

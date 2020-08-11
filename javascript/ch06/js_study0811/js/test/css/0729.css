@@ -1,0 +1,16 @@
+.container { width: 450px; margin: 20px auto; 
+border: 1px solid black;}
+.day1 { text-align: center; padding: 20px; background-color: cornflowerblue;}
+.day1 h3 { font-size: 1.5em; color: navy;}
+.day1 p { font-weight: bold; color: #222;}
+.day1 .accent { font-style: italic; font-size: 1.1em; color: purple;}
+.bar { background-color: #747474; color: #fff; font-size: 1.1em;
+padding-left: 44px; margin: -18px auto; height: 40px; line-height: 40px;}
+.day2 { margin: 0 auto;  padding: 0; background-color: beige;}
+.day2 ul { list-style: none; height: 60px; border-bottom: 1px dashed #cccccc;}
+.day2 .item_title { float: left; width: 160px;  font-size: 1.5em; font-weight: bold;
+line-height: 40px;}
+.day2 .item_date { color: #222; font-size: 1.2em; text-align: right; margin-right: 20px;
+line-height: 40px;}
+.day2 ul:last-child { border: none; margin-bottom: 0;}
+.day2 ul:first-child { }

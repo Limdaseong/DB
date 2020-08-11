@@ -11,52 +11,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.koreait.board.common.Utils;
+import com.koreait.board.db.BoardDAO;
 import com.koreait.board.db.DbCon;
+import com.koreait.board.vo.BoardVO;
 
 @WebServlet("/boardWrite")
 public class BoardWriteSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String jsp = "/WEB-INF/view/boardRegMod.jsp";
+		request.getRequestDispatcher(jsp).forward(request, response); //redirect는 무적권 get방식이다
 	} // jsp파일은 dispatcher로 연다
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		String title = request.getParameter("title");
 		String ctnt = request.getParameter("ctnt");
-		String strI_student = request.getParameter("i_student");
+		String strI_student = request.getParameter("i_student"); // HTML에서는 정수형이란것은 없다
+		
+		System.out.println("title : " + title);
+		System.out.println("ctnt : " + ctnt);
+		System.out.println("i_student : " + strI_student);
+		
+		BoardVO param = new BoardVO();
+		param.setTitle(title);
+		param.setCtnt(ctnt);
+		param.setI_student(Utils.parseStrToInt(strI_student));
+		
+		int result = BoardDAO.insBoard(param);
+		System.out.println("result : " + result);
 
-		if("".equals(title) || "".equals(ctnt) || "".equals(strI_student)) {
-			response.sendRedirect("/jsp/board_Write.jsp?err=10");
-			return;
+		if(result == 1) {
+			response.sendRedirect("/boardList");
+		} else {
+			request.setAttribute("msg", "에러가 발생하였습니다.");
+			doGet(request, response);
 		}
-		
-		int i_student = Integer.parseInt(strI_student);
-		int result = -1;
-		
-		Connection con = null;
-		PreparedStatement ps = null;
-		
-		String sql = " INSERT INTO t_board (i_board, title, ctnt, i_student) "
-				+ " SELECT nvl(max(i_board), 0)+1, ?, ?, ? "
-				+ " FROM t_board ";
-		
-		try {
-    		con = DbCon.getCon();
-    		ps = con.prepareStatement(sql);
-    		ps.setNString(1, title);
-    		ps.setNString(2, ctnt);
-    		ps.setInt(3, i_student);
-    		result = ps.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DbCon.close(con, ps);
-		}
-		
-		String jsp = "/WEB-INF/view/boardRegMod";
-		request.getRequestDispatcher(jsp).forward(request, response);
 		
 	} 
 
