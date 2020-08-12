@@ -10,6 +10,29 @@ import com.koreait.board.vo.BoardVO;
 
 public class BoardDAO {
 	
+	public static int udtBoard(BoardVO param) {
+		int result = 0;
+		Connection con =null;
+		PreparedStatement ps = null;
+		
+		String sql = " UPDATE t_board SET title = ?, ctnt = ? WHERE i_board = ? ";
+		
+		try {
+			con = DbCon.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setNString(1, param.getTitle());
+			ps.setNString(2, param.getCtnt());
+			ps.setInt(3, param.getI_board());
+			
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbCon.close(con, ps);
+		}
+		return result;
+	}
+	
 	public static int delBoard(int i_board) { // pk값을 삭제할거니까 하나의 값을 삽입
 		
 		int result = 0; // 경우의 수는 2개 ( 0, 1)
@@ -70,7 +93,7 @@ public class BoardDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = " SELECT i_board, title, ctnt, i_student FROM t_board ORDER BY i_board asc ";
+		String sql = " SELECT i_board, title, ctnt, i_student FROM t_board ORDER BY i_board desc ";
 		
 		try {
 			con = DbCon.getCon();
@@ -136,6 +159,8 @@ public class BoardDAO {
 		}
 		return vo;
 	}
+
+	
 	
 }
 
