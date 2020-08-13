@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            name: '홍길동',
+            showName: function() {
+                console.log('name : ' + this.name)
+            }
+        }
+        obj.showName()
+
+        var obj2 = {
+            name: '홍길동',
+            age: 10,
+            showName: () => {
+                console.log(this.name == '')
+                console.log('name : ' + this.name + ', age' + this.age)
+            }
+        }
+        obj2.showName()
+    </script>
+</body>
+</html>

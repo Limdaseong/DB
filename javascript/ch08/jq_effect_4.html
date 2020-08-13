@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        * { margin: 0;}
+        .txt1 { width: 50px; text-align: center; background-color: aqua;
+        padding: 5px;}
+    </style>
+</head>
+<body>
+    <p class="txt1">내용</p>
+
+    <script>
+        $(document).ready(function() {
+            $(".txt1").animate({marginLeft:"300px"}, 1000)
+            .animate({marginTop:"300px"}, 1000)
+            .queue(function(){
+                $(this).css("background","red"); // 이후로의 애니메이션이 정지
+                $(this).dequeue(); // 이후로의 애니메이션이 적용
+            })
+            .animate({marginLeft:"0"}, 1000)
+            .animate({marginTop:"0"}, 1000);
+        })
+    </script>
+</body>
+</html>

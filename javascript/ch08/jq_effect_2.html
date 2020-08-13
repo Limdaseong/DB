@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .txt1, .txt2 { background-color: pink; padding: 5px;}
+    </style>
+</head>
+<body>
+    <p><button class="btn1">버튼1</button></p>
+    <span class="txt1">500px 이동</span>
+    <p><button class="btn2">버튼2</button></p>
+    <span class="txt2">50px 이동</span>
+
+    <script>
+        // animate(스타일속성, 적용시간, 가속도, 콜백함수)
+        $(document).ready(function() {
+            // 1번 버튼
+            $(".btn1").click(function() {
+                $(".txt1").animate({
+                    marginLeft:"500px",
+                    fontSize:"2em",
+                }, 2000, "linear", function() {
+                    alert("애니메이션 완료!");
+                });
+            });
+
+            // 2번 버튼 - 버튼을 누를때마다 누적해서 50씩 이동
+            $(".btn2").click(function() {
+                $(".txt2").animate({
+                    marginLeft:"+=50px"
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>

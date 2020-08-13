@@ -6,12 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="result"></div>
+    <div id="result" class="cls"></div>
+    <div class="cls"></div>
     <script>
-        var fn1 = function(n1, n2) {
+        let ab = 10;
+        const cc = '가기';
+
+        let re = `안녕하세요 제 나이는 ${ab}입니다.`
+        var fn1 = (n1, n2) => {
             return n1 + n2;
         }
         
+        var eleResult = document.getElementById('result')
+        var eleClses = document.getElementsByClassName('cls')
+
+        var eleclses2 = document.querySelector('.cls')
+
         var res = fn1(5, 10)
 
         result.innerHTML = res

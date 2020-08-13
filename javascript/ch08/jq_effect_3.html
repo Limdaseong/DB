@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        p { width: 110px; text-align: center;}
+        .txt1 { background-color: aqua;}
+        .txt2 { background-color: pink;}
+        .txt3 { background-color: orange;}
+        .txt4 { background-color: green;}
+        .txt5 { background-color: gold;}
+    </style>
+</head>
+<body>
+    <p class="txt1">효과1<br>delay(0)</p>
+    <p class="txt2">효과2<br>delay(3000)</p>
+    <p><button class="btn1">50px 전진</button></p>
+    <p class="txt3">효과3<br>.</p>
+    <p class="txt4">효과4<br>stop()</p>
+    <p class="txt5">효과5<br>stop(true, true)</p>
+
+    <script>
+        $(document).ready(function() {
+            $(".txt1").animate({marginLeft:"300px"}, 1000);
+
+            $(".txt2").delay(3000).animate({marginLeft:"300px"}, 1000);
+
+            $(".btn1").click(function() {
+                $(".txt3").animate({marginLeft:"+=50px"}, 800); // 0.8초 동안 50px 이동
+                $(".txt4").animate({marginLeft:"+=50px"}, 800).stop(); // stop() 적용되어 동작하지 않음
+                $(".txt5").animate({marginLeft:"+=50px"}, 800).stop(true, true); // 애니메이션이 동작하지 않고, css만 적용되어 50px만큼 이동
+            })
+        })
+    </script>
+</body>
+</html>
