@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 500px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding: 30px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid black;
+        }
+
+        .container h3 {
+            text-align: center;
+        }
+
+        p {
+            margin-left: 30px;
+        }
+
+        legend {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>수강신청</h3>
+        <form>
+            <fieldset>
+                <legend>신청자</legend>
+                <p>
+                    <label for=""><span style="color: green; font-weight: bold;">이름</span></label>
+                    <input type="text" id="name" name="name">
+                </p>
+                <p>
+                    <label for=""><span style="color: green; font-weight: bold;">학과</span></label>
+                    <select id="subject">
+                        <option value="none">----- 학과 선택 -----</option>
+                        <option value="com">컴퓨터공학과</option>
+                        <option value="ele">전자공학과</option>
+                        <option value="rob">기계공학과</option>
+                        <option value="arc">건축공학과</option>
+                        <option value="che">화학공학과</option>
+                        <option value="ind">산업공학과</option>
+                    </select>
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>신청 과목</legend>
+                <p>이 달에 신청할 과목을 선택하세요.<br><br>
+                    <input type="radio" value="영어 회화" name="eng">영어 회화
+                    <input type="radio" value="영어 문법" name="eng">영어 문법
+                    <input type="radio" value="영어 작문" name="eng">영어 작문
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>메일링</legend>
+                <p>메일로 받고 싶은 뉴스 주제를 선택해 주세요<br><br>
+                    <input type="checkbox" name="title">해외뉴스
+                    <input type="checkbox" name="title">5분회화
+                    <input type="checkbox" name="title">모닝팝스
+                </p>
+            </fieldset>
+            <br>
+            <input type="button" id="no" value="취소" onclick="cancel()">
+            <input type="button" id="" value="확인" onclick="inputComplete()">
+        </form>
+    </div>
+
+    <script>
+        function inputComplete() {
+            var name = document.getElementById("name")
+            var subResult = null
+            var sub = document.getElementById("subject")
+            for (var i = 0; i < sub.length; i++) {
+                if (sub[i].selected == true) {
+                    subResult = sub[i]
+                    break
+                }
+            } // 선택된 select값
+
+            var engResult = null
+            var eng = document.getElementsByName('eng')
+            for (var i = 0; i < eng.length; i++) {
+                if (eng[i].checked == true) {
+                    engResult = eng[i]
+                    break
+                }
+            } // 라디오에 선택된 값 
+            var checkResult = ""
+            var check = frm.title
+
+            for (var i = 0; i < check.length; i++) {
+                if (check[i].checked == true) {
+                    checkResult += check[i].value + " "
+                }
+            } //체크박스 선택된 값
+            if (subResult == null) {
+                alert("학과를 선택해주세요!")
+            } else if (engResult == null) {
+                alert("신청 과목을 선택해주세요!")
+            } else if (checkResult == "") {
+                alert("뉴스 주제를 선택해주세요!")
+            } else {
+                alert(engResult.value)
+            }
+        }
+
+
+        function cancel() {
+
+        }
+    </script>
+</body>
+
+</html>

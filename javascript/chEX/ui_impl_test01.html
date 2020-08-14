@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container { width: 650px; margin-top: 30px; margin-bottom: 30px;
+        margin-left: auto; margin-right: auto;}
+        .container h2 { text-align: center;}
+        .container form { background-color: purple; padding: 30px 30px;
+        color: white; text-align: center;}
+        form input { border: none; width: 220px; padding: 10px; font-size: 0.8em;
+        margin-bottom: 10px;}
+        form .addBtn { background-color:white; color: #555; border: none; width: 80px;
+        padding: 9px; font-size: 1em; box-shadow: 1.5px 1.5px 3px black; 
+         cursor: pointer;}
+        .m1 { text-align: left; display: inline-block;  width: 900px;} 
+        #title, #date { width: 130px;}
+        #theater { width: 80px;}
+        .d { margin-left: 10px;}
+        .m2 { text-align: right; display: inline-block; margin-left: 10px; ;}
+        /* itemList */
+        ul { list-style: none; margin: 0; padding: 0;}
+        ul li { background-color: #eee;  font-size: 1.1em; transition: 0.2s; 
+        padding: 10px 10px 10px 40px; position: relative;}
+        ul li:nth-child(odd) { background-color: #ddd;}
+        ul li:hover { background-color: lemonchiffon; color: brown; font-weight: bold;}
+        .close { background-color: orange; opacity: 0.7; color: red; padding: 3px 12px 5px 12px; 
+        font-size: 1.5em; position: absolute; right: 0; top: 0; cursor: pointer;}
+        .MovieInfo { background-color: yellow; opacity: 0.7; color: black; padding: 12px 12px 12px 12px; 
+        font-size: 0.8em; position: absolute; right: 42px; top: 0; cursor: pointer;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>도서 목록 관리 프로그램</h2>
+        <form action="">
+            <div class="m1">
+                <input type="text" class="d" id="title" autofocus placeholder="영화명">
+                <input type="datetime-local" class="d" id="date">
+                <input type="text" class="d" id="theater" placeholder="극장명">
+                <div class="m2">
+                    <button id="add" class="addBtn" onclick="showInfo()">추가</button>
+                </div>
+            </div>
+        </form>
+        <div id="itemList"></div>
+    </div>
+    <script>
+        function Movie(title, date, theater) {
+            this.title = title;
+            this.date = date;
+            this.theater = theater;
+        }
+        Movie.prototype.showInfo = function() {
+            return "영화명: "+this.title+"\n날짜: "+this.date+"\n극장명: "+this.theater;
+        }
+        var itemList = [];
+
+        var addBtn = document.querySelector("#add");
+        addBtn.addEventListener("click", addList); 
+
+        function addList() {
+            var title = document.querySelector("#title").value;
+            var date = document.querySelector("#date").value;
+            var theater = document.querySelector("#theater").value;
+            
+
+            if(title == 0) {
+                alert("영화명을 입력해 주세요!");
+            } else if(date == 0) {
+                alert("날짜를 입력해 주세요!");
+            } else if(theater == 0) {
+                alert("극장명을 입력해 주세요!");
+            } else {
+                itemList.push(new Movie(title, date, theater));
+                document.querySelector("#title").value = "";
+                document.querySelector("#date").value = "";
+                document.querySelector("#theater").value = "";
+                document.querySelector("#title").focus();
+                event.preventDefault();
+                showInfo();
+            }
+
+            
+        }
+
+        function showInfo() {
+            var list = "<ul>";
+            for(var i=0; i<itemList.length; i++) {
+                list += "<li>" + itemList[i].title + "<span class='MovieInfo' id=" + i + ">영화정보</span>" + "<span class='close' id=" + i + ">×</span>" + "</li>";
+            }
+            list += "</ul>";
+
+            document.querySelector("#itemList").innerHTML = list;
+
+            var removeList = document.querySelectorAll(".close");
+            for(var i=0; i<removeList.length; i++) {
+                removeList[i].addEventListener("click", removeItem);
+            }
+
+            var MovieList = document.querySelectorAll(".MovieInfo");
+            for(var i=0; i<MovieList.length; i++) {
+                MovieList[i].addEventListener("click", showMovieInfo); 
+            }
+        }
+
+        function removeItem() {
+            var id = this.getAttribute("id"); 
+            itemList.splice(id, 1); 
+            showInfo(); 
+        }
+
+        function showMovieInfo() {
+            var id = this.getAttribute("id");
+            alert(itemList[id].showInfo());
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test4</title>
+    <script type="text/javascript"src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <style>
+        img{ width: 50px; }
+        #container{ width: 300px; margin: 20px auto; padding : 50px; border : 1px solid black;}
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h3><img src="img/w3.PNG" id="logo" alt="">Web Programming!</h3>
+        <input type="text" name="addtext" id="addtext"> <button>교과내용 추가</button>
+        <p id="d1">HTML5</p>
+        <p id="d2">CSS3</p>
+        <p id="d3">Javascript</p>
+    </div>
+    <script>
+        var i = 4;
+        $(document).ready(function()
+        {
+            $('button').click(function()
+            {
+                $('#d' + (i-1)).append('<p id="d'+i+'">' + addtext.value+'</p>');
+                $('#d' + (i)).css("color", "blue");
+                $('#d' + (i)).css("font-weight", "bold");
+                i++
+            })
+        })
+    </script>
+</body>
+</html>
