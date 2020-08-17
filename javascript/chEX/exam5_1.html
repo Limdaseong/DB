@@ -9,8 +9,14 @@
             margin-right: 20px;
         }
 
+        button { width: 50px; height : 30px; margin-top : 10px }
         .btn:not(:last-child) {
             margin-right: 10px;
+        }
+        .selected {
+            background-color: beige;
+            font-weight: bold;
+            color: brown;
         }
     </style>
 </head>
@@ -21,12 +27,20 @@
     <script>
         var selectedSeats = []
 
-        function switchSeat(seat) {
+        function toggleSeat(seat) {
             var idx = selectedSeats.indexOf(seat) // 없는 애는 -1이 넘어온다, 들어있는 값은 인덱스값
-
+            var btn = document.querySelector('#id_' + seat)
             if(idx == -1) { // 기존에 선택이 안 되어 있었다
+            
+                if(allSeatCnt.value == selectedSeats.length) {
+                    alert('인원 수를 초과하였습니다.')
+                    return
+                }
+                
+                btn.classList.add('selected')
                 selectedSeats.push(seat) // 추가
             } else { // 기존에 선택이 되어 있었다
+                btn.classList.remove('selected')
                 selectedSeats.splice(idx, 1) // 빼기
             }
 
@@ -74,12 +88,15 @@
                 arr.forEach(function(item) {
                     var divChild = document.createElement('div')
                     for(var i=1; i<=colCnt; i++) {
+                        let txt = `${item}${i}` // 블록 단위에는 let이나 const를 써준다
+
                         var btn = document.createElement('button')
                         btn.setAttribute('class', 'btn')
-
-                        var txt = `${item}${i}`
-                        btn.setAttribute('onclick', `switchSeat('${txt}')`)
-                        btn.innerHTML = txt
+                        btn.setAttribute('id','id_' + txt)
+                        btn.addEventListener('click', function(){ // const를 쓰면 ()=>가 된다
+                            toggleSeat(txt)
+                        })
+                        btn.innerText = txt
                         divChild.appendChild(btn)
                     }
                     divParent.appendChild(divChild)
@@ -93,8 +110,8 @@
             memberContainer.appendChild(select_adult)
             memberContainer.appendChild(select_teen)
 
-            var arr =  ['A', 'B', 'C']
-            var seat_btns = makeSeatBtns(arr, 5)
+            var arr =  ['A', 'B', 'C', 'D', 'E', 'F']
+            var seat_btns = makeSeatBtns(arr, 10)
             seatsContainer.appendChild(seat_btns)
             //seatsContainer.innerHTML = seat_btns
 
