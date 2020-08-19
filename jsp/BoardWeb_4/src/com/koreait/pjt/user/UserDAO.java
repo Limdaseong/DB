@@ -12,37 +12,33 @@ import com.koreait.pjt.vo.UserVO;
 public class UserDAO {
 	public static int insUser(UserVO param) {
 		String sql = " INSERT INTO t_user "
-			+ " (i_user, user_id, user_pw, nm, email) "
-			+ " VALUES "
-			+ " (seq_user.nextval, ?, ?, ?, ?) ";
+					+ " (i_user, user_id, user_pw, nm, email) "
+					+ " VALUES "
+					+ " (seq_user.nextval, ?, ?, ?, ?) ";
 		
 		
 	
 		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
 			@Override
-			public int update(PreparedStatement ps) throws SQLException {
-				
+			public void update(PreparedStatement ps) throws SQLException {
 				ps.setNString(1, param.getUser_id());
 				ps.setNString(2, param.getUser_pw());
 				ps.setNString(3, param.getNm());
 				ps.setNString(4, param.getEmail());
-				
-				return ps.executeUpdate();
 			}
 		});
 	}
 	
 	//0:에러 발생, 1:로그인 성공, 2:비밀번호 틀림, 3:아이디 없음
-	public static int selUser(UserVO param) {
+	public static int login(UserVO param) {
 		String sql = " SELECT i_user, user_pw, nm "
-				+ " FROM t_user "
-				+ " WHERE user_id = ? ";
+					+ " FROM t_user "
+					+ " WHERE user_id = ? ";
 				
 		return JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
 			@Override
-			public ResultSet prepared(PreparedStatement ps) throws SQLException {
+			public void prepared(PreparedStatement ps) throws SQLException {
 				ps.setNString(1, param.getUser_id());
-				return ps.executeQuery();
 			}
 
 			@Override

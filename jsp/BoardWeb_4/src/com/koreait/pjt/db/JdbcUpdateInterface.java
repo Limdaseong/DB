@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public interface JdbcUpdateInterface {
-	int update(PreparedStatement ps) throws SQLException;
+	void update(PreparedStatement ps) throws SQLException;
 	// 인터페이스는 선언부만 있지 객체화가 안된다
 	// 객체생성 private을 써서 막을 수 있다
 	

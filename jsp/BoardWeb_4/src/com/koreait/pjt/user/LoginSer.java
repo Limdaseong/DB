@@ -23,6 +23,7 @@ public class LoginSer extends HttpServlet {
 		// 단위테스트를 해봐라
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user_id = request.getParameter("user_id");
 		String user_pw = request.getParameter("user_pw");
@@ -32,7 +33,7 @@ public class LoginSer extends HttpServlet {
 		param.setUser_id(user_id);
 		param.setUser_pw(encrypt_pw);
 		
-		int result = UserDAO.selUser(param);
+		int result = UserDAO.login(param);
 		System.out.println(result);
 		if(result != 1) {  //에러처리
 			String msg = "";
@@ -49,9 +50,8 @@ public class LoginSer extends HttpServlet {
 		HttpSession hs = request.getSession();
 		hs.setAttribute(Const.LOGIN_USER, param);
 		
-		
 		System.out.println("로그인 성공!!!");
-		response.sendRedirect("/board/list");
+		response.sendRedirect("/list");
 	}
 
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.koreait.pjt.Const;
 import com.koreait.pjt.ViewResolver;
-import com.koreait.pjt.user.UserDAO;
+import com.koreait.pjt.db.BoardDAO;
 
 @WebServlet("/list")
 public class BoardListSer extends HttpServlet {
@@ -24,6 +24,7 @@ public class BoardListSer extends HttpServlet {
 			return;
 		}
 		// 로그인된 사람은 리스트를 볼 수 있음
+		request.setAttribute("data", BoardDAO.selBoardList());
 		ViewResolver.forward("board/list", request, response);
 	}
 }
