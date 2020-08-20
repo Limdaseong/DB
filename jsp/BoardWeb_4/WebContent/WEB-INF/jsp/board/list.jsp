@@ -12,6 +12,12 @@
 <head>
 <meta charset="UTF-8">
 <title>리스트</title>
+<style>
+	.row:hover {
+		background-color: #b8e994;
+		cursor: pointer;
+	}
+</style>
 </head>
 <body>
 	<div>${loginUser.nm }님 환영합니다!</div>
@@ -25,17 +31,23 @@
 			<th>제목</th>
 			<th>조회수</th>
 			<th>작성자</th>
-			<th>작성일</th>
+			<th>등록일시</th>
 		</tr>
 		<c:forEach items="${data}" var="item">
-			<tr>
+			<tr class="row" onclick="moveToDetail(${item.i_board})">
 				<td>${item.i_board }</td>
 				<td>${item.title }</td>
-				<td>${item.ctnt }</td>
-				<td>${item.r_dt }</td>
-				<td>${item.hits }</td>					
+				<td>${item.hits }</td>
+				<td>${item.i_user }</td>
+				<td>${item.r_dt }</td>					
 			</tr>
 		</c:forEach>		
 	</table>
+	
+	<script>
+		function moveToDetail(i_board) {
+			location.href = '/board/detail?i_board='+i_board
+		}
+	</script>
 </body>
 </html>
