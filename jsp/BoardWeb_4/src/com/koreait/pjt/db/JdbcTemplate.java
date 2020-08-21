@@ -16,6 +16,7 @@ public class JdbcTemplate {
 		try {
 			con = DbCon.getCon();
 			ps = con.prepareStatement(sql);
+			
 			jdbc.update(ps);
 			
 			result = ps.executeUpdate();

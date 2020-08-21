@@ -12,9 +12,21 @@ import com.koreait.pjt.vo.BoardVO;
 
 public class BoardDAO {
 	
+	public static void addHits (final int i_board) {
+		String sql = " UPDATE t_board4 SET hits = hits + 1 WHERE i_board = ? ";
+		
+		JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, i_board);
+			}
+		});
+	}
+	
 	public static int udtBoard(final BoardVO param) {
-		String sql = " UPDATE t_board4 SET title = ?, ctnt = ? "
-						+ " WHERE i_board = ? ";
+		String sql = " UPDATE t_board4 SET m_dt = sysdate, title = ?, ctnt = ? "
+						+ " WHERE i_board = ? AND i_user = ?";
 		
 		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
 			
@@ -23,6 +35,7 @@ public class BoardDAO {
 				ps.setNString(1, param.getTitle());
 				ps.setNString(2, param.getCtnt());
 				ps.setInt(3, param.getI_board());
+				ps.setInt(4, param.getI_user());
 			}
 		});
 	}

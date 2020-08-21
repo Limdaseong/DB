@@ -22,19 +22,19 @@ public class MyUtils {
 		}
 	}
 	
-	//return true: 로그인이 안됨!, false: 로그인 된 상태
+	// 로그인 확인 용도 / return true: 로그인이 안됨!, false: 로그인 된 상태
 	public static boolean isLogout(HttpServletRequest request) throws IOException {
-		HttpSession hs = request.getSession();
 		if(null == getLoginUser(request)) {
 			return true;
 		}
 		return false;
 	}
 	
-	
+	// 로그인 정보를 가져오려고 쓰는 것
 	public static UserVO getLoginUser(HttpServletRequest request) {
 		HttpSession hs = request.getSession();
 		return (UserVO)hs.getAttribute(Const.LOGIN_USER);
+		
 	}
 	
 	

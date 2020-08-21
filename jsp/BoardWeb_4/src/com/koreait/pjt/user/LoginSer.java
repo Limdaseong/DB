@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.SendResult;
 
 import com.koreait.pjt.Const;
 import com.koreait.pjt.MyUtils;
@@ -19,6 +18,10 @@ public class LoginSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(!MyUtils.isLogout(request)) {
+			response.sendRedirect("/list");
+			return;
+		}
 		ViewResolver.forward("user/login", request, response);
 		// 단위테스트를 해봐라
 	}
@@ -45,10 +48,12 @@ public class LoginSer extends HttpServlet {
 			request.setAttribute("user_id", user_id);
 			request.setAttribute("msg", msg);
 			doGet(request, response);
+			
 			return;
 		}
 		HttpSession hs = request.getSession();
 		hs.setAttribute(Const.LOGIN_USER, param);
+		
 		
 		System.out.println("로그인 성공!!!");
 		response.sendRedirect("/list");

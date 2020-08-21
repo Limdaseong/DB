@@ -19,6 +19,9 @@
 			</form>		
 		</c:if>
 			
+	
+		
+
 		
 	</div>
 	<div>제목: ${data.title }</div>

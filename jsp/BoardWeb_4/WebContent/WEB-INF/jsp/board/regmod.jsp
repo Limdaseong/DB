@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>등록/수정</title>
+<title>${data == null ? '등록' : '수정' }</title>
 </head>
 <body>
 
@@ -13,8 +13,7 @@
 			<input type="hidden" name="i_board" value="${data.i_board }">
 			<div>제목: <input type="text" name="title" required value="${data.title }"></div>
 			<div>내용: <textarea name="ctnt" required>${data.ctnt }</textarea></div>
-			<%--<input type="hidden" name="i_user" value="${loginUser.i_user }"> --%>
-			<div><input type="submit" value="등록"></div>
+			<div><input type="submit" value="${data == null ? '등록' : '수정' }"></div>
 		</form>
 	</div>
 	<h3>${msg }</h3>

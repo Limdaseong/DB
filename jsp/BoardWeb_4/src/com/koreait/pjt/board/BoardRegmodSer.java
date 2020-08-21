@@ -24,8 +24,12 @@ public class BoardRegmodSer extends HttpServlet {
 			response.sendRedirect("/login");
 			return;
 		}
-		int i_board = MyUtils.parseStrToInt(request.getParameter("i_board"));
-		request.setAttribute("data", BoardDAO.selBoard(i_board));
+		String strI_board = request.getParameter("i_board");
+		if(strI_board != null) {
+			int i_board = MyUtils.parseStrToInt(request.getParameter("i_board")); 
+			//i_board값은 null값이 넘어온다
+			request.setAttribute("data", BoardDAO.selBoard(i_board));
+		}
 		
 
 		
@@ -34,31 +38,31 @@ public class BoardRegmodSer extends HttpServlet {
 	}  // 화면띄우기라고!!! (등록창/수정창)
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("i_board").equals("0")) {
-			String title = request.getParameter("title");
-			String ctnt = request.getParameter("ctnt");
+		String strI_board = request.getParameter("i_board");
+		String title = request.getParameter("title");
+		String ctnt = request.getParameter("ctnt");
+		
+		HttpSession hs = request.getSession();
+		UserVO loginUser = (UserVO) hs.getAttribute(Const.LOGIN_USER);
+		
+		BoardVO param = new BoardVO();
+		
+		param.setTitle(title);
+		param.setCtnt(ctnt);
+		param.setI_user(loginUser.getI_user());
+		
+		if("".equals(strI_board)) {
+			
 			//String strI_user = request.getParameter("i_user");
 			// 한번씩  syso로 null값인지 체크를 꼭 하자		
-			
-			HttpSession hs = request.getSession();
-			UserVO loginUser = (UserVO) hs.getAttribute(Const.LOGIN_USER);
-			
-			BoardVO param = new BoardVO();
-			param.setTitle(title);
-			param.setCtnt(ctnt);
-			param.setI_user(loginUser.getI_user());
 			
 			BoardDAO.insBoard(param);
 			
 			response.sendRedirect("/list");
 		} else {
-			String title = request.getParameter("title");
-			String ctnt = request.getParameter("ctnt");
-			int i_board = MyUtils.parseStrToInt(request.getParameter("i_board"));
 			
-			BoardVO param = new BoardVO();
-			param.setTitle(title);
-			param.setCtnt(ctnt);
+			int i_board = MyUtils.parseStrToInt(strI_board);
+			
 			param.setI_board(i_board);
 			
 			BoardDAO.udtBoard(param);
