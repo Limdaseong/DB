@@ -18,11 +18,12 @@
 				<a href="#" onclick="submitDel()">삭제</a>
 			</form>		
 		</c:if>
-			
+	</div>
 	
-		
-
-		
+	<div>
+		<button onclick="doLike(${data.i_board})">
+			<span></span>
+		</button>
 	</div>
 	<div>제목: ${data.title }</div>
 	<div>작성일시: ${data.r_dt }</div>

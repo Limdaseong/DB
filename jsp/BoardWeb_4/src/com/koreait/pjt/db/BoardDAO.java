@@ -12,7 +12,11 @@ import com.koreait.pjt.vo.BoardVO;
 
 public class BoardDAO {
 	
-	public static void addHits (final int i_board) {
+	public static int like(final BoardVO param) {
+		String 
+	}
+	
+	public static void addHits(final int i_board) {
 		String sql = " UPDATE t_board4 SET hits = hits + 1 WHERE i_board = ? ";
 		
 		JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {

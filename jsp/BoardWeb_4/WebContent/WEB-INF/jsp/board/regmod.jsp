@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>${data == null ? '등록' : '수정' }</title>
+<style>
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
 </head>
 <body>
 

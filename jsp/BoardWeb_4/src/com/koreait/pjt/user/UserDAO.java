@@ -7,9 +7,27 @@ import java.sql.SQLException;
 import com.koreait.pjt.db.JdbcSelectInterface;
 import com.koreait.pjt.db.JdbcTemplate;
 import com.koreait.pjt.db.JdbcUpdateInterface;
+import com.koreait.pjt.vo.UserLoginHistoryVO;
 import com.koreait.pjt.vo.UserVO;
 
 public class UserDAO {
+	
+	public static void insUserLoginHistory(UserLoginHistoryVO uthVO) {
+		String sql = " INSERT INTO t_user_loginhistory (i_history, i_user, ip_addr, os, browser) "
+						+ " VALUES (seq_userloginhistory.nextval, ?, ?, ?, ?) ";
+		
+		JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, uthVO.getI_user());
+				ps.setNString(2, uthVO.getIp_addr());
+				ps.setNString(3, uthVO.getOs());
+				ps.setNString(4, uthVO.getBrowser());
+			}
+		});
+	}
+	
 	public static int insUser(UserVO param) {
 		String sql = " INSERT INTO t_user "
 					+ " (i_user, user_id, user_pw, nm, email) "
@@ -63,4 +81,6 @@ public class UserDAO {
 			}
 		});
 	}
+
+	
 }

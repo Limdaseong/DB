@@ -14,6 +14,9 @@
 <meta charset="UTF-8">
 <title>리스트</title>
 <style>
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
 .row:hover {
 	background-color: #b8e994;
 	cursor: pointer;

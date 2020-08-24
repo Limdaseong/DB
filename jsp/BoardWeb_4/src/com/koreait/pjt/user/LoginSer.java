@@ -1,6 +1,7 @@
 package com.koreait.pjt.user;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.koreait.pjt.Const;
 import com.koreait.pjt.MyUtils;
 import com.koreait.pjt.ViewResolver;
+import com.koreait.pjt.vo.UserLoginHistoryVO;
 import com.koreait.pjt.vo.UserVO;
 
 @WebServlet("/login")
@@ -51,12 +53,60 @@ public class LoginSer extends HttpServlet {
 			
 			return;
 		}
+		
+		//--------------------로그인 히스토리 기록 [start]
+		String agent = request.getHeader("User-Agent");
+		System.out.println("agent: " + agent);
+		String os = getOs(agent);
+		String browser = getBrowser(agent);
+		String ip_addr = request.getRemoteAddr();	
+		
+		System.out.println("os: " + os);
+		System.out.println("browser: " + browser);
+		System.out.println("ip_addr: " + ip_addr);
+		
+		UserLoginHistoryVO uthVO = new UserLoginHistoryVO();
+		uthVO.setI_user(param.getI_user());
+		uthVO.setOs(os);
+		uthVO.setIp_addr(ip_addr);
+		uthVO.setBrowser(browser);
+		UserDAO.insUserLoginHistory(uthVO);
+		//--------------------로그인 히스토리 기록 [end]
+	
 		HttpSession hs = request.getSession();
 		hs.setAttribute(Const.LOGIN_USER, param);
 		
 		
 		System.out.println("로그인 성공!!!");
 		response.sendRedirect("/list");
+	}
+	
+	private String getBrowser(String agent) {
+		if(agent.toLowerCase().contains("msie")) {
+			return "ie";
+		} else if(agent.toLowerCase().contains("chrome")) {
+			return "chrome";
+		} else if(agent.toLowerCase().contains("safari") && agent.toLowerCase().contains("version")) {
+			return "safari";
+		}
+		
+		return "";
+	}
+	
+	private String getOs(String agent) {
+		if(agent.toLowerCase().contains("mac")) {
+			return "mac";
+		} else if(agent.toLowerCase().contains("windows")) {
+			return "win";
+		} else if(agent.toLowerCase().contains("x11")) {
+			return "linux";
+		} else if(agent.toLowerCase().contains("android")) {
+			return "android";
+		} else if(agent.toUpperCase().contains("iphone")) {
+			return "iOS";
+		}
+		
+		return "";
 	}
 
 }
