@@ -12,7 +12,6 @@
 </style>
 </head>
 <body>
-
 	<div>
 		<form id="frm" action="regmod" method="post">
 			<input type="hidden" name="i_board" value="${data.i_board }">

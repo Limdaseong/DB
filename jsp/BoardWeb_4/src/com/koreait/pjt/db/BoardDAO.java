@@ -11,9 +11,31 @@ import com.koreait.pjt.vo.BoardVO;
 
 
 public class BoardDAO {
+	public static void insLike(final BoardVO param) {
+		String sql = " INSERT INTO t_board4_like (i_user, i_board)"
+						+" values(?, ?) ";
+		
+		JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.getI_user());
+				ps.setInt(2, param.getI_board());
+			}
+		});
+	}
 	
-	public static int like(final BoardVO param) {
-		String 
+	public static void delLike(final BoardVO param) {
+		String sql = " DELETE FROM t_board4_like WHERE i_board = ? AND i_user = ? ";
+		
+		JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.getI_board());
+				ps.setInt(2, param.getI_user());
+			}
+		});
 	}
 	
 	public static void addHits(final int i_board) {
@@ -57,23 +79,31 @@ public class BoardDAO {
 		});
 	}
 	
-	public static BoardDomain selBoard(final int i_board) {
+	public static BoardDomain selBoard(final BoardVO param) {
 		BoardDomain result = new BoardDomain();
-		result.setI_board(i_board);
+		result.setI_board(param.getI_board());
 		
-		String sql = " SELECT B.nm, A.i_board, A.i_user "
-				+ " , A.title, A.ctnt, A.hits, TO_CHAR(A.r_dt, 'YYYY/MM/DD HH24:MI') as r_dt "
+		String sql = " SELECT B.nm as nm, A.i_user "
+				+ " , A.title, A.ctnt, A.hits, TO_CHAR(A.r_dt, 'YYYY/MM/DD') as r_dt, "
+				+ " DECODE(C.i_user ,null, 0, 1) as yn_like "
 				+ " FROM t_board4 A "
 				+ " INNER JOIN t_user B "
 				+ " ON A.i_user = B.i_user "
+				+ " LEFT JOIN t_board4_like C "
+				+ " ON A.i_board = C.i_board "
+				+ " AND C.i_user = ? "
 				+ " WHERE A.i_board = ? ";
+		
+			
+		
 		
 		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
 			// result가 0이 나왔다면 에러 터짐.  알지?
 			
 			@Override
 			public void prepared(PreparedStatement ps) throws SQLException {
-				ps.setInt(1, i_board);
+				ps.setInt(1, param.getI_user());
+				ps.setInt(2, param.getI_board());
 			}
 			
 			@Override
@@ -85,7 +115,7 @@ public class BoardDAO {
 					result.setCtnt(rs.getNString("ctnt"));
 					result.setHits(rs.getInt("hits"));
 					result.setR_dt(rs.getNString("r_dt"));
-					result.setI_board(rs.getInt("i_board"));
+					result.setYn_like(rs.getInt("yn_like"));
 				}
 				return 0;
 			}

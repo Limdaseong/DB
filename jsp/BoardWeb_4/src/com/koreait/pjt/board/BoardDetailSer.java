@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.koreait.pjt.MyUtils;
 import com.koreait.pjt.ViewResolver;
 import com.koreait.pjt.db.BoardDAO;
+import com.koreait.pjt.vo.BoardDomain;
+import com.koreait.pjt.vo.BoardVO;
 import com.koreait.pjt.vo.UserVO;
 
 @WebServlet("/board/detail")
@@ -43,7 +45,12 @@ public class BoardDetailSer extends HttpServlet {
 		}
 		//조회수 올려!
 
-		request.setAttribute("data", BoardDAO.selBoard(i_board));
+		BoardVO param = new BoardVO();
+		param.setI_user(loginUser.getI_user());
+		param.setI_board(i_board);
+		BoardDomain bd =  BoardDAO.selBoard(param);
+		System.out.println(bd.getNm());
+		request.setAttribute("data",bd);
 		ViewResolver.forward("board/detail", request, response);
 			
 	}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #all {
+        background-color:#9AECDB;
+    }
+    #container {
+        width: 700px; background: #ffb8b8; height: 700px;
+        margin: 0 auto;
+    }
+
+    #container h1 {
+        padding-top: 50px;
+        color: #feeff4;
+    }
+
+    .inp {
+        margin: 0 auto;
+        margin-top : 30px;
+        text-align: center;
+        line-height: 60px;
+        width: 500px;
+        height: 60px;
+        background: #ffcccc;
+    }
+
+    .ipt_themes {
+        padding: 5px 0px 5px 10px;
+        background: #ffcccc;
+        width: 450px;
+        border: 0px;
+        border-bottom: 2px solid black;
+        height: 20px;
+        font-size: larger;
+    }
+    
+</style>
+<body>
+    <div>
+		<div id="container">
+			<h1 style="text-align: center;">회원가입</h1>
+			<form id="frm" action="join" method="post" onsubmit="return chk()">
+				<div class="inp"><label><input class="ipt_themes" type="text" name="user_id" placeholder="아이디" required ><div id="input"></div></label></div>
+				<div class="inp"><label><input class="ipt_themes" type="password" name="user_pw" placeholder="비밀번호" required><div id="input"></div></label></div>
+				<div class="inp"><label><input class="ipt_themes"type="password" name="user_pwre" placeholder="비밀번호 확인" required><div id="input"></div></label></div>
+				<div class="inp"><input class="ipt_themes" type="text" name="nm" placeholder="이름" required ><div id="input"></div></div>
+				<div class="inp"><input class="ipt_themes" type="email" name="email" placeholder="이메일" ><div></div></div>
+				<div><input type="submit" id="btn" value="회원가입"></div>
+				<h3 class="err"></h3>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

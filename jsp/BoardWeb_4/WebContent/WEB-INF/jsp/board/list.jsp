@@ -6,6 +6,7 @@
 <%@ page import="com.koreait.pjt.db.BoardDAO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
+	
 	List<BoardVO> list = (List) request.getAttribute("data");
 %>
 <!DOCTYPE html>

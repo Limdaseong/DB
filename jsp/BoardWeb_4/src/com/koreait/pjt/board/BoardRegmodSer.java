@@ -25,10 +25,12 @@ public class BoardRegmodSer extends HttpServlet {
 			return;
 		}
 		String strI_board = request.getParameter("i_board");
+		
+		BoardVO param = new BoardVO();
 		if(strI_board != null) {
 			int i_board = MyUtils.parseStrToInt(request.getParameter("i_board")); 
 			//i_board값은 null값이 넘어온다
-			request.setAttribute("data", BoardDAO.selBoard(i_board));
+			request.setAttribute("data", BoardDAO.selBoard(param));
 		}
 		
 

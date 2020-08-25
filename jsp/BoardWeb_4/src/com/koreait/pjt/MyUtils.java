@@ -13,7 +13,7 @@ public class MyUtils {
 	public static int parseStrToInt(String str) {
 		return parseStrToInt(str, 0);
 	}
-
+		// 이름이 같은 메소드들을 오버로딩이라고 한다
 	public static int parseStrToInt(String str, int defNo) {
 		try {
 			return Integer.parseInt(str);
@@ -21,6 +21,11 @@ public class MyUtils {
 			return defNo;
 		}
 	}
+	
+	// 오버라이딩은 부모Class에서 정의한 메서드를 자식 Class에서 변경하는 것
+
+	
+	
 	
 	// 로그인 확인 용도 / return true: 로그인이 안됨!, false: 로그인 된 상태
 	public static boolean isLogout(HttpServletRequest request) throws IOException {
@@ -34,7 +39,6 @@ public class MyUtils {
 	public static UserVO getLoginUser(HttpServletRequest request) {
 		HttpSession hs = request.getSession();
 		return (UserVO)hs.getAttribute(Const.LOGIN_USER);
-		
 	}
 	
 	
