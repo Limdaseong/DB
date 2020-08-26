@@ -125,7 +125,7 @@ public class BoardDAO {
 	
 	public static List<BoardVO> selBoardList() {
 		
-		List<BoardVO> list = new ArrayList();
+		List<BoardVO> list = new ArrayList<BoardVO>();
 		// 레퍼런스 변수에 final을 붙이면 주소값을 못 바꾼다(객체를 못 바꾼다 / 객체에 추가나 삭제는 할 수 있음)
 		
 		String sql = " SELECT i_board, title, hits, i_user, r_dt "

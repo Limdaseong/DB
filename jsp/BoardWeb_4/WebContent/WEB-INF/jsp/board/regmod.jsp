@@ -13,12 +13,14 @@
 </head>
 <body>
 	<div>
+		<div class="container">
 		<form id="frm" action="regmod" method="post">
-			<input type="hidden" name="i_board" value="${data.i_board }">
-			<div>제목: <input type="text" name="title" required value="${data.title }"></div>
-			<div>내용: <textarea name="ctnt" required>${data.ctnt }</textarea></div>
-			<div><input type="submit" value="${data == null ? '등록' : '수정' }"></div>
+			<div><input type="hidden" name="i_board" value="${data.i_board }"></div>
+			<div><input id="title" type="text" name="title" placeholder="제목을 입력하세요" value="${data.title }"></div>
+			<div><textarea name="ctnt" placeholder="내용을 입력하세요">${data.ctnt }</textarea></div>
+			<div><button type="submit">${data.i_board == null ? '글등록' : '글수정'}</button></div>
 		</form>
+	</div>
 	</div>
 	<h3>${msg }</h3>
 	<script>

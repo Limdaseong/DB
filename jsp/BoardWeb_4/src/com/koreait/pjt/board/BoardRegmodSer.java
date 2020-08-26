@@ -28,7 +28,7 @@ public class BoardRegmodSer extends HttpServlet {
 		
 		BoardVO param = new BoardVO();
 		if(strI_board != null) {
-			int i_board = MyUtils.parseStrToInt(request.getParameter("i_board")); 
+			MyUtils.parseStrToInt(request.getParameter("i_board")); 
 			//i_board값은 null값이 넘어온다
 			request.setAttribute("data", BoardDAO.selBoard(param));
 		}
@@ -56,7 +56,7 @@ public class BoardRegmodSer extends HttpServlet {
 		if("".equals(strI_board)) {
 			
 			//String strI_user = request.getParameter("i_user");
-			// 한번씩  syso로 null값인지 체크를 꼭 하자		
+			// 한번씩  print문으로 null값인지 체크를 꼭 하자		
 			
 			BoardDAO.insBoard(param);
 			
@@ -75,6 +75,6 @@ public class BoardRegmodSer extends HttpServlet {
 		System.out.println(request.getParameter("i_board"));
 		
 		
-	}  // 처리 용도(db에 등록/수정) 실시라고!!!
+	}  // 처리 용도(DB에 등록/수정) 실시라고!!!
 
 }

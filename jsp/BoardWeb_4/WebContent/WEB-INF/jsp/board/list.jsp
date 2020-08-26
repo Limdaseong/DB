@@ -53,7 +53,7 @@
 		<div>${data != "" ?  "등록글없음 ㅇㅇㅇㅇ" : "dd" }</div>
 		-->
 
-
+		<img src="Image\gunchim.jpg">
 
 		<c:choose>
 			<c:when test="${empty data }">

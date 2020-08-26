@@ -17,17 +17,15 @@ import com.koreait.pjt.vo.UserVO;
 public class BoardDeleteSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		if(MyUtils.isLogout(request)) {
-//			response.sendRedirect("/login");
-//			return;
-//		} //로그인 확인
-//	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(MyUtils.isLogout(request)) {
+			response.sendRedirect("/login");
+			return;
+		} //로그인 확인
+	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String strI_board = request.getParameter("i_board");
-		int i_board = MyUtils.parseStrToInt(strI_board);
 		
 		UserVO loginUser = MyUtils.getLoginUser(request);
 		
@@ -37,10 +35,9 @@ public class BoardDeleteSer extends HttpServlet {
 		}
 		
 		BoardVO param = new BoardVO();
-		param.setI_board(i_board);
 		param.setI_user(loginUser.getI_user());
 		
-		int result = BoardDAO.delBoard(param);
+		BoardDAO.delBoard(param);
 		response.sendRedirect("/list");
 		
 		

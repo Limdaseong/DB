@@ -15,15 +15,20 @@ rel="stylesheet">
 	.pointerCursor {
 		cursor: pointer;
 	}
+	.marginTop30 {
+		margin-top:30;
+	}
 </style>
 <body>
 	<div>
 		<a href="/list">리스트</a>
 		<c:if test="${loginUser.i_user == data.i_user }">
+			<button type="submit">
 			<a href="/regmod?i_board=${data.i_board }">수정</a>
+			</button>
 			<form id="delFrm" action="/board/del" method="post">
 				<input type="hidden" name="i_board" value="${data.i_board }">
-				<a href="#" onclick="submitDel()">삭제</a>
+				<button type="submit"><a href="#" onclick="submitDel()">삭제</a></button>
 			</form>		
 		</c:if>
 	</div>
@@ -44,6 +49,48 @@ rel="stylesheet">
 	<hr>
 	<div> ${data.ctnt }</div>
 	
+	<div class="marginTop30">
+		<form id="cmtFrm" action="/board/cmt" method="post">
+			<input type="hidden" name="i_cmt" value="0">
+			<input type="hidden" name="i_board" value="${data.i_board }">
+			<div>
+				<input type="text" name="cmt" placeholder="댓글내용">
+				<input type="submit" value="전송">
+			</div>
+		</form>
+	</div>
+	
+	<div class="marginTop30">
+		<table>
+			<tr>
+				<th>내용</th>
+				<th>글쓴이</th>
+				<th>등록일</th>
+				<th>비고</th>
+			</tr>
+			<c:forEach items="${cmtList}" var="item">
+				<tr>
+					<td>${item.cmt }</td>
+					<td>${item.nm}</td>
+					<td>${item.r_dt }</td>
+					<td>
+						<c:if test="${loginUser.i_user == item.i_user }">
+							<!-- <a href="/regmod?i_board=${data.i_board }">수정</a>
+							<form id="delFrm" action="/board/del" method="post">
+								<input type="hidden" name="i_board" value="${data.i_board }">
+								<a href="#" onclick="submitDel()">삭제</a>
+							</form> -->
+							<form id="regfrm" action="/board/cmt" method="post">
+								<button onclick>수정</button>
+							</form>
+							<button onclick="delcmt(${item.i_cmt})">삭제</button>
+						</c:if>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+	
 	<script>
 		function submitDel() {
 			if(confirm('삭제?')){
@@ -53,6 +100,10 @@ rel="stylesheet">
 		
 		function toggleLike(yn_like) {
 			location.href="/board/toggleLike?i_board=${data.i_board}&yn_like="+ yn_like  // 쿼리스트링에서 =을 기준으로 왼쪽은 키값이고 오른쪽은 value값이다
+		}
+		
+		function delcmt(i_cmt) {
+			location.href="/board/cmt?i_board=${data.i_board}&i_cmt=" + i_cmt
 		}
 	</script>
 	
