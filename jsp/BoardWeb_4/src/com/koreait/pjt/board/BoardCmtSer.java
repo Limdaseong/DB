@@ -51,9 +51,11 @@ public class BoardCmtSer extends HttpServlet {
 		String strI_board = request.getParameter("i_board");
 		String cmt = request.getParameter("cmt");
 		
+		
 		UserVO loginUser = MyUtils.getLoginUser(request);
 		
 		int i_board = MyUtils.parseStrToInt(strI_board);
+		int i_cmt = MyUtils.parseStrToInt(strI_cmt);
 		
 		BoardCmtVO param = new BoardCmtVO();
 		
@@ -61,12 +63,14 @@ public class BoardCmtSer extends HttpServlet {
 		param.setCmt(cmt);
 		
 		switch(strI_cmt) {
+		
 		case "0": //등록
 			param.setI_board(i_board); // 등록때는 필요없다
 			BoardCmtDAO.insCmt(param);
 			break;
 		default: //수정
-			
+			param.setI_cmt(i_cmt);
+			BoardCmtDAO.updCmt(param);
 			break;
 		}
 		

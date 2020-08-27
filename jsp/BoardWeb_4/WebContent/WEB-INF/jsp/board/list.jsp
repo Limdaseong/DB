@@ -26,6 +26,19 @@
 .whenTd {
 	color: red;
 }
+
+#page {
+	text-decoration:none;
+	color:blue;
+}
+#pageSelected {
+	text-decoration:none;
+	color:red;
+}
+#page:hover {
+	color:green;
+}
+
 </style>
 </head>
 <body>
@@ -35,6 +48,27 @@
 	</div>
 	<div>
 		<a href="regmod">글쓰기</a>
+	</div>
+	
+	<div>
+		${param.page == null ? 1 : param.page}
+		<form action="/list" id="selFrm" method="get">
+		<input type="hidden" name="page" 
+		value="${param.page == null ? 1 : param.page }">
+			레코드 수 : 
+			<select name="record_cnt" onchange="changeRecordCnt()">
+				<c:forEach begin="10" end="30" step="10" var="item">
+					<c:choose>
+						<c:when test="${param.record_cnt == item || (param.record_cnt == null && item == 10)}">
+							<option value="${item}" selected>${item}개</option>
+						</c:when>
+						<c:otherwise>
+							<option value="${item}">${item}개</option>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</select>
+		</form>
 	</div>
 	<!-- 앞에 /를 안붙이면 마지막에 있는 주소로 들어감 첨부터 주소를 고치고 싶다면 /를 붙여야함 -->
 	<h1>게시판 리스트</h1>
@@ -52,8 +86,6 @@
 		 존재는 하지만 그 존재의미가 없다 null 대신 "" 이걸로 Test 
 		<div>${data != "" ?  "등록글없음 ㅇㅇㅇㅇ" : "dd" }</div>
 		-->
-
-		<img src="Image\gunchim.jpg">
 
 		<c:choose>
 			<c:when test="${empty data }">
@@ -74,13 +106,28 @@
 			</c:otherwise>
 		</c:choose>
 
-
-
 	</table>
-
+	<div class="fontCenter">
+	<c:forEach var="item" begin="1" end="${pagingCnt}" >
+			<%-- <span><a href="/list?page=${item}" id="page">${item}</a></span>--%>
+			<%-- <button onclick="moveToList(${item})">${item }</button> --%>
+			<c:choose>
+					<c:when test="${param.page == item}">
+						<a href="/list?page=${item}" id="pageSelected">${item}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="/list?page=${item}" id="page">${item}</a>
+					</c:otherwise>
+				</c:choose>
+	</c:forEach>
+	</div>
 	<script>
 		function moveToDetail(i_board) {
 			location.href = '/board/detail?i_board='+i_board //?뒤에부터는 쿼리스트링이라고 한다
+		}
+		
+		function changeRecordCnt() {
+			selFrm.submit()
 		}
 	</script>
 </body>

@@ -28,7 +28,7 @@ rel="stylesheet">
 			</button>
 			<form id="delFrm" action="/board/del" method="post">
 				<input type="hidden" name="i_board" value="${data.i_board }">
-				<button type="submit"><a href="#" onclick="submitDel()">삭제</a></button>
+				<a href="#" onclick="submitDel()">삭제</a>
 			</form>		
 		</c:if>
 	</div>
@@ -55,7 +55,8 @@ rel="stylesheet">
 			<input type="hidden" name="i_board" value="${data.i_board }">
 			<div>
 				<input type="text" name="cmt" placeholder="댓글내용">
-				<input type="submit" value="전송">
+				<input type="submit" id="cmtSubmit" value="전송">
+				<input type="button" value="취소" onclick="cmtCancel()">
 			</div>
 		</form>
 	</div>
@@ -75,15 +76,8 @@ rel="stylesheet">
 					<td>${item.r_dt }</td>
 					<td>
 						<c:if test="${loginUser.i_user == item.i_user }">
-							<!-- <a href="/regmod?i_board=${data.i_board }">수정</a>
-							<form id="delFrm" action="/board/del" method="post">
-								<input type="hidden" name="i_board" value="${data.i_board }">
-								<a href="#" onclick="submitDel()">삭제</a>
-							</form> -->
-							<form id="regfrm" action="/board/cmt" method="post">
-								<button onclick>수정</button>
-							</form>
-							<button onclick="delcmt(${item.i_cmt})">삭제</button>
+						<button onclick="delcmt(${item.i_cmt})">삭제</button>
+						<button onclick="modify(${item.i_cmt}, '${item.cmt }')">수정</button>
 						</c:if>
 					</td>
 				</tr>
@@ -92,6 +86,7 @@ rel="stylesheet">
 	</div>
 	
 	<script>
+		
 		function submitDel() {
 			if(confirm('삭제?')){
 				delFrm.submit()
@@ -103,8 +98,25 @@ rel="stylesheet">
 		}
 		
 		function delcmt(i_cmt) {
+			if(confirm('삭제하시겠습니까?')){
 			location.href="/board/cmt?i_board=${data.i_board}&i_cmt=" + i_cmt
+			}
 		}
+		
+		function modify(i_cmt, cmt) {
+			console.log("i_cmt : " + i_cmt)
+			cmtFrm.i_cmt.value = i_cmt // i_cmt가 들어가지고
+			cmtFrm.cmt.value = cmt // cmt가 들어가지고
+			cmtFrm.cmtSubmit.value = '수정'
+		}
+		
+		function cmtCancel() {
+			cmtFrm.i_cmt.value = 0 
+		//	폼id.inputNAME.값 = 값
+			cmtFrm.cmt.value = ''
+			cmtFrm.cmtSubmit.value ='전송'
+		}
+		
 	</script>
 	
 			

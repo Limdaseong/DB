@@ -50,6 +50,28 @@ public class BoardDAO {
 		});
 	}
 	
+	// 페이징 숫자 가져오기
+	public static int selPagingCnt(BoardDomain param) {
+		String sql = " SELECT CEIL(COUNT(i_board) / ?) FROM t_board4 ";
+		System.out.println("확인1"+param.getRecord_cnt());
+		return JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.getRecord_cnt());				
+				System.out.println("확인2"+param.getRecord_cnt());
+			}
+			
+			@Override
+			public int executeQuery(ResultSet rs) throws SQLException {
+				if(rs.next()) {
+					return rs.getInt(1); // 스칼라 값 : 한 개의 행과 한 개의 열만 가지고 있는 값
+				}
+				return 0;
+			}
+		});
+	}
+	
 	public static int udtBoard(final BoardVO param) {
 		String sql = " UPDATE t_board4 SET m_dt = sysdate, title = ?, ctnt = ? "
 						+ " WHERE i_board = ? AND i_user = ?";
@@ -123,18 +145,27 @@ public class BoardDAO {
 		return result;
 	}
 	
-	public static List<BoardVO> selBoardList() {
+	public static List<BoardVO> selBoardList(BoardDomain param) {
 		
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		// 레퍼런스 변수에 final을 붙이면 주소값을 못 바꾼다(객체를 못 바꾼다 / 객체에 추가나 삭제는 할 수 있음)
 		
-		String sql = " SELECT i_board, title, hits, i_user, r_dt "
-				+ " FROM t_board4 ORDER BY i_board DESC ";
+		String sql = " SELECT A.* FROM "
+						+ " (SELECT ROWNUM as RNUM, A.* "
+						 + " FROM (SELECT  A.i_board, A.title, A.hits, A.i_user, A.r_dt, B.nm "
+								   + " FROM t_board4 A "
+								   + " INNER JOIN t_user B ON A.i_user = B.i_user "
+							       + " ORDER BY i_board DESC) A "
+						 + " WHERE ROWNUM <= ?) A " // eIdx
+					+ " WHERE A.RNUM > ? "; // sIdx
 		
 		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
 
 			@Override
-			public void prepared(PreparedStatement ps) throws SQLException {}
+			public void prepared(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.geteIdx());
+				ps.setInt(2, param.getsIdx());
+			}
 
 			@Override
 			public int executeQuery(ResultSet rs) throws SQLException {
@@ -145,6 +176,7 @@ public class BoardDAO {
 					int hits = rs.getInt("hits");
 					int i_user = rs.getInt("i_user");
 					String r_dt = rs.getNString("r_dt");
+					String nm = rs.getNString("nm");
 					
 					BoardVO vo = new BoardVO();
 					vo.setI_board(i_board);
@@ -152,6 +184,7 @@ public class BoardDAO {
 					vo.setHits(hits);
 					vo.setI_user(i_user);
 					vo.setR_dt(r_dt);
+					vo.setNm(nm);
 					
 					list.add(vo);
 				}

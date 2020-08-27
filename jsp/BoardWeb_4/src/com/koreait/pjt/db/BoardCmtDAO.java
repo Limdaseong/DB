@@ -60,7 +60,20 @@ public class BoardCmtDAO {
 		return list;
 	}
 	
-	public static int updCmt() {
+	public static int updCmt(final BoardCmtVO param) {
+		String sql = " UPDATE t_board4_cmt SET cmt = ?, m_dt = sysdate "
+				+ " WHERE i_cmt = ? AND i_user = ? "; // 내용, 시간
+		
+		JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setNString(1, param.getCmt());
+				ps.setInt(2, param.getI_cmt());
+				ps.setInt(3, param.getI_user());
+			}
+		});
+							
 		return 0;
 	}
 	
