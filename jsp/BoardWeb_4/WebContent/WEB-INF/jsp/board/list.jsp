@@ -44,22 +44,25 @@
 <body>
 	<div>
 		${loginUser.nm }님환영합니다!
+		<a href="/profile">프로필</a>
 		<a href="/logout">로그아웃</a>
 	</div>
 	<div>
 		<a href="regmod">글쓰기</a>
 	</div>
 	
+	
+	<%-- 상단 콤보박스(레코드 수 : ) --%>
 	<div>
-		${param.page == null ? 1 : param.page}
 		<form action="/list" id="selFrm" method="get">
-		<input type="hidden" name="page" 
-		value="${param.page == null ? 1 : param.page }">
+		<input type="hidden" name="page" value="${page}">
+		<input type="hidden" name="searchText" value="${param.searchText}">
 			레코드 수 : 
 			<select name="record_cnt" onchange="changeRecordCnt()">
 				<c:forEach begin="10" end="30" step="10" var="item">
 					<c:choose>
-						<c:when test="${param.record_cnt == item || (param.record_cnt == null && item == 10)}">
+						<c:when
+						test="${param.record_cnt == item}">
 							<option value="${item}" selected>${item}개</option>
 						</c:when>
 						<c:otherwise>
@@ -87,6 +90,8 @@
 		<div>${data != "" ?  "등록글없음 ㅇㅇㅇㅇ" : "dd" }</div>
 		-->
 
+
+		<%-- 게시글 나타내는 곳 --%>
 		<c:choose>
 			<c:when test="${empty data }">
 				<tr>
@@ -107,23 +112,35 @@
 		</c:choose>
 
 	</table>
+	
+	<%-- 페이지수 나타내는 곳 --%>
 	<div class="fontCenter">
 	<c:forEach var="item" begin="1" end="${pagingCnt}" >
 			<%-- <span><a href="/list?page=${item}" id="page">${item}</a></span>--%>
 			<%-- <button onclick="moveToList(${item})">${item }</button> --%>
 			<c:choose>
-					<c:when test="${param.page == item}">
-						<a href="/list?page=${item}" id="pageSelected">${item}</a>
+					<c:when test="${page == item}">
+						<a href="/list?page=${item}&item=" id="pageSelected">${item}</a>
 					</c:when>
 					<c:otherwise>
-						<a href="/list?page=${item}" id="page">${item}</a>
+						<a href="/list?page=${item}&record_cnt=${param.record_cnt}&searchText=${param.searchText}" id="page">${item}</a>
 					</c:otherwise>
 				</c:choose>
 	</c:forEach>
+	
+	<%-- 검색 --%>
+	<div>
+		<form action="/list">
+			<input type="search" name="searchText" value="${param.searchText }">
+			<input type="hidden" name="record_cnt" value="${param.record_cnt}">
+			<input type="submit" value="검색">
+		</form>
+	</div>
 	</div>
 	<script>
 		function moveToDetail(i_board) {
-			location.href = '/board/detail?i_board='+i_board //?뒤에부터는 쿼리스트링이라고 한다
+			location.href = '/board/detail?page=${page}&record_cnt=${param.record_cnt}&i_board=' + i_board 
+					//?뒤에부터는 쿼리스트링이라고 한다
 		}
 		
 		function changeRecordCnt() {

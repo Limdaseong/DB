@@ -13,8 +13,8 @@
 	<div class="container">
 	<h1>로그인</h1>
 	<form action="/login" method="post" id="frm" onsubmit="return chk()">
-		<div>
-			<div><input type="text" name="user_id" placeholder="아이디" required value="${user_id}"></div>
+		<div> <%-- 다시 바꿔주기 --%>
+			<div><input type="text" name="user_id" placeholder="아이디" required value="ddddd" <%-- ${user_id} --%>></div>
 			<div><input type="password" name="user_pw" placeholder="비밀번호" required></div>
 			<div><input type="submit" value="로그인"></div>
 			<h3 class="err">${msg}</h3>

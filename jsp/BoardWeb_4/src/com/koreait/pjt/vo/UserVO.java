@@ -6,7 +6,7 @@ public class UserVO {
 	private String user_pw;
 	private String nm;
 	private String email;
-	private String profile;
+	private String profile_img;
 	private String r_dt;
 	private String m_dt;
 	
@@ -40,11 +40,12 @@ public class UserVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getProfile() {
-		return profile;
+	
+	public String getProfile_img() {
+		return profile_img;
 	}
-	public void setProfile(String profile) {
-		this.profile = profile;
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
 	}
 	public String getR_dt() {
 		return r_dt;

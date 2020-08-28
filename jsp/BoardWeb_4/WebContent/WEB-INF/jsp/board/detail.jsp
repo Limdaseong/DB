@@ -21,7 +21,7 @@ rel="stylesheet">
 </style>
 <body>
 	<div>
-		<a href="/list">리스트</a>
+		<a href="/list?page=${param.page}&record_cnt=${param.record_cnt}&searchText=${param.searchText}">리스트</a>
 		<c:if test="${loginUser.i_user == data.i_user }">
 			<button type="submit">
 			<a href="/regmod?i_board=${data.i_board }">수정</a>
