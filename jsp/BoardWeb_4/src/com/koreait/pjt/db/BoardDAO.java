@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.koreait.pjt.vo.BoardDomain;
 import com.koreait.pjt.vo.BoardVO;
+import com.koreait.pjt.vo.UserVO;
 
 
 public class BoardDAO {
@@ -214,4 +215,5 @@ public class BoardDAO {
 			}
 		});
 	}
-}
+	
+ }
