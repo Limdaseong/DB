@@ -53,7 +53,7 @@ public class BoardRegmodSer extends HttpServlet {
 		BoardVO param = new BoardVO();
 		
 		param.setTitle(title);
-		param.setCtnt(filter2);
+		param.setCtnt(scriptFilter(ctnt));
 		param.setI_user(loginUser.getI_user());
 		
 		if("".equals(strI_board)) {
