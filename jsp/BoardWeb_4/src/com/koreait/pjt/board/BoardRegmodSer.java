@@ -47,10 +47,13 @@ public class BoardRegmodSer extends HttpServlet {
 		HttpSession hs = request.getSession();
 		UserVO loginUser = (UserVO) hs.getAttribute(Const.LOGIN_USER);
 		
+		String filter1 = scriptFilter(ctnt);
+		String filter2 = swearWordFilter(filter1);
+		
 		BoardVO param = new BoardVO();
 		
 		param.setTitle(title);
-		param.setCtnt(ctnt);
+		param.setCtnt(filter2);
 		param.setI_user(loginUser.getI_user());
 		
 		if("".equals(strI_board)) {
@@ -76,5 +79,27 @@ public class BoardRegmodSer extends HttpServlet {
 		
 		
 	}  // 처리 용도(DB에 등록/수정) 실시라고!!!
+	
+	//욕 필터
+		private String swearWordFilter(final String ctnt) {
+			String[] filters = {"개새끼", "미친년", "ㄱ ㅐ ㅅ ㅐ ㄲ ㅣ"};
+			String result = ctnt;
+			for(int i=0; i<filters.length; i++) {
+				result = result.replace(filters[i], "***");
+			}
+			return result;
+		}
 
+		//스크립트 필터
+		private String scriptFilter(final String ctnt) {
+			String[] filters = {"<", ">"};
+			String[] filterReplaces = {"&lt;", "&gt;"};
+
+			String result = ctnt;
+			for(int i=0; i<filters.length; i++) {
+				result = result.replace(filters[i], filterReplaces[i]);
+			}
+			return result;
+		}
+	
 }

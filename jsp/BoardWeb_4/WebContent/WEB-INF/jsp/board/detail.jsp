@@ -18,22 +18,92 @@ rel="stylesheet">
 	.marginTop30 {
 		margin-top:30;
 	}
+	.containerPImg {
+		display: inline-block;	
+		width: 30px;
+		height: 30px;
+	    border-radius: 50%;
+	    overflow: hidden;
+	}
+	
+	.pImg {
+	
+		 object-fit: cover;
+		  max-width:100%;
+	}
+	table {
+	border: 1px solid black;
+	}
+	td, th {
+	border: 1px solid black;
+	}
 </style>
 <body>
 	<div>
 		<a href="/list?page=${param.page}&record_cnt=${param.record_cnt}&searchText=${param.searchText}">리스트</a>
 		<c:if test="${loginUser.i_user == data.i_user }">
-			<button type="submit">
 			<a href="/regmod?i_board=${data.i_board }">수정</a>
-			</button>
 			<form id="delFrm" action="/board/del" method="post">
 				<input type="hidden" name="i_board" value="${data.i_board }">
 				<a href="#" onclick="submitDel()">삭제</a>
 			</form>		
 		</c:if>
 	</div>
-	<div>제목: ${data.title }</div>
+	
+	<table>
+		<tr>
+			<td>제목</td>		<td>${data.title }</td>
+			<td>작성일</td>	<td>${data.r_dt }</td>
+			<td>작성자</td>
+			<td colspan="2">
+			${data.nm }
+			<div class="containerPImg">
+			<c:choose>
+				<c:when test="${item.profile_img != null}">
+					<img class="pImg" src="/img/user/${item.i_user}/${item.profile_img}">
+				</c:when>
+				<c:otherwise>
+					<img class="pImg" src="/img/default_profile.jpg">
+				</c:otherwise>
+			</c:choose>
+			</div>
+			</td>
+			<td>조회수</td>	<td>${data.hits }</td>
+			<td>
+				<div class="pointerCursor">
+					<c:if test="${data.yn_like == 0 }">
+						<span class="material-icons" onclick="toggleLike(${data.yn_like})">favorite_border</span>
+					</c:if>
+					<c:if test="${data.yn_like == 1 }">
+						<span class="material-icons" style="color: red;"
+							onclick="toggleLike(${data.yn_like})">favorite</span>
+					</c:if>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="10">${data.ctnt }</td>
+		</tr>
+	</table>
+	
+	
+	
+	
+	
+	<%-- <div>제목: ${data.title }</div>
 	<div>작성일시: ${data.r_dt }</div>
+	<div>
+		<div class="containerPImg">
+			<c:choose>
+				<c:when test="${item.profile_img != null}">
+					<img class="pImg" src="/img/user/${item.i_user}/${item.profile_img}">
+				</c:when>
+				<c:otherwise>
+					<img class="pImg" src="/img/default_profile.jpg">
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
 	<div>작성자: ${data.nm }</div>
 	<div>조회수: ${data.hits }</div>
 	<div class="pointerCursor">
@@ -47,7 +117,7 @@ rel="stylesheet">
 	</c:if>
 	</div>
 	<hr>
-	<div> ${data.ctnt }</div>
+	<div> ${data.ctnt }</div> --%>
 	
 	<div class="marginTop30">
 		<form id="cmtFrm" action="/board/cmt" method="post">
@@ -65,6 +135,7 @@ rel="stylesheet">
 		<table>
 			<tr>
 				<th>내용</th>
+				<th> </th>
 				<th>글쓴이</th>
 				<th>등록일</th>
 				<th>비고</th>
@@ -72,6 +143,18 @@ rel="stylesheet">
 			<c:forEach items="${cmtList}" var="item">
 				<tr>
 					<td>${item.cmt }</td>
+					<td>
+						<div class="containerPImg">
+								<c:choose>
+									<c:when test="${item.profile_img != null}">
+										<img class="pImg" src="/img/user/${item.i_user}/${item.profile_img}">
+									</c:when>
+									<c:otherwise>
+										<img class="pImg" src="/img/default_profile.jpg">
+									</c:otherwise>
+								</c:choose>
+							</div>
+					</td>
 					<td>${item.nm}</td>
 					<td>${item.r_dt }</td>
 					<td>

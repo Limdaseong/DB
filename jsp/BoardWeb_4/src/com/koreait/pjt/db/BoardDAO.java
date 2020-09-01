@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.koreait.pjt.vo.BoardDomain;
 import com.koreait.pjt.vo.BoardVO;
-import com.koreait.pjt.vo.UserVO;
 
 
 public class BoardDAO {
@@ -152,23 +151,46 @@ public class BoardDAO {
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		// 레퍼런스 변수에 final을 붙이면 주소값을 못 바꾼다(객체를 못 바꾼다 / 객체에 추가나 삭제는 할 수 있음)
 		
+		/*
+		 * String sql = " SELECT A.* FROM " + " (SELECT ROWNUM as RNUM, A.* " +
+		 * " FROM (SELECT  A.i_board, A.title, A.hits, A.i_user, A.r_dt, B.nm, B.profile_img "
+		 * + " FROM t_board4 A " + " INNER JOIN t_user B ON A.i_user = B.i_user " +
+		 * "	WHERE A.title LIKE ? " + " ORDER BY i_board DESC) A " +
+		 * " WHERE ROWNUM <= ?) A " // eIdx + " WHERE A.RNUM > ? "; // sIdx
+		 */		
+		
 		String sql = " SELECT A.* FROM "
-						+ " (SELECT ROWNUM as RNUM, A.* "
-						 + " FROM (SELECT  A.i_board, A.title, A.hits, A.i_user, A.r_dt, B.nm "
-								   + " FROM t_board4 A "
-								   + " INNER JOIN t_user B ON A.i_user = B.i_user "
-								   + "	WHERE A.title LIKE ? "
-							       + " ORDER BY i_board DESC) A "
-						 + " WHERE ROWNUM <= ?) A " // eIdx
-				      + " WHERE A.RNUM > ? "; // sIdx
+				+ " (SELECT ROWNUM as RNUM, A.* "
+				 + " FROM (SELECT  A.i_board, A.title, A.hits, A.i_user, A.r_dt, nvl(C.cnt, 0) as like_cnt, "
+				 + " nvl(D.cnt, 0) as cmt_cnt, B.nm, B.profile_img, DECODE(E.i_board, null, 0, 1) as yn_like "
+						   + " FROM t_board4 A "
+						   + " LEFT JOIN ( " 
+						   		+ " SELECT i_board, count(i_board) as cnt "
+						   		+ " FROM t_board4_like GROUP BY i_board " 
+						   + " ) C "
+						   + " ON A.i_board = C.i_board "
+						   + " LEFT JOIN ( "
+						   + " SELECT i_board, count(i_cmt) as cnt FROM t_board4_cmt GROUP BY i_board "
+						   + " ) D "
+						   + " ON A.i_board = D.i_board "
+						   + " LEFT JOIN ( "
+						   + " SELECT i_board FROM t_board4_like WHERE i_user = ? "
+						   + " ) E "
+						   + " ON A.i_board = E.i_board "
+						   + " INNER JOIN t_user B ON A.i_user = B.i_user "
+						   + "	WHERE A.title LIKE ? "
+					       + " ORDER BY i_board DESC) A "
+				 + " WHERE ROWNUM <= ?) A " // eIdx
+		      + " WHERE A.RNUM > ? "; // sIdx
 		
 		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
 
 			@Override
 			public void prepared(PreparedStatement ps) throws SQLException {
-				ps.setNString(1, param.getSearchText());
-				ps.setInt(2, param.geteIdx());
-				ps.setInt(3, param.getsIdx());
+				ps.setInt(1, param.getI_user());
+				ps.setNString(2, param.getSearchText());
+				ps.setInt(3, param.geteIdx());
+				ps.setInt(4, param.getsIdx());
 			}
 
 			@Override
@@ -181,14 +203,23 @@ public class BoardDAO {
 					int i_user = rs.getInt("i_user");
 					String r_dt = rs.getNString("r_dt");
 					String nm = rs.getNString("nm");
+					String profile_img = rs.getNString("profile_img");
+					int like_cnt = rs.getInt("like_cnt");
+					int cmt_cnt = rs.getInt("cmt_cnt");
+					int yn_like = rs.getInt("yn_like");
 					
-					BoardVO vo = new BoardVO();
+					BoardDomain vo = new BoardDomain();
 					vo.setI_board(i_board);
 					vo.setTitle(title);
 					vo.setHits(hits);
 					vo.setI_user(i_user);
 					vo.setR_dt(r_dt);
 					vo.setNm(nm);
+					vo.setProfile_img(profile_img);
+					vo.setLike_cnt(like_cnt);
+					vo.setCmt_cnt(cmt_cnt);
+					vo.setYn_like(yn_like);
+					
 					
 					list.add(vo);
 				}

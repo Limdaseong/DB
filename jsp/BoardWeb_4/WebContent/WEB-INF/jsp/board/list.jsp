@@ -9,11 +9,14 @@
 	
 	List<BoardVO> list = (List) request.getAttribute("data");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>리스트</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+rel="stylesheet">
 <style>
 * {
 	font-family: 'Noto Sans KR', sans-serif;
@@ -38,6 +41,20 @@
 #page:hover {
 	color:green;
 }
+.containerPImg {
+		display: inline-block;	
+		width: 30px;
+		height: 30px;
+	    border-radius: 50%;
+	    overflow: hidden;
+}
+	
+.pImg {
+	
+		 object-fit: cover;
+		  max-width:100%;
+}
+
 
 </style>
 </head>
@@ -81,8 +98,11 @@
 			<th>No</th>
 			<th>제목</th>
 			<th>조회수</th>
+			<th>좋아요</th>
+			<td> </td> 
 			<th>작성자</th>
 			<th>등록일시</th>
+			<th> </th>
 		</tr>
 
 		<!--
@@ -95,17 +115,40 @@
 		<c:choose>
 			<c:when test="${empty data }">
 				<tr>
-					<td colspan="5" style="color: red; align: center;">등록된 글이 없습니다</td>
+					<td colspan="6" style="color: red; align: center;">등록된 글이 없습니다</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${data}" var="item">
 					<tr class="row" onclick="moveToDetail(${item.i_board})">
 						<td>${item.i_board }</td>
-						<td>${item.title }</td>
+						<td>${item.title } [${item.cmt_cnt}]</td>
 						<td>${item.hits }</td>
-						<td>${item.i_user }</td>
+						<td>${item.like_cnt}</td>
+						<td>
+							<div class="containerPImg">
+								<c:choose>
+									<c:when test="${item.profile_img != null}">
+										<img class="pImg" src="/img/user/${item.i_user}/${item.profile_img}">
+									</c:when>
+									<c:otherwise>
+										<img class="pImg" src="/img/default_profile.jpg">
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</td>
+						<td>${item.nm}</td>
 						<td>${item.r_dt }</td>
+						<td>
+							<div class="pointerCursor">
+									<c:if test="${item.yn_like == 0 }">
+										<span class="material-icons")>favorite_border</span>
+									</c:if>
+									<c:if test="${item.yn_like == 1 }">
+										<span class="material-icons" style="color: red;">favorite</span>
+									</c:if>
+							</div>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

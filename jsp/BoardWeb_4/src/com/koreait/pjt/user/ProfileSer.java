@@ -45,7 +45,7 @@ public class ProfileSer extends HttpServlet {
 		
 		int maxFileSize = 10_485_760; // 1024 * 1024 * 10 (10mb) / _는 단위수 보이게 하려고 한 것이다 / 최대 파일 사이즈 크기
 		String fileNm = ""; // 원래 파일명 
-		String originFileNm = "";
+		// String originFileNm = "";
 		String saveFileNm = "";
 		
 		try {
@@ -62,7 +62,7 @@ public class ProfileSer extends HttpServlet {
 				//originFileNm = mr.getOriginalFileName(key);
 				System.out.println("key : " + key);
 				System.out.println("fileNm : " + fileNm);
-				System.out.println("originFileNm : " + originFileNm);
+				// System.out.println("originFileNm : " + originFileNm);
 				
 				System.out.println(ext);
 				// substring(*,@) 은 *번째 글자부터 @번째 글자까지 나오게 할 수 있다
