@@ -54,6 +54,11 @@ rel="stylesheet">
 		 object-fit: cover;
 		  max-width:100%;
 }
+.highlight {
+	background-color: rgb(255, 255, 118);
+	font-weight: bold;
+	color: rgb(211, 47, 47);
+}
 
 
 </style>
@@ -100,9 +105,9 @@ rel="stylesheet">
 			<th>조회수</th>
 			<th>좋아요</th>
 			<td> </td> 
+			<th> </th>
 			<th>작성자</th>
 			<th>등록일시</th>
-			<th> </th>
 		</tr>
 
 		<!--
@@ -122,9 +127,19 @@ rel="stylesheet">
 				<c:forEach items="${data}" var="item">
 					<tr class="row" onclick="moveToDetail(${item.i_board})">
 						<td>${item.i_board }</td>
-						<td>${item.title } [${item.cmt_cnt}]</td>
+						<td>${item.title }		<span style="font-size: small;">[${item.cmt_cnt}]</span></td>
 						<td>${item.hits }</td>
 						<td>${item.like_cnt}</td>
+						<td>
+							<div class="pointerCursor">
+									<c:if test="${item.yn_like == 0 }">
+										<span class="material-icons")>favorite_border</span>
+									</c:if>
+									<c:if test="${item.yn_like == 1 }">
+										<span class="material-icons" style="color: red;">favorite</span>
+									</c:if>
+							</div>
+						</td>
 						<td>
 							<div class="containerPImg">
 								<c:choose>
@@ -139,16 +154,6 @@ rel="stylesheet">
 						</td>
 						<td>${item.nm}</td>
 						<td>${item.r_dt }</td>
-						<td>
-							<div class="pointerCursor">
-									<c:if test="${item.yn_like == 0 }">
-										<span class="material-icons")>favorite_border</span>
-									</c:if>
-									<c:if test="${item.yn_like == 1 }">
-										<span class="material-icons" style="color: red;">favorite</span>
-									</c:if>
-							</div>
-						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
@@ -166,7 +171,7 @@ rel="stylesheet">
 						<a href="/list?page=${item}&item=" id="pageSelected">${item}</a>
 					</c:when>
 					<c:otherwise>
-						<a href="/list?page=${item}&record_cnt=${param.record_cnt}&searchText=${param.searchText}" id="page">${item}</a>
+						<a href="/list?page=${item}&record_cnt=${param.record_cnt}&searchText=${param.searchText}&searchType=${searchType}" id="page">${item}</a>
 					</c:otherwise>
 				</c:choose>
 	</c:forEach>
@@ -174,6 +179,11 @@ rel="stylesheet">
 	<%-- 검색 --%>
 	<div>
 		<form action="/list">
+			<select name="searchType">
+				<option value="a" ${searchType == 'a' ? 'selected' : ' ' }>제목</option>
+				<option value="b" ${searchType == 'b' ? 'selected' : ' ' }>내용</option>
+				<option value="c" ${searchType == 'c' ? 'selected' : ' ' }>제목+내용</option>
+			</select>
 			<input type="search" name="searchText" value="${param.searchText }">
 			<input type="hidden" name="record_cnt" value="${param.record_cnt}">
 			<input type="submit" value="검색">
@@ -182,7 +192,7 @@ rel="stylesheet">
 	</div>
 	<script>
 		function moveToDetail(i_board) {
-			location.href = '/board/detail?page=${page}&record_cnt=${param.record_cnt}&i_board=' + i_board 
+			location.href = '/board/detail?page=${page}&searchText=${param.searchText}&searchType=${searchType}&record_cnt=${param.record_cnt}&i_board=' + i_board 
 					//?뒤에부터는 쿼리스트링이라고 한다
 		}
 		

@@ -52,8 +52,18 @@ public class BoardDAO {
 	
 	// 페이징 숫자 가져오기
 	public static int selPagingCnt(BoardDomain param) {
-		String sql = " SELECT CEIL(COUNT(i_board) / ?) FROM t_board4 "
-							+ " WHERE title LIKE ? ";
+		String sql = " SELECT CEIL(COUNT(i_board) / ?) FROM t_board4 WHERE ";
+		 switch(param.getSearchType()) {
+		   case "a":
+			   sql += " title like ? ";
+			   break;
+		   case "b":
+			   sql += " ctnt like ? ";
+			   break;
+		   case "c":
+			   sql += " (ctnt like ? or title like ?) ";
+			   break;
+		   }
 		
 		return JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
 			
@@ -61,6 +71,9 @@ public class BoardDAO {
 			public void prepared(PreparedStatement ps) throws SQLException {
 				ps.setInt(1, param.getRecord_cnt());				
 				ps.setNString(2, param.getSearchText());
+				if(param.getSearchType().equals("c")) {
+					ps.setNString(3, param.getSearchText());
+				}
 			}
 			
 			@Override
@@ -146,9 +159,9 @@ public class BoardDAO {
 		return result;
 	}
 	
-	public static List<BoardVO> selBoardList(BoardDomain param) {
+	public static List<BoardDomain> selBoardList(BoardDomain param) {
 		
-		List<BoardVO> list = new ArrayList<BoardVO>();
+		List<BoardDomain> list = new ArrayList<BoardDomain>();
 		// 레퍼런스 변수에 final을 붙이면 주소값을 못 바꾼다(객체를 못 바꾼다 / 객체에 추가나 삭제는 할 수 있음)
 		
 		/*
@@ -165,21 +178,34 @@ public class BoardDAO {
 				 + " nvl(D.cnt, 0) as cmt_cnt, B.nm, B.profile_img, DECODE(E.i_board, null, 0, 1) as yn_like "
 						   + " FROM t_board4 A "
 						   + " LEFT JOIN ( " 
-						   		+ " SELECT i_board, count(i_board) as cnt "
-						   		+ " FROM t_board4_like GROUP BY i_board " 
+						   + " 	SELECT i_board, count(i_board) as cnt "
+						   + " 	FROM t_board4_like GROUP BY i_board " 
 						   + " ) C "
 						   + " ON A.i_board = C.i_board "
 						   + " LEFT JOIN ( "
-						   + " SELECT i_board, count(i_cmt) as cnt FROM t_board4_cmt GROUP BY i_board "
+						   + " 	SELECT i_board, count(i_cmt) as cnt "
+						   + "		FROM t_board4_cmt GROUP BY i_board "
 						   + " ) D "
 						   + " ON A.i_board = D.i_board "
 						   + " LEFT JOIN ( "
-						   + " SELECT i_board FROM t_board4_like WHERE i_user = ? "
+						   + " 	SELECT i_board FROM t_board4_like WHERE i_user = ? "
 						   + " ) E "
 						   + " ON A.i_board = E.i_board "
 						   + " INNER JOIN t_user B ON A.i_user = B.i_user "
-						   + "	WHERE A.title LIKE ? "
-					       + " ORDER BY i_board DESC) A "
+						   + "	WHERE  ";
+						   switch(param.getSearchType()) {
+						   case "a":
+							   sql += " A.title like ? ";
+							   break;
+						   case "b":
+							   sql += " A.ctnt like ? ";
+							   break;
+						   case "c":
+							   sql += " (A.ctnt like ? or A.title like ?) ";
+							   break;
+						   }
+						        
+					 sql += " ORDER BY i_board DESC) A "
 				 + " WHERE ROWNUM <= ?) A " // eIdx
 		      + " WHERE A.RNUM > ? "; // sIdx
 		
@@ -187,10 +213,15 @@ public class BoardDAO {
 
 			@Override
 			public void prepared(PreparedStatement ps) throws SQLException {
-				ps.setInt(1, param.getI_user());
-				ps.setNString(2, param.getSearchText());
-				ps.setInt(3, param.geteIdx());
-				ps.setInt(4, param.getsIdx());
+				int seq = 1;
+				ps.setInt(seq, param.getI_user());
+				ps.setNString(++seq, param.getSearchText());
+				if(param.getSearchType().equals("c")) {
+					ps.setNString(++seq, param.getSearchText());
+				}				
+				ps.setInt(++seq, param.geteIdx());
+				ps.setInt(++seq, param.getsIdx());
+				
 			}
 
 			@Override

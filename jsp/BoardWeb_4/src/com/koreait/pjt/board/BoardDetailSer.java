@@ -34,6 +34,7 @@ public class BoardDetailSer extends HttpServlet {
 		
 		String strI_board = request.getParameter("i_board");
 		int i_board = MyUtils.parseStrToInt(strI_board);
+		String searchType = request.getParameter("searchType");
 		
 		ServletContext application = getServletContext();
 		// 부모 서블릿에 상속을 받아서 getServletcontext를 쓸 수 있다
@@ -49,7 +50,6 @@ public class BoardDetailSer extends HttpServlet {
 		param.setI_user(loginUser.getI_user());
 		param.setI_board(i_board);
 		request.setAttribute("data", BoardDAO.selBoard(param));
-		
 		request.setAttribute("cmtList", BoardCmtDAO.selCmtList(i_board));
 		
 		ViewResolver.forward("board/detail", request, response);

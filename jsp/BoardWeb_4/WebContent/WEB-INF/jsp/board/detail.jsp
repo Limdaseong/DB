@@ -40,11 +40,15 @@ rel="stylesheet">
 </style>
 <body>
 	<div>
-		<a href="/list?page=${param.page}&record_cnt=${param.record_cnt}&searchText=${param.searchText}">리스트</a>
+		<a href="/list?page=${param.page}&record_cnt=${param.record_cnt}&searchText=${param.searchText}&searchType=${param.searchType}">목록</a>
 		<c:if test="${loginUser.i_user == data.i_user }">
-			<a href="/regmod?i_board=${data.i_board }">수정</a>
+			<a href="/regmod?i_board=${data.i_board }&record_cnt=${param.record_cnt}&searchText=${param.searchText}&searchType=${param.searchType}">수정</a>
 			<form id="delFrm" action="/board/del" method="post">
 				<input type="hidden" name="i_board" value="${data.i_board }">
+				<input type="hidden" name="page" value="${param.page}">
+				<input type="hidden" name="searchText" value="${param.serachText}">
+				<input type="hidden" name="searchType" value="${param.searchType}">
+				<input type="hidden" name="record_cnt" value="${param.record_cnt}">
 				<a href="#" onclick="submitDel()">삭제</a>
 			</form>		
 		</c:if>
@@ -52,7 +56,7 @@ rel="stylesheet">
 	
 	<table>
 		<tr>
-			<td>제목</td>		<td>${data.title }</td>
+			<td>제목</td>		<td id="elTitle">${data.title }</td>
 			<td>작성일</td>	<td>${data.r_dt }</td>
 			<td>작성자</td>
 			<td colspan="2">
@@ -82,7 +86,7 @@ rel="stylesheet">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="10">${data.ctnt }</td>
+			<td colspan="10" id="elCtnt">${data.ctnt }</td>
 		</tr>
 	</table>
 	
@@ -200,6 +204,39 @@ rel="stylesheet">
 			cmtFrm.cmtSubmit.value ='전송'
 		}
 		
+		function doHighlight() {
+			var searchText = '${param.searchText}'
+			var searchType = '${param.searchType}'
+			
+			if(searchText == '') {
+				return
+			}
+			
+			switch(searchType) {
+			case 'a':
+				var txt = elTitle.innerText
+				txt = txt.replace(new RegExp('${param.searchText}','gi'), '<span class="highlight">' + searchText + '</span>')
+				elTilte.innerHTML = txt
+				console.log('txt : ' + txt)
+				break; 
+			case 'b':
+				var txt = elCtnt.innerText
+				txt = txt.replace(new RegExp('${param.searchText}','gi'), '<span class="highlight">' + searchText + '</span>')
+				elCtnt.innerHTML = txt
+				break;
+			case 'c':
+				var txt = elTitle.innerText
+				txt = txt.replace(new RegExp('${param.searchText}','gi'), '<span class="highlight">' + searchText + '</span>')
+        		elTitle.innerHTML = txt
+        		
+        		txt = elCtnt.innerText
+        		txt = txt.replace(new RegExp('${param.searchText}','gi'), '<span class="highlight">' + searchText + '</span>')
+        		elCtnt.innerHTML = txt
+				break;
+			}
+		}
+		
+		doHighlight()
 	</script>
 	
 			

@@ -16,7 +16,11 @@
 		<div class="container">
 		<form id="frm" action="regmod" method="post">
 			<div><input type="hidden" name="i_board" value="${data.i_board }"></div>
-			<div><input id="title" type="text" name="title" placeholder="제목을 입력하세요" value="${data.title }"></div>
+			<input type="hidden" name="page" value="${param.page}">
+			<input type="hidden" name="searchText" value="${param.serachText}">
+			<input type="hidden" name="searchType" value="${param.searchType}">
+			<input type="hidden" name="record_cnt" value="${param.record_cnt}">
+			<div><input id="title" type="text" name="title" placeholder="제목을 입력하세요" value="${data.title}"></div>
 			<div><textarea name="ctnt" placeholder="내용을 입력하세요">${data.ctnt }</textarea></div>
 			<div><button type="submit">${data.i_board == null ? '글등록' : '글수정'}</button></div>
 		</form>

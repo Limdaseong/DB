@@ -1,6 +1,7 @@
 package com.koreait.pjt.board;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,16 +19,18 @@ import com.koreait.pjt.vo.UserVO;
 public class BoardListSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		if(MyUtils.isLogout(request)) {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		UserVO loginUser = MyUtils.getLoginUser(request);
+		if(loginUser == null) {
 			response.sendRedirect("/login");
 			return;
 		}
 		
+		String searchType = request.getParameter("searchType");
+		searchType = (searchType == null) ? "a" : searchType;
+		
 		String searchText = request.getParameter("searchText");
 		searchText = (searchText == null ? "" : searchText);
-		
-		UserVO loginUser = MyUtils.getLoginUser(request);
 		
 		int page = MyUtils.getIntParameter(request, "page");
 		page = (page == 0 ? 1 : page);
@@ -38,23 +41,35 @@ public class BoardListSer extends HttpServlet {
 		BoardDomain param = new BoardDomain();
 		param.setRecord_cnt(recordCnt);
 		param.setSearchText("%" + searchText + "%");
+		param.setSearchType(searchType);
 		param.setI_user(loginUser.getI_user());
 		int pagingCnt = BoardDAO.selPagingCnt(param);
 				
 		if(page > pagingCnt) {
 			page = pagingCnt;
 		}
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("page", page);
 		
 		int eIdx = page * recordCnt;
 		int sIdx = eIdx - recordCnt;
 
 		param.seteIdx(eIdx);
 		param.setsIdx(sIdx);
-
-		request.setAttribute("page", page);
 		
 		request.setAttribute("pagingCnt", BoardDAO.selPagingCnt(param));
-		request.setAttribute("data", BoardDAO.selBoardList(param));
+		
+		List<BoardDomain> list = BoardDAO.selBoardList(param);
+		//하이라이트 처리
+		if(!"".equals(searchText) && ("a".equals(searchType) || "c".equals(searchType))) {
+			for(BoardDomain item : list) {		
+				String title = item.getTitle();
+				title = title.replace(searchText
+						, "<span class=\"highlight\">" + searchText +"</span>");
+				item.setTitle(title);
+			}
+		}
+		request.setAttribute("data", list);
 		
 		ViewResolver.forward("board/list", request, response);
 	}
