@@ -10,7 +10,14 @@ public class BoardVO {
 	private String m_dt;
 	private String nm;
 	private String profile_img;
+	private int like_cnt;
 	
+	public int getLike_cnt() {
+		return like_cnt;
+	}
+	public void setLike_cnt(int like_cnt) {
+		this.like_cnt = like_cnt;
+	}
 	public String getProfile_img() {
 		return profile_img;
 	}

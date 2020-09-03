@@ -47,6 +47,21 @@ public class UserDAO {
 		});
 	}
 	
+	/*
+	 * public static int pwCheck(UserVO param) { String sql =
+	 * " SELECT user_pw FROM t_user ";
+	 * 
+	 * return JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+	 * 
+	 * @Override public void prepared(PreparedStatement ps) throws SQLException {
+	 * 
+	 * 
+	 * }
+	 * 
+	 * @Override public int executeQuery(ResultSet rs) throws SQLException { // TODO
+	 * Auto-generated method stub return 0; } }) }
+	 */
+	
 	//0:에러 발생, 1:로그인 성공, 2:비밀번호 틀림, 3:아이디 없음
 	public static int login(UserVO param) {
 		String sql = " SELECT i_user, user_pw, nm "

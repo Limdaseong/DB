@@ -9,6 +9,9 @@
 </head>
 <body>
 	<h1>프로필</h1>
+	<div>
+		<a href="/changePw"><button>비밀번호 변경</button></a>
+	</div>
 	
 	<div style='margin: 30px auto; width:700px;'>
 		<div>
@@ -36,5 +39,14 @@
 		<div>EMAIL : ${data.email }</div>
 		<div>REGISTER DATE : ${data.r_dt}</div>
 	</div>
+	
+	<script>
+		var proc = '${param.proc}'
+		switch(proc) {
+		case '1':
+			alert('비밀번호를 변경하였습니다.')
+			break
+		}
+	</script>
 </body>
 </html>

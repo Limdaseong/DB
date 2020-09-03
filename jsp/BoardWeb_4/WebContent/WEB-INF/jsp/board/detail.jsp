@@ -8,10 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-rel="stylesheet">
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  />
 </head>
 <style>
+	
 	.pointerCursor {
 		cursor: pointer;
 	}
@@ -37,6 +41,29 @@ rel="stylesheet">
 	td, th {
 	border: 1px solid black;
 	}
+	
+	#likeListContainer {
+			opacity: 0;
+			border: 1px solid #bdc3c7;
+			position: absolute;
+			left: 0px;
+			top: 30px;
+			width: 150px;
+			height: 200px;
+			font-size: 0.8em;
+			overflow-y: auto;
+			background-color: white;
+			transition-duration : 500ms;
+		}
+				
+		#id_like { 
+			position:relative;
+			font-size: 1em;
+		 }		
+		
+		#id_like:hover #likeListContainer {
+			opacity: 1;
+		}	
 </style>
 <body>
 	<div>
@@ -85,6 +112,30 @@ rel="stylesheet">
 				</div>
 			</td>
 		</tr>
+		<c:if test="${data.like_cnt > 0 }">
+			<tr>
+				<td colspan="10">
+				<span class="pointerCursor" id="id_like">좋아요 ${data.like_cnt}개
+					<div id="likeListContainer">
+						<c:forEach items="${like }" var="item">
+							<div>							
+								<div class="containerPImg">
+									<c:choose>
+										<c:when test="${item.profile_img != null}">
+											<img class="pImg" src="/img/user/${item.i_user}/${item.profile_img}">
+										</c:when>
+										<c:otherwise>
+											<img class="pImg" src="/img/default_profile.jpg">
+										</c:otherwise>
+									</c:choose>
+								</div>							
+							${item.nm} 
+							</div>
+						</c:forEach>
+					</div>
+				</span></td>
+			</tr>	
+		</c:if>
 		<tr>
 			<td colspan="10" id="elCtnt">${data.ctnt }</td>
 		</tr>
@@ -171,6 +222,7 @@ rel="stylesheet">
 			</c:forEach>
 		</table>
 	</div>
+	
 	
 	<script>
 		
