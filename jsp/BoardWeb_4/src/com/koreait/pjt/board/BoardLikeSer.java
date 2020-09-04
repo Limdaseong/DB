@@ -1,6 +1,8 @@
 package com.koreait.pjt.board;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,43 +10,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.koreait.pjt.MyUtils;
 import com.koreait.pjt.db.BoardDAO;
-import com.koreait.pjt.vo.BoardVO;
-import com.koreait.pjt.vo.UserVO;
+import com.koreait.pjt.vo.BoardDomain;
 
-@WebServlet("/board/toggleLike")
+@WebServlet("/board/likeList")
 public class BoardLikeSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int i_board = MyUtils.getIntParameter(request, "i_board");
+		System.out.println("i_board : " + i_board);
 		
-		UserVO loginUser = MyUtils.getLoginUser(request);
+		List<BoardDomain> likeList = BoardDAO.selBoardLikeList(i_board);
 		
-		if(loginUser == null) {
-			response.sendRedirect("/login");
-		} 
+		Gson gson = new Gson();
 		
-		// 로그인 정보는 로그인하면서 세션에 들어가서 그 세션에 있는 정보로 i_user를 쓸 수 있다
+		String json = gson.toJson(likeList);
 		
-		String strI_board = request.getParameter("i_board"); // ""안에 적은 값이 키값이다
-		String strYn_like = request.getParameter("yn_like");
+		System.out.println("json : " + json);
 		
-		int i_board = MyUtils.parseStrToInt(strI_board); // 파싱은 에러가 안터지게 하기 위해서 설정해 둔 것이다
-		int yn_like = MyUtils.parseStrToInt(strYn_like, 3); // 
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		// 보내고 있는 자료가 무엇(형식?)인지 setContentType으로 알려줌
 		
-		BoardVO param = new BoardVO();
-		
-		param.setI_board(i_board);
-		param.setI_user(loginUser.getI_user()); // 로그인한 사람의 i_user
-		
-		if(yn_like == 0) { // 좋아요 처리
-			BoardDAO.insLike(param);
-		} else if(yn_like == 1) { // 좋아요 취소 처리
-			BoardDAO.delLike(param);
-		}
+		PrintWriter out = response.getWriter();
+		out.print(json);  //여기서 넘어오는 것은 html 문서 형태이다 // 그래서 json 형식의 글을 보내도 인식 x
+	}
 
-		response.sendRedirect("/board/detail?i_board=" + i_board);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

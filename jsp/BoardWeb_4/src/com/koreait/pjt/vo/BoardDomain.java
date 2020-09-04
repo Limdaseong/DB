@@ -3,14 +3,12 @@ package com.koreait.pjt.vo;
 public class BoardDomain extends BoardVO {
 	// join할 때 편하라고 board
 	
-	private String nm;
 	private int yn_like;
 	private int record_cnt; // 페이지당 나오는 레코드 수 (글 수)
 	private int eIdx;
 	private int sIdx;
 	private String searchText;
 	private String searchType;
-	private int like_cnt;
 	private int cmt_cnt;
 	
 	public String getSearchType() {
@@ -24,12 +22,6 @@ public class BoardDomain extends BoardVO {
 	}
 	public void setCmt_cnt(int cmt_cnt) {
 		this.cmt_cnt = cmt_cnt;
-	}
-	public int getLike_cnt() {
-		return like_cnt;
-	}
-	public void setLike_cnt(int like_cnt) {
-		this.like_cnt = like_cnt;
 	}
 	
 	public String getSearchText() {
@@ -58,12 +50,6 @@ public class BoardDomain extends BoardVO {
 		this.sIdx = sIdx;
 	}
 	
-	public String getNm() {
-		return nm;
-	}
-	public void setNm(String nm) {
-		this.nm = nm;
-	}
 	public int getYn_like() {
 		return yn_like;
 	}
