@@ -1,0 +1,193 @@
+﻿CREATE TABLE t_user(
+    i_user NUMBER PRIMARY KEY,
+    user_id varchar2(30) not null,
+    user_pw varchar2(100) not null,
+    nm varchar(20) not null,
+    email varchar2(40),
+    profile_img varchar2(50),
+    r_dt date default sysdate,  ->쓸때 현재시간
+    m_dt date default sysdate ->수정시 현재시간
+);
+
+CREATE SEQUENCE seq_user
+nocache;
+
+select seq_user.nextval from dual;
+
+
+CREATE TABLE t_board4(
+    i_board number primary key,
+    title nvarchar2(100) not null,
+    ctnt nvarchar2(2000) not null,
+    hits number default 0,
+    i_user number not null,
+    r_dt date default sysdate,
+    m_dt date default sysdate,
+    FOREIGN key(i_user) REFERENCES t_user(i_user)
+);
+
+CREATE SEQUENCE seq_userloginhistory
+nocache;
+
+CREATE TABLE t_user_loginhistory(
+    i_history number primary key,
+    i_user number not null,
+    ip_addr varchar2(15) not null,
+    os varchar2(10) not null,
+    browser varchar2(10) not null,
+    r_dt date default sysdate,
+    FOREIGN KEY (i_user) REFERENCES t_user(i_user)
+);
+
+CREATE TABLE t_board4_like(
+i_user number,
+i_board number,
+r_dt date default sysdate,
+primary key(i_user, i_board),
+FOREIGN key (i_user) REFERENCES t_user(i_user),
+FOREIGN key (i_board) REFERENCES t_board4(i_board)
+);
+
+SELECT A.*,C.nm, DECODE(B.i_user, null, 0, 1) as yn_like            DECODE는 삼항식 컬럼명,null,0,1 -  컬럼명이 null이 었다면 0 아니면 1
+FROM t_board4 A
+LEFT JOIN t_board4_like B
+ON A.i_board = B.i_board AND B.i_user = 7
+INNER JOIN t_user C
+ON A.i_user = C.i_user
+WHERE A.i_board =6;
+
+INSERT INTO t_board4_like
+(i_user, i_board)
+VALUEs
+(7,6);
+
+1번쨰 방법 넘어오는값 신경안쓰고 무조건 selecet 해서 있으면 삭제 없으면 인설트 - 안전하지만 효율적이진 않음
+
+2번쨰 넘오는 값을 믿고 인설트 하라면 인설트 삭제하라면 삭제 - 효율적이지만 불안전
+
+댓글 sql
+CREATE TABLE T_BOARD4_CMT(
+    i_cmt number primary key,
+    i_board number not null,
+    i_user number not null,
+    cmt nvarchar2(500) not null,
+    r_dt date DEFAULT sysdate,
+    m_dt date DEFAULT sysdate,
+    FOREIGN key (i_board) REFERENCES t_board4(i_board),
+    FOREIGN key (i_user) REFERENCES t_user(i_user)
+);
+
+on delete cascade주면 foreign키를 걸어놔도 참조하고있는거까지 다 삭제해줌
+
+댓글 시퀀스
+CREATE SEQUENCE seq_board4_cmt
+start with 0
+MINVALUE 0
+NOCACHE;
+
+
+
+라이브러리 추가방법
+1. 복사해서 파일의 lib에다가 붙여넣기 해준다
+2. tomcat라이브러리 폴더에 넣어준다  (이게 제일편함, 프로젝트만들때마다 해줄필요없음 (1,3번은 프로젝트만들때마다 해줘야함))
+3. 프로젝트 - 빌드패스 - Add library로 추가해준다
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡJSTL 라이브러리 사용예시(실무에서 많이쓴다고 하심)ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> //위의 방식으로 라이브러리를 넣은후 라이브러리를 사용하겠다는 의미로 적어줘야함
+
+<c:forEach items="${data}" var ="item"> 
+		<%-- items="${?}" ?자리에 setAttribute의 키값을 넣어줌 --%>
+		<%-- var="item"의 item은 변수명처럼 바꿀수있다 바꾸면 밑에도 바꿔줘야됨 --%>
+		<tr>		
+			<td>${item.i_board}</td>
+			<td><a href="/boardDetail?i_board=${item.i_board}">${item.title}</a></td>
+			<td>${item.hits}</td>
+			<td>${item.i_user}</td>
+			<td>${item.r_dt}</td>
+		</tr>
+		</c:forEach>
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+네이버 폰트 폰트적용
+window preference
+폰트 -> 베이직 -> 텍스트폰트 -> 에디터 -> D2Coding
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+페이징
+ROUND - 반올림
+CEIL - 올림 <--이거쓸거
+FLOOR - 내림
+
+--------------------------------------------------------------------------------------
+
+SELECT A.* FROM 
+(
+    SELECT ROWNUM as RNUM, A.* FROM
+    (  
+         SELECT  A.i_board, A.title, A.hits, A.i_user, A.r_dt, B.nm
+         FROM t_board4 A INNER JOIN t_user B ON A.i_user = B.i_user
+         ORDER BY i_board DESC
+    ) A
+        WHERE ROWNUM <= 40 --end IDX = eidx (Page*Recodecnt)
+) A
+WHERE A.RNUM <= 20; --STRAT IDX = sidx (EIDX - Recodecnt)
+
+SELECT CEIL(COUNT(*)/10) FROM t_board4;
+
+CREATE TABLE t_user_loginhistory(
+    i_history number primary key,
+    i_user number not null,
+    ip_addr varchar2(15) not null,
+    os varchar2(10) not null,
+    browser varchar2(10) not null,
+    r_dt date default sysdate,
+    FOREIGN KEY (i_user) REFERENCES t_user(i_user)
+);
+
+-------------------------------------------------------------------------------
+
+www.servlet.com -> cos library 들어가서 버전 20.08 다운 받고 압축 푼 후에 
+톰캣 파일에 들어가서 lib파일 들어가서 cos.jar파일 넣기
+
+------------------------------------------------------------------------------------
+
+SELECT A.i_board, A.title, nvl(b.cnt, 0) as like_cnt
+FROM t_board4 A
+LEFT JOIN (
+	SELECT i_board, count(i_board) FORM t_board4_like GROUP BY i_board;
+) B
+ON A.i_board = B.i_board;
+
+
+SELECT * FROM t_board4_like order by i_board;
+SELECT i_board, count(i_board) FORM t_board4_like GROUP BY i_board;
+SELECT distinct i_board, i_user FROM t_board4_like;
+SELECT i_board FROM t_baord4_like GROUP BY i_board;
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+SELECT B.i_user, B.nm, B.profile_img 
+FROM t_board4_like A
+INNER JOIN t_user B
+ON A.i_user = B.i_user
+WHERE A.i_board = ?
+ORDER BY A.r_dt asc;
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+flexbox froggy 게임하면서 배우는 css
+애니메이션 css 사이트 animate.css
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+똑같은 표현을 했을 때 json이 용량이 적고 xml이 용량이 더 크다
+
+"data={"no": 1, "nm": "박도흠", "height": 2 "weight": 9}"
+
+<data>
+  <no>1</no>
+  <nm>박도흠<nm>
+  <height>2</height>
+  <weight>9</weight>
+</data>
+
+--------------------------------------------------------------------------------------------
+

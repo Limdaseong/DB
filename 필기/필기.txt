@@ -1,0 +1,27 @@
+﻿식당 리뷰할 수 있는 서비스
+(사진도 올릴 수 있고)
+
+
+
+서블릿 1개 - 분기시켜주는 객체(HandlerMapping) - ( 다리역할 )
+메소드만 작성, 어떤 컨트롤러에 어떤 메소드를 호출시킬지
+
+ - 컨트롤러(기존에 만들던 서블릿) - 서비스 ( 로직 ) - DAO
+
+http://location:8099/(  컨트롤러 구분  )/(  호출할 메소드  )
+
+
+jpa
+
+<servlet>
+	    <servlet-name>staticServlet</servlet-name>
+	    <servlet-class>com.koreait.matzip.StaticContainer</servlet-class>
+	</servlet>
+   
+    <servlet-mapping>
+            <servlet-name>staticServlet</servlet-name>
+            <url-pattern>/res/*</url-pattern>
+    </servlet-mapping>
+
+요거 2개 해줘야함
+
