@@ -1,9 +1,9 @@
 package com.koreait.matzip.user;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.koreait.matzip.Const;
-import com.koreait.matzip.SecurityUtils;
 import com.koreait.matzip.ViewRef;
 import com.koreait.matzip.vo.UserVO;
 
@@ -48,9 +48,11 @@ public class UserController {
 		int result = service.login(param);
 		
 		if(result == 1) {
-			return "redirect:/rest/restMap";
+			HttpSession hs = request.getSession();
+			hs.setAttribute(Const.LOGIN_USER, param); // 4개의 값을 한 곳으로 모아서 보내줌
+			return "redirect:/restaurant/restMap";
 		} else {
-			return "redirect:/user/login?error=" + result;
+			return "redirect:/user/login?user_id=" + user_id + "&error=" + result;
 		}
 	}
 	
@@ -84,5 +86,13 @@ public class UserController {
 		int result = service.login(param);
 		
 		return String.format("ajax:{\"result\": %s}", result);
+	}
+	// ajax 통신은 refresh 하지 않고 기능을 바꾸게 하려고 하는 것이다
+	
+	public String logout(HttpServletRequest request) {
+		HttpSession hs = request.getSession();
+		hs.invalidate(); //세션에 있던 값을 다 삭제
+		
+		return "redirect:/user/login";
 	}
 }
