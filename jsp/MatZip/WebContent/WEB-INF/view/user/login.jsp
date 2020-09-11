@@ -3,13 +3,11 @@
 <div id="sectionContainerCenter">
 	<div>
 		<div class="msg">${msg}</div>
-		<form class="frm" action="/user/loginProc" method="post">
+		<form id="frm" class="frm" action="/user/loginProc" method="post">
 			<div><input type="text" name="user_id" placeholder="아이디"></div>
-			<div><input type="password" name="user_pw" placeholder="비밀번호"></div>
+			<d	iv><input type="password" name="user_pw" placeholder="비밀번호"></div>
 			<div><input type="submit" value="로그인"></div>
 		</form>
 		<a href="join">회원가입</a>
 	</div>	
 </div>
-
-
