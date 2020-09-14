@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jni.Proc;
-
 @WebServlet("/")
 public class Container extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,9 +29,21 @@ public class Container extends HttpServlet {
 	}
 	
 	protected void proc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		// 로그인 되어 있으면 login, join 접속 x
+		
+		String routerCheckResult = LoginChkInterceptor.routerChk(request);
+		
+		if(routerCheckResult != null) {
+			response.sendRedirect(routerCheckResult);
+			return;
+		}
+		
+		
+		// 로그인에 따른 접속 가능여부 판단
+		// (로그인이 안 되어 있으면 접속할 수 있는 주소만 나머지 전부 로그인이 되어 있어야 함)
+		
 		String temp = mapper.nav(request); //보통 템플릿 파일명
 		
-		//System.out.println("sub : " + temp.subString(temp.substring);
 		if(temp.indexOf(":") >= 0) {
 			String prefix = temp.substring(0, temp.indexOf(":"));
 			String value = temp.substring(temp.indexOf(":") + 1);
@@ -44,7 +54,7 @@ public class Container extends HttpServlet {
 			} else if("ajax".equals(prefix)) {
 				response.setCharacterEncoding("UTF-8");
 				response.setContentType("application/json");
-				PrintWriter out = response.getWriter();
+				PrintWriter out = response.getWriter(); // 
 				out.print(value);
 				return;
 			}
