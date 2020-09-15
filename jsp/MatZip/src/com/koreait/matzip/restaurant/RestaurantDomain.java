@@ -1,6 +1,6 @@
 package com.koreait.matzip.restaurant;
 
-public class RestaurantDomain extends RestaurantRegVO {
+public class RestaurantDomain extends RestaurantVO {
 	private String userNm;
 	private int hits;
 	private String cd_category_nm;

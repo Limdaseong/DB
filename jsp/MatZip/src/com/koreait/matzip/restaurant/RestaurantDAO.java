@@ -9,11 +9,12 @@ import java.util.List;
 import com.koreait.matzip.db.JdbcSelectInterface;
 import com.koreait.matzip.db.JdbcTemplate;
 import com.koreait.matzip.db.JdbcUpdateInterface;
+import com.koreait.matzip.vo.RestaurantRecommendMenuVO;
 
 public class RestaurantDAO {
-	RestaurantRegVO param = new RestaurantRegVO();
+	RestaurantVO param = new RestaurantVO();
 	
-	public int reg(RestaurantRegVO param) {
+	public int reg(RestaurantVO param) {
 		String sql = " INSERT INTO t_restaurant (nm, addr, lat, lng, cd_category, i_user) "
 							+ " VALUES (?, ?, ?, ?, ?, ?) ";
 		
@@ -31,7 +32,7 @@ public class RestaurantDAO {
 		});
 	}
 	
-	public RestaurantDomain selRest(RestaurantRegVO param) {
+	public RestaurantDomain selRest(RestaurantVO param) {
 		RestaurantDomain vo = new RestaurantDomain();
 		
 		String sql = " SELECT A.nm, A.addr, A.i_user, A.hits as cntHits "
@@ -74,7 +75,7 @@ public class RestaurantDAO {
 	}
 	
 	public List<RestaurantDomain> selRestList() {
-		List<RestaurantDomain> list = new ArrayList();
+		List<RestaurantDomain> list = new ArrayList<RestaurantDomain>();
 		
 		String sql = " SELECT i_rest, nm, lat, lng FROM t_restaurant ";
 		
@@ -97,5 +98,70 @@ public class RestaurantDAO {
 			}
 		});
 		return list;
+	}
+
+	public int insRecommendMenu(RestaurantRecommendMenuVO param) {
+		String sql = " INSERT INTO t_restaurant_recommend_menu "
+						+ " (seq, i_rest, menu_nm, menu_price, menu_pic) "
+						+ " SELECT IFNULL(MAX(seq), 0) + 1, ?, ?, ?, ? "
+						+ " 	FROM t_restaurant_recommend_menu "
+						+ " 	WHERE i_rest = ? ";
+		
+		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.getI_rest());
+				ps.setString(2, param.getMenu_nm());
+				ps.setInt(3, param.getMenu_price());
+				ps.setString(4, param.getMenu_pic());
+				ps.setInt(5, param.getI_rest());
+			}
+		});
+		
+	}
+	
+	public List<RestaurantRecommendMenuVO> selRecommendMenuList(int i_rest) {
+		List<RestaurantRecommendMenuVO> list = new ArrayList();
+		String sql = " SELECT seq, menu_nm, menu_price, menu_pic "
+							+ " FROM t_restaurant_recommend_menu "
+							+ " WHERE i_rest = ? ";
+		
+		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, i_rest);
+			}
+			
+			@Override
+			public void executeQuery(ResultSet rs) throws SQLException {
+				while(rs.next()) {
+					RestaurantRecommendMenuVO vo = new RestaurantRecommendMenuVO();
+					vo.setSeq(rs.getInt("seq"));
+					vo.setMenu_nm(rs.getNString("menu_nm"));
+					vo.setMenu_price(rs.getInt("menu_price"));
+					vo.setMenu_pic(rs.getNString("menu_pic"));
+					list.add(vo);
+					
+				}
+			}
+		});
+		
+		return list;
+	}
+
+	public int delRecommendMenu(RestaurantRecommendMenuVO param) {
+		String sql = " DELETE FROM t_restaurant_recommend_menu "
+							+ " WHERE seq = ? AND i_rest = ? ";
+		
+		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.getSeq());
+				ps.setInt(2, param.getI_rest());
+			}
+		});
 	}
 }

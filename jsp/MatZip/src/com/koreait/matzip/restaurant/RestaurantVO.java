@@ -1,6 +1,6 @@
 package com.koreait.matzip.restaurant;
 
-public class RestaurantRegVO {
+public class RestaurantVO {
 	private String nm;
 	private String addr;
 	private double lat;
