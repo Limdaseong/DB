@@ -1,94 +1,144 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="recMenuContainer">
-			<c:forEach items="${recommendMenuList}" var="item">
-				<div class="recMenuItem" id="recMenuItem_${item.seq }">
-					<div class="pic">
-						<c:if test="${item.menu_pic != null and item.menu_pic != ''}">
-							<img src="/res/img/restaurant/${data.i_rest}/${item.menu_pic}">
-						</c:if>
-					</div>
-					<div class="info">
-						<div class="nm">${item.menu_nm}</div>
-						<div class="price"><fmt:formatNumber type="number" value="${item.menu_price}"/></div>
-					</div>
-					<c:if test="${loginUser.i_user == data.i_user && item.menu_pic != null}">
-						<div class="delIconContainer" onclick="delRecMenu(${data.i_rest}, ${item.seq})">
-							<span class="material-icons">clear</span>
-						</div>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<div>
+	<div class="recMenuContainer">
+		<c:forEach items="${recommendMenuList}" var="item">
+			<div class="recMenuItem" id="recMenuItem_${item.seq}">
+				<div class="pic">
+					<c:if test="${item.menu_pic != null and item.menu_pic != ''}">
+						<img src="/res/img/restaurant/${data.i_rest}/${item.menu_pic}">
 					</c:if>
 				</div>
-			</c:forEach>
-		</div>
-<div id="sectionContainerCenter">
-	<div>
-		<c:if test="${loginUser.i_user == data.i_user}">
-		<div>
-			<button onclick="isDel()">삭제</button>
-			
-			<form id="recFrm" action="/restaurant/addRecMenusProc" enctype="multipart/form-data" method="post">
-				<div><button type="button" onclick="addRecMenu()">메뉴 추가</button></div>
-				<input type="hidden" name="i_rest" value="${data.i_rest }">
-				<div id="recItem"></div>
-				<div><input type="submit" value="등록"></div>
-			</form>
-		</div>
-		</c:if>
-		
-		<div class="restaurant-detail">
-			<div id="detail-header">
-				<div class="restaurant_title_wrap">
-					<span class="title">
-						<h1 class="restaurant_name">${data.nm}</h1>
-					</span>
+				<div class="info">
+					<div class="nm">${item.menu_nm}</div>
+					<div class="price">
+						<fmt:formatNumber type="number" value="${item.menu_price}" />
+						원
+					</div>
 				</div>
-				<div class="status branch_none">
-					<span class="cnt hit">${data.cntHits }</span>
-					<span class="cnt favorite">${data.cntFavorite}</span>
-				</div>
+				<c:if test="${loginUser.i_user == data.i_user}">
+					<div class="delIconContainer" onclick="delRecMenu(${item.seq})">
+						<span class="material-icons">clear</span>
+					</div>
+				</c:if>
 			</div>
-			<div>
-				<table>
-					<caption>레스토랑 상세 정보</caption>
-					<tbody>
-						<tr>
-							<th>주소</th>
-							<th>${data.addr}</th>
-						</tr>
-						<tr>
-							<th>카테고리</th>
-							<th>${data.cd_category_nm}</th>
-						</tr>
-					</tbody>
-				</table>
+		</c:forEach>
+	</div>
+	<div id="sectionContainerCenter">
+		<div>
+			<c:if test="${loginUser.i_user == data.i_user}">
+				<button onclick="isDel()">가게 삭제</button>
+
+				<h2>- 추천 메뉴 -</h2>
+				<div>
+					<div>
+						<button type="button" onclick="addRecMenu()">추천 메뉴 추가</button>
+					</div>
+					<form id="recFrm" action="/restaurant/addRecMenusProc"
+						enctype="multipart/form-data" method="post">
+						<input type="hidden" name="i_rest" value="${data.i_rest}">
+						<div id="recItem"></div>
+						<div>
+							<input type="submit" value="등록">
+						</div>
+					</form>
+				</div>
+
+				<h2>- 메뉴 -</h2>
+				<div>
+					<form id="menuFrm" action="/restaurant/addMenusProc"
+						enctype="multipart/form-data" method="post">
+						<input type="hidden" name="i_rest" value="${data.i_rest}">
+						<input type="file" name="menu_pic" multiple>
+						<div>
+							<input type="submit" value="등록">
+						</div>
+					</form>
+				</div>
+			</c:if>
+
+			<div class="restaurant-detail">
+				<div id="detail-header">
+					<div class="restaurant_title_wrap">
+						<span class="title">
+							<h1 class="restaurant_name">${data.nm}</h1>
+						</span>
+					</div>
+					<div class="status branch_none">
+						<span class="cnt hit">${data.cntHits}</span> <span
+							class="cnt favorite">${data.cntFavorite}</span>
+					</div>
+				</div>
+				<div>
+					<table>
+						<caption>레스토랑 상세 정보</caption>
+						<tbody>
+							<tr>
+								<th>주소</th>
+								<td>${data.addr}</td>
+							</tr>
+							<tr>
+								<th>카테고리</th>
+								<td>${data.cd_category_nm}</td>
+							</tr>
+							<tr>
+								<th>메뉴</th>
+								<td>
+									<div class="menuList">
+										<c:if test="${fn:length(menuList) > 0}">
+											<c:forEach var="i" begin="0" end="${fn:length(menuList) > 3 ? 2 : fn:length(menuList) - 1}">
+												<div class="menuItem">
+													<img src="/res/img/restaurant/${data.i_rest}/menu/${menuList[i].menu_pic}">
+												</div>
+											</c:forEach>
+										</c:if>
+										<c:if test="${fn:length(menuList) > 3}">
+											<div class="menuItem bg_black">
+												<div class="moreCnt">+${fn:length(menuList) - 3}</div>
+											</div>
+										</c:if>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-	
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script>
-		function delRecMenu(i_rest, seq) {
-			console.log('i_rest : ' + i_rest)
-			console.log('seq : ' + seq)
-			
-			axios.get('/restaurant/ajaxDelRecMenu', {
-				params: {
-					i_rest, seq
-				}
-			}).then(function(res) {
-				if(res.data == 1) {
-					//엘리먼트 삭제
-					var ele = document.querSelector('#recMenuItem_' + seq)
-				}
-			})
-		}
-	
-		function isDel() {
-			if(confirm('삭제하시겠습니까?')) {
-				location.href = '/restaurant/restDel?i_rest=${data.i_rest}'
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+	function delRecMenu(i_rest, seq) {
+		if(!confirm('삭제하시겠습니까?')) {
+			return
+		}	
+		
+		console.log('i_rest : ' + i_rest)
+		console.log('seq : ' + seq)
+		
+		axios.get('/restaurant/ajaxDelRecMenu', {
+			params: {
+				i_rest: ${data.i_rest},
+				seq: seq
+				// 여기서 적는 EL식은 고정값이다 EL식은 자바스크립트에서 쓰는게 아니라 서버(자바)에서 쓰는 것이다
+				// 자바 객체는 서버에서만 쓰는 것이다
 			}
-		}
+		}).then(function(res) {
+			console.log(res)
+			if(res.data == 1) {
+				//엘리먼트 삭제
+				var ele = document.querySelector('#recMenuItem_' + seq)
+				ele.remove()
+			}
+		})
+	}
 		
 		var idx = 0;
 		
